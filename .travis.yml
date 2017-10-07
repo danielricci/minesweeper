@@ -16,6 +16,5 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
-  - chmod +x gradlew
-
+  
 script: gradle ant-build
