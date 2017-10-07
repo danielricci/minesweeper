@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 //-------------------------------
 
-mainClassName = 'application.MainApplication'
+mainClassName = 'Driver'
 
 
 /** ANT **/
