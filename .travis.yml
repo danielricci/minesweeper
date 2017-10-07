@@ -16,5 +16,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
+  - cd Chess
+  - chmod +x gradlew
   
-script: gradle ant-build
+script: gradle ant-cleanall ant-build
