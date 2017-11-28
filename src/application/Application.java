@@ -34,7 +34,6 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 import engine.core.system.AbstractApplication;
-import engine.core.ui.navigation.MenuBuilder;
 
 /**
  * This is the main application, the main method resides within this class
@@ -63,7 +62,7 @@ public final class Application extends AbstractApplication {
 			 * @param windowEvent The event that this window triggered
 			 */
 			@Override public void windowClosing(WindowEvent windowEvent) {
-				if(!Application.instance().flush()) {
+				if(!Application.instance().clear()) {
 					return;
 				}
 				
@@ -96,17 +95,17 @@ public final class Application extends AbstractApplication {
 	 */
 	public static void main(String[] args) {
         try {      	
-	        	EventQueue.invokeLater(new Runnable() {
-	        		@Override public void run() {
-	        			try {
-						Application.initialize(Application.class, false);
-						Application.instance().setVisible(true);
-					} catch (Exception exception) {
-						exception.printStackTrace();
-					}
-	            	}
-	        });
-    		} 
+        	EventQueue.invokeLater(new Runnable() {
+        		@Override public void run() {
+        			try {
+        				Application.initialize(Application.class, false);
+        				Application.instance().setVisible(true);
+        			} catch (Exception exception) {
+        				exception.printStackTrace();
+        			}
+            	}
+        	});
+		} 
         catch (Exception exception) {
         		exception.printStackTrace();
         }
