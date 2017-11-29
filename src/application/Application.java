@@ -27,13 +27,12 @@ package application;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.util.logging.Level;
 
 import engine.core.system.AbstractApplication;
+import engine.core.system.EngineProperties;
+import engine.core.system.EngineProperties.Property;
+import engine.utils.logging.Tracelog;
 
 /**
  * This is the main application, the main method resides within this class
@@ -47,29 +46,6 @@ public final class Application extends AbstractApplication {
 	 * Constructs a new instance of this class type
 	 */
 	public Application() {
-		
-		// Set the default state of the application to be maximized
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        // Pressing on the close button won't do it's default action
-		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		
-		addWindowListener(new WindowAdapter() {
-			
-			/**
-			 * Catches a closing of this JFrame so we can handle it properly
-			 * 
-			 * @param windowEvent The event that this window triggered
-			 */
-			@Override public void windowClosing(WindowEvent windowEvent) {
-				if(!Application.instance().clear()) {
-					return;
-				}
-				
-				// Dispose the window
-				Application.shutdown();
-			};		
-		});
 
 		// Set the application dimensions
 		Dimension applicationDimensions = new Dimension(600, 600);
@@ -77,14 +53,14 @@ public final class Application extends AbstractApplication {
 		
 		// Set the size of application
         setSize(applicationDimensions);
-        
+
 		// Set the location of the window to be in middle of the screen
 		setLocation(
 			screenSize.width / 2 - applicationDimensions.width / 2,
 			screenSize.height / 2 - applicationDimensions.height / 2
 		);
-        
-        // The user cannot resize the game
+		
+	      // The user cannot resize the game
         setResizable(false);
 	}
 	
@@ -95,43 +71,66 @@ public final class Application extends AbstractApplication {
 	 */
 	public static void main(String[] args) {
         try {      	
+        	// Call the event queue and invoke a new runnable
+			// object to execute our game.
         	EventQueue.invokeLater(new Runnable() {
         		@Override public void run() {
         			try {
-        				Application.initialize(Application.class, false);
+        				
+        				// Get the debug mode state based on the arguments passed into the application
+        				boolean debugMode = false;
+        				for(String arg : args) {
+        					if(arg.trim().equalsIgnoreCase("-debug")) {
+        						debugMode = true;
+        						break;
+        					}
+						}
+        				
+        				Application.initialize(Application.class, debugMode);
         				Application.instance().setVisible(true);
-        			} catch (Exception exception) {
-        				exception.printStackTrace();
-        			}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
             	}
-        	});
-		} 
+            });
+    	} 
         catch (Exception exception) {
-        		exception.printStackTrace();
+        	Tracelog.log(Level.SEVERE, true, exception);
         }
     }
 	
 	/**
-	 * Populates the file menu
+	 * Populates the game menu
 	 */
-	private void PopulateFileMenu() {
-		// Get an option builder to act as the root builder
-//		MenuBuilder.start(getJMenuBar())
-//			.addMenu("Test")
-//				.addMenuItem(FirstEntry.class)
-//				.addMenuItem(SecondEntry.class)
-//				.addMenuItem(ThirdEntry.class)
-//				.addMenuItem(FourthEntry.class);
+	private void populateGameMenu() {
+	}
+
+	/**
+	 * Populates the debug menu
+	 */
+	private void populateDebugMenu() {
+	}
+
+	/**
+	 * Populates the help menu
+	 */
+	private void populateHelpMenu() {
+	}
+	
+	
+	@Override protected void onApplicationShown() {
+		populateGameMenu();
+		if(isDebug()) {
+			populateDebugMenu();
+		}
+		populateHelpMenu();
 	}
 	
 	@Override protected void onBeforeEngineDataInitialized() {
+		EngineProperties.instance().setProperty(Property.LOCALIZATION_PATH_CVS, "resources/Localization.csv");
+		EngineProperties.instance().setProperty(Property.ENGINE_OUTPUT, "true");
+		//EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
 		//EngineProperties.instance().setProperty(Property.DATA_PATH_XML, "/generated/tilemap.xml");
 		//EngineProperties.instance().setProperty(Property.DATA_PATH_SHEET, "/generated/tilemap.png");
-		//EngineProperties.instance().setProperty(Property.ENGINE_OUTPUT, "true");
-		//EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
-	}
-	
-	@Override protected void onApplicationShown() {
-		PopulateFileMenu();
 	}
 }
