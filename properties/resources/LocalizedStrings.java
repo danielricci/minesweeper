@@ -30,6 +30,8 @@ package resources;
  * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
  *
  */
-public enum Localization {
-
+public enum LocalizedStrings {
+	About,
+	GitHub,
+	Help 
 }

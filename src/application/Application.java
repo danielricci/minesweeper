@@ -29,10 +29,14 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 
+import engine.core.navigation.MenuBuilder;
 import engine.core.system.AbstractApplication;
 import engine.core.system.EngineProperties;
 import engine.core.system.EngineProperties.Property;
+import engine.utils.globalisation.Localization;
 import engine.utils.logging.Tracelog;
+import menu.AboutMenuItem;
+import resources.LocalizedStrings;
 
 /**
  * This is the main application, the main method resides within this class
@@ -115,6 +119,9 @@ public final class Application extends AbstractApplication {
 	 * Populates the help menu
 	 */
 	private void populateHelpMenu() {
+		MenuBuilder.start(getJMenuBar())
+			.addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Help))
+				.addMenuItem(AboutMenuItem.class);
 	}
 	
 	
@@ -127,7 +134,7 @@ public final class Application extends AbstractApplication {
 	}
 	
 	@Override protected void onBeforeEngineDataInitialized() {
-		EngineProperties.instance().setProperty(Property.LOCALIZATION_PATH_CVS, "resources/Localization.csv");
+		EngineProperties.instance().setProperty(Property.LOCALIZATION_PATH_CVS, "resources/LocalizedStrings.csv");
 		EngineProperties.instance().setProperty(Property.ENGINE_OUTPUT, "true");
 		//EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
 		//EngineProperties.instance().setProperty(Property.DATA_PATH_XML, "/generated/tilemap.xml");
