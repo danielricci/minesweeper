@@ -82,21 +82,21 @@ public final class Application extends AbstractApplication {
 	 * @param args The outside argument / command line argument
 	 */
 	public static void main(String[] args) {
-        	EventQueue.invokeLater(new Runnable() {
-        		@Override public void run() {
-    				// Get the debug mode state based on the arguments passed into the application
-    				boolean debugMode = false;
-    				for(String arg : args) {
-    					if(arg.trim().equalsIgnoreCase("-debug")) {
-    						debugMode = true;
-    						break;
-    					}
-    				}
-				
-				Application.initialize(Application.class, debugMode);
-				Application.instance().setVisible(true);
-        		}
-        	});
+    	EventQueue.invokeLater(new Runnable() {
+    		@Override public void run() {
+				// Get the debug mode state based on the arguments passed into the application
+				boolean debugMode = false;
+				for(String arg : args) {
+					if(arg.trim().equalsIgnoreCase("-debug")) {
+						debugMode = true;
+						break;
+					}
+				}
+			
+			Application.initialize(Application.class, debugMode);
+			Application.instance().setVisible(true);
+    		}
+    	});
     }
 	
 	/**
@@ -126,7 +126,7 @@ public final class Application extends AbstractApplication {
 	    MenuBuilder.start(getJMenuBar())
 	        .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Debug))
 	            .addMenuItem(DebugGameMenuItem.class)
-	            .addSeparator()
+	            	.addSeparator()
 	            .addMenuItem(DebuggerWindowMenuItem.class);
 	}
 
