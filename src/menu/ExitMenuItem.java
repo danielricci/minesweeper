@@ -22,28 +22,40 @@
 * IN THE SOFTWARE.
 */
 
-package resources;
+package menu;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+
+import application.Application;
+import engine.core.navigation.AbstractMenuItem;
+import engine.utils.globalisation.Localization;
+import resources.LocalizedStrings;
 
 /**
- * The list of available keys for localization lookup
+ * Starts a new game
  * 
- * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public enum LocalizedStrings {
-	About,
-	BeginnerMode,
-	BestTimes,
-	CustomMode,
-	Debug,
-	DebugNew,
-	DebugWindow,
-	ExpertMode,
-	Exit,
-	Game,
-	GitHub,
-	Help,
-	IntermediateMode,
-	Marks,
-	New, 
+public class ExitMenuItem extends AbstractMenuItem {
+
+	/**
+	 * Constructs a new instance of this class type
+	 *
+	 * @param parent The parent associated to this menu item
+	 */
+	public ExitMenuItem(JComponent parent) {
+		super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.Exit)), parent);
+	}
+	
+	
+	@Override public void onExecute(ActionEvent actionEvent) {
+	    Application.instance().dispatchEvent(
+            new WindowEvent(Application.instance(), WindowEvent.WINDOW_CLOSING)
+        );
+    }
 }

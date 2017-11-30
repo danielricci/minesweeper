@@ -1,4 +1,15 @@
 key,en_ca
 About,About Minesweeper
+BeginnerMode,Beginner
+BestTimes,Best Times
+CustomMode,Custom
+Debug,Debug
+DebugNew,New
+ExpertMode,Expert
+Exit,Exit
+Game,Game
 GitHub,https://github.com/danielricci/minesweeper
 Help,Help
+IntermediateMode,Intermediate
+Marks,Marks [?]
+New,New

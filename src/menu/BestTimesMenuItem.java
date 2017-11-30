@@ -22,28 +22,34 @@
 * IN THE SOFTWARE.
 */
 
-package resources;
+package menu;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+
+import engine.core.navigation.AbstractMenuItem;
+import engine.utils.globalisation.Localization;
+import resources.LocalizedStrings;
 
 /**
- * The list of available keys for localization lookup
+ * Starts a new game
  * 
- * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public enum LocalizedStrings {
-	About,
-	BeginnerMode,
-	BestTimes,
-	CustomMode,
-	Debug,
-	DebugNew,
-	DebugWindow,
-	ExpertMode,
-	Exit,
-	Game,
-	GitHub,
-	Help,
-	IntermediateMode,
-	Marks,
-	New, 
+public class BestTimesMenuItem extends AbstractMenuItem {
+
+	/**
+	 * Constructs a new instance of this class type
+	 *
+	 * @param parent The parent associated to this menu item
+	 */
+	public BestTimesMenuItem(JComponent parent) {
+		super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.BestTimes)), parent);
+	}
+	
+	@Override public void onExecute(ActionEvent actionEvent) {
+	}
 }

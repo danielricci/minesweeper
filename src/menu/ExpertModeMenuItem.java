@@ -22,28 +22,38 @@
 * IN THE SOFTWARE.
 */
 
-package resources;
+package menu;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComponent;
+
+import engine.core.navigation.AbstractMenuItem;
+import engine.utils.globalisation.Localization;
+import resources.LocalizedStrings;
 
 /**
- * The list of available keys for localization lookup
+ * Beginner mode menu item
  * 
- * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public enum LocalizedStrings {
-	About,
-	BeginnerMode,
-	BestTimes,
-	CustomMode,
-	Debug,
-	DebugNew,
-	DebugWindow,
-	ExpertMode,
-	Exit,
-	Game,
-	GitHub,
-	Help,
-	IntermediateMode,
-	Marks,
-	New, 
+public class ExpertModeMenuItem extends AbstractMenuItem {
+
+	/**
+	 * Constructs a new instance of this class type
+	 *
+	 * @param parent The parent associated to this menu item
+	 */
+	public ExpertModeMenuItem(JComponent parent) {
+		super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.ExpertMode)), parent);
+	}
+	
+	@Override protected String getGroupName() {
+	    return "GameMode";
+	}
+	
+	@Override public void onExecute(ActionEvent actionEvent) {
+	}
 }

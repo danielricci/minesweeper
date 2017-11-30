@@ -27,15 +27,23 @@ package application;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.util.logging.Level;
 
 import engine.core.navigation.MenuBuilder;
 import engine.core.system.AbstractApplication;
 import engine.core.system.EngineProperties;
 import engine.core.system.EngineProperties.Property;
 import engine.utils.globalisation.Localization;
-import engine.utils.logging.Tracelog;
 import menu.AboutMenuItem;
+import menu.BeginnerModeMenuItem;
+import menu.BestTimesMenuItem;
+import menu.CustomModeMenuItem;
+import menu.DebugGameMenuItem;
+import menu.DebuggerWindowMenuItem;
+import menu.ExitMenuItem;
+import menu.ExpertModeMenuItem;
+import menu.IntermediateModeMenuItem;
+import menu.MarksMenuItem;
+import menu.NewGameMenuItem;
 import resources.LocalizedStrings;
 
 /**
@@ -74,45 +82,52 @@ public final class Application extends AbstractApplication {
 	 * @param args The outside argument / command line argument
 	 */
 	public static void main(String[] args) {
-        try {      	
-        	// Call the event queue and invoke a new runnable
-			// object to execute our game.
         	EventQueue.invokeLater(new Runnable() {
         		@Override public void run() {
-        			try {
-        				
-        				// Get the debug mode state based on the arguments passed into the application
-        				boolean debugMode = false;
-        				for(String arg : args) {
-        					if(arg.trim().equalsIgnoreCase("-debug")) {
-        						debugMode = true;
-        						break;
-        					}
-						}
-        				
-        				Application.initialize(Application.class, debugMode);
-        				Application.instance().setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-            	}
-            });
-    	} 
-        catch (Exception exception) {
-        	Tracelog.log(Level.SEVERE, true, exception);
-        }
+    				// Get the debug mode state based on the arguments passed into the application
+    				boolean debugMode = false;
+    				for(String arg : args) {
+    					if(arg.trim().equalsIgnoreCase("-debug")) {
+    						debugMode = true;
+    						break;
+    					}
+    				}
+				
+				Application.initialize(Application.class, debugMode);
+				Application.instance().setVisible(true);
+        		}
+        	});
     }
 	
 	/**
 	 * Populates the game menu
 	 */
 	private void populateGameMenu() {
+        MenuBuilder.start(getJMenuBar())
+            .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Game))
+                .addMenuItem(NewGameMenuItem.class)
+                    .addSeparator() 
+                .addMenuItem(BeginnerModeMenuItem.class)
+                .addMenuItem(IntermediateModeMenuItem.class)
+                .addMenuItem(ExpertModeMenuItem.class)
+                .addMenuItem(CustomModeMenuItem.class)
+                    .addSeparator()
+                .addMenuItem(MarksMenuItem.class)
+                    .addSeparator()
+                .addMenuItem(BestTimesMenuItem.class)
+                    .addSeparator()
+                .addMenuItem(ExitMenuItem.class);
 	}
 
 	/**
 	 * Populates the debug menu
 	 */
 	private void populateDebugMenu() {
+	    MenuBuilder.start(getJMenuBar())
+	        .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Debug))
+	            .addMenuItem(DebugGameMenuItem.class)
+	            .addSeparator()
+	            .addMenuItem(DebuggerWindowMenuItem.class);
 	}
 
 	/**
