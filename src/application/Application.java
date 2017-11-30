@@ -84,14 +84,14 @@ public final class Application extends AbstractApplication {
 	public static void main(String[] args) {
     	EventQueue.invokeLater(new Runnable() {
     		@Override public void run() {
-				// Get the debug mode state based on the arguments passed into the application
-				boolean debugMode = false;
-				for(String arg : args) {
-					if(arg.trim().equalsIgnoreCase("-debug")) {
-						debugMode = true;
-						break;
-					}
+			// Get the debug mode state based on the arguments passed into the application
+			boolean debugMode = false;
+			for(String arg : args) {
+				if(arg.trim().equalsIgnoreCase("-debug")) {
+					debugMode = true;
+					break;
 				}
+			}
 			
 			Application.initialize(Application.class, debugMode);
 			Application.instance().setVisible(true);
