@@ -31,9 +31,11 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import application.Application;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
 import resources.LocalizedStrings;
+
 
 /**
  * Starts a new game
@@ -50,9 +52,26 @@ public class NewGameMenuItem extends AbstractMenuItem {
 	 */
 	public NewGameMenuItem(JComponent parent) {
 		super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.New)), parent);
-        super.get(JMenuItem.class).setAccelerator(KeyStroke.getKeyStroke('G', Toolkit.getDefaultToolkit ().getMenuShortcutKeyMask()));
+        super.get(JMenuItem.class).setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit ().getMenuShortcutKeyMask()));
 	}
 	
 	@Override public void onExecute(ActionEvent actionEvent) {
+
+		// Flush the application before continuing
+		if(!Application.instance().clear()) {
+			return;
+		}
+		
+		// Get a reference to the view factory 
+//		ViewFactory factory = AbstractSignalFactory.getFactory(ViewFactory.class);
+//		
+//		// Get a reference to the main window to start application
+//		MainView view = factory.get(MainView.class, true, GameMode.GAME); 
+//			
+//		// Add the view to the application
+//		Application.instance().add(view);
+//		
+//		// Render the specified view
+//		view.render();
 	}
 }
