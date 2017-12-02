@@ -31,14 +31,16 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import application.Application;
+import application.MainApplication;
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
+import game.core.ViewFactory;
 import resources.LocalizedStrings;
-
+import views.BoardView;
 
 /**
- * Starts a new game
+ * This menu item is in charge of starting a new game based on the specified settings currently set in the game
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
@@ -58,20 +60,17 @@ public class NewGameMenuItem extends AbstractMenuItem {
 	@Override public void onExecute(ActionEvent actionEvent) {
 
 		// Flush the application before continuing
-		if(!Application.instance().clear()) {
+		if(!MainApplication.instance().clear()) {
 			return;
 		}
+
+		// Create the board view
+		BoardView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new BoardView(), true);
 		
-		// Get a reference to the view factory 
-//		ViewFactory factory = AbstractSignalFactory.getFactory(ViewFactory.class);
-//		
-//		// Get a reference to the main window to start application
-//		MainView view = factory.get(MainView.class, true, GameMode.GAME); 
-//			
-//		// Add the view to the application
-//		Application.instance().add(view);
-//		
-//		// Render the specified view
-//		view.render();
+		// Add the view to the application
+		MainApplication.instance().add(view);
+		
+		// Render the specified view
+		view.render();
 	}
 }

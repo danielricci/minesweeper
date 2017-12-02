@@ -24,9 +24,7 @@
 
 package application;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 import engine.core.navigation.MenuBuilder;
 import engine.core.system.AbstractApplication;
@@ -52,34 +50,19 @@ import resources.LocalizedStrings;
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public final class Application extends AbstractApplication {
+public final class MainApplication extends AbstractApplication {
 	
 	/**
 	 * Constructs a new instance of this class type
 	 */
-	public Application() {
-
-		// Set the application dimensions
-		Dimension applicationDimensions = new Dimension(600, 600);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		// Set the size of application
-        setSize(applicationDimensions);
-
-		// Set the location of the window to be in middle of the screen
-		setLocation(
-			screenSize.width / 2 - applicationDimensions.width / 2,
-			screenSize.height / 2 - applicationDimensions.height / 2
-		);
-		
-	      // The user cannot resize the game
+	public MainApplication() {
         setResizable(false);
 	}
 	
 	/**
 	 * The main method entry-point for the application
 	 * 
-	 * @param args The outside argument / command line argument
+	 * @param args The list of args for the application
 	 */
 	public static void main(String[] args) {
     	EventQueue.invokeLater(new Runnable() {
@@ -92,9 +75,8 @@ public final class Application extends AbstractApplication {
 					break;
 				}
 			}
-			
-			Application.initialize(Application.class, debugMode);
-			Application.instance().setVisible(true);
+			MainApplication.initialize(MainApplication.class, debugMode);
+			MainApplication.instance().setVisible(true);
     		}
     	});
     }
@@ -139,13 +121,27 @@ public final class Application extends AbstractApplication {
 				.addMenuItem(AboutMenuItem.class);
 	}
 	
-	
-	@Override protected void onApplicationShown() {
-		populateGameMenu();
-		if(isDebug()) {
-			populateDebugMenu();
-		}
-		populateHelpMenu();
+	@Override protected void onInitializeWindow() {
+	    super.onInitializeWindow();
+	    
+	    // Populate the game menu
+	    populateGameMenu();
+	    
+	    // If this is a debug session, populate the debug menu
+        if(isDebug()) {
+            populateDebugMenu();
+        }
+        
+        // Populate the help menu
+        populateHelpMenu();
+
+        // Call new game and pack the window
+        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+        MainApplication.instance().pack();
+        
+        // Center the application in the middle of the screen. This must be done after a call is done to pack()
+        // or it will not be centered properly
+        setLocationRelativeTo(null);
 	}
 	
 	@Override protected void onBeforeEngineDataInitialized() {

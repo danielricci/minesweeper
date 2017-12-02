@@ -30,7 +30,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
-import application.Application;
+import application.MainApplication;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
 import resources.LocalizedStrings;
@@ -54,8 +54,8 @@ public class ExitMenuItem extends AbstractMenuItem {
 	
 	
 	@Override public void onExecute(ActionEvent actionEvent) {
-	    Application.instance().dispatchEvent(
-            new WindowEvent(Application.instance(), WindowEvent.WINDOW_CLOSING)
+	    MainApplication.instance().dispatchEvent(
+            new WindowEvent(MainApplication.instance(), WindowEvent.WINDOW_CLOSING)
         );
     }
 }
