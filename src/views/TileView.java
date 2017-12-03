@@ -58,7 +58,4 @@ public class TileView extends PanelView {
 
     @Override public void registerSignalListeners() {
     }
-
-    @Override public void render() {
-    }
 }

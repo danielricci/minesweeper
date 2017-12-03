@@ -69,23 +69,18 @@ public class BoardView extends PanelView {
         for(int row = 0, dimensionsX = boardDimensions.width; row < dimensionsX; ++row) {
             for(int col =  0, dimensionsY = boardDimensions.height; col < dimensionsY; ++col) {		
                 // Create a tile and add it to our board
-                TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(
-                        new TileView(), false
-                        );
+                TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new TileView(), false);
                 view.setPreferredSize(new Dimension(16, 16));
 
                 gbc.gridx = col;
                 gbc.gridy = row;
                 add(view, gbc);
-                
+
                 view.render();
-            }			
+            }
         }
     }
-    
+
     @Override public void initializeComponentBindings() {
-    }
-    
-    @Override public void render() {
     }
 }
