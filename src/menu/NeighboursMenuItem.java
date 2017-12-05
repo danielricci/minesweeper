@@ -29,9 +29,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 
+import engine.communication.internal.signal.arguments.BooleanEventArgs;
+import engine.core.factories.AbstractFactory;
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
+import game.core.ViewFactory;
 import resources.LocalizedStrings;
+import views.TileView;
 
 /**
  * The menu item for displaying the immediate neighbours of a selected tile
@@ -50,7 +55,20 @@ public class NeighboursMenuItem extends AbstractMenuItem {
         super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNeighbours)), parent);
     }
 
+    @Override public void onReset() {
+        super.onReset();
+        super.get(JCheckBoxMenuItem.class).setSelected(false);
+    }
+
+    @Override public boolean enabled() {
+        return AbstractSignalFactory.isRunning();
+    }
+
     @Override public void onExecute(ActionEvent actionEvent) {
-        
+        AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
+            TileView.class, 
+            new BooleanEventArgs(this, TileView.EVENT_NEIGHBORS, 
+            get(JCheckBoxMenuItem.class).isSelected())
+        );
     }
 }

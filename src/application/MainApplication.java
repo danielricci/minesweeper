@@ -89,16 +89,16 @@ public final class MainApplication extends AbstractApplication {
         MenuBuilder.start(getJMenuBar())
         .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Game))
         .addMenuItem(NewGameMenuItem.class)
-        .addSeparator() 
+            .addSeparator() 
         .addMenuItem(BeginnerModeMenuItem.class)
         .addMenuItem(IntermediateModeMenuItem.class)
         .addMenuItem(ExpertModeMenuItem.class)
         .addMenuItem(CustomModeMenuItem.class)
-        .addSeparator()
+            .addSeparator()
         .addMenuItem(MarksMenuItem.class)
-        .addSeparator()
+            .addSeparator()
         .addMenuItem(BestTimesMenuItem.class)
-        .addSeparator()
+            .addSeparator()
         .addMenuItem(ExitMenuItem.class);
     }
 

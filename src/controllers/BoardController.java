@@ -25,20 +25,22 @@
 package controllers;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
 import core.EntityMovement;
+import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import model.TileModel;
+import models.TileModel;
 
 /**
- * This controller is responsible for the functionality related to the logical components
- * of the board
+ * This controller is responsible for the functionality related to the logical components of the board
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
@@ -89,13 +91,13 @@ public class BoardController extends BaseController {
 
             // Link the tile rows together
             linkTiles(
-                    // Previous row
-                    i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
-                            // Current Row
-                            Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
-                            // Next Row
-                            i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
-                    );
+                // Previous row
+                i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
+                // Current Row
+                Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
+                // Next Row
+                i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
+            );
         }
     }
 
@@ -122,5 +124,71 @@ public class BoardController extends BaseController {
             // Assign the mappings where we reference the neutral-neutral tile as the key
             _tileModels.put(neutralRow[i], neighbors);
         }
+    }
+
+    /**
+     * Sets the tile neighbors to a highlighted state, this is used for debugging purposes
+     * 
+     * @param highlighted If the neighbors should be in a highlighted state or not
+     */
+    public void showTileNeighborsDebug(ISignalListener listener, boolean highlighted) {
+
+        // Get the context of the listener
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+         
+        // Go through the list of tile model neighbors
+        for(TileModel tile : getAllNeighbors(tileModel)) {
+            tile.setHighlighted(highlighted);
+        }
+    }
+
+    /**
+     * Gets all the neighbors associated to the particular model
+     * 
+     * @param tileModel The tile model to use as a search for neighbors around it
+     * 
+     * @return The list of tile models that neighbor the passed in tile model
+     */
+    private List<TileModel> getAllNeighbors(TileModel tileModel) {
+
+        // Get the list of neighbors associated to our tile model
+        Map<EntityMovement, TileModel> tileModelNeighbors = _tileModels.get(tileModel);
+
+        // This collection holds the list of all the neighbors
+        List<TileModel> allNeighbors = new ArrayList();
+
+        // Go through every entry set in our structure
+        for(Map.Entry<EntityMovement, TileModel> entry : tileModelNeighbors.entrySet()) {
+
+            // Get the tile model
+            TileModel tile = entry.getValue();
+            if(tile == null) {
+                continue;
+            }
+
+            // Add our tile to the list
+            allNeighbors.add(tile);
+
+            // To get the diagonals, make sure that if we are on the top or bottom tile
+            // that we fetch their respective tiles, and provided that they are valid
+            // add them to our list.
+            switch(entry.getKey()) {
+            case UP:
+            case DOWN:
+                TileModel left = _tileModels.get(tile).get(EntityMovement.LEFT);
+                if(left != null) {
+                    allNeighbors.add(left);
+                }
+
+                TileModel right = _tileModels.get(tile).get(EntityMovement.RIGHT);
+                if(right != null) {
+                    allNeighbors.add(right);
+                }
+                break;
+            }
+        }
+
+        // return the list of neighbors
+        return allNeighbors;
     }
 }

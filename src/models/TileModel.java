@@ -22,7 +22,7 @@
  * IN THE SOFTWARE.
  */
 
-package model;
+package models;
 
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.model.BaseModel;
@@ -35,6 +35,16 @@ import engine.core.mvc.model.BaseModel;
  */
 public class TileModel extends BaseModel {
 
+    /**
+     * Signal indicating that this model's highlight state has changed
+     */
+    public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
+    
+    /**
+     * Property indicating this tile is highlighted
+     */
+    private boolean _highlighted;
+    
     /** 
      * Constructs a new instance of this class type
      *
@@ -42,5 +52,25 @@ public class TileModel extends BaseModel {
      */
     public TileModel(ISignalListener... listeners) {
         super(listeners);
+    }
+ 
+    /**
+     * Sets the highlight state of this model
+     * 
+     * @param highlighted If the tile model should be highlighted
+     */
+    public void setHighlighted(boolean highlighted) {
+        _highlighted = highlighted;
+        setOperation(EVENT_HIGHLIGHT_CHANGED);
+        doneUpdating();
+    }
+    
+    /**
+     * Gets if the tile model is in a highlighted state
+     * 
+     * @return If the tile model is highlighted
+     */
+    public boolean getIsHighlighted() {
+        return _highlighted;
     }
 }
