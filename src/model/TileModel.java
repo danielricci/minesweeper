@@ -22,37 +22,25 @@
  * IN THE SOFTWARE.
  */
 
-package menu;
+package model;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-
-import application.MainApplication;
-import engine.core.navigation.AbstractMenuItem;
-import engine.core.navigation.MenuBuilder;
-import engine.utils.globalisation.Localization;
-import resources.LocalizedStrings;
+import engine.communication.internal.signal.ISignalListener;
+import engine.core.mvc.model.BaseModel;
 
 /**
- * The menu item for a new game in the debugger
+ * The model representation of a tile 
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class DebugGameMenuItem extends AbstractMenuItem {
+public class TileModel extends BaseModel {
 
-    /**
+    /** 
      * Constructs a new instance of this class type
-     * 
-     * @param parent The parent of this menu item
+     *
+     * @param listeners The list of receivers
      */
-    public DebugGameMenuItem(JComponent parent) {
-        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNew)), parent);
-    }
-
-    @Override public void onExecute(ActionEvent actionEvent) {
-        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+    public TileModel(ISignalListener... listeners) {
+        super(listeners);
     }
 }

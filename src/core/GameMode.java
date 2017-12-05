@@ -1,4 +1,4 @@
-package game.structure;
+package core;
 
 /**
  * The game modes available in the game

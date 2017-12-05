@@ -30,7 +30,13 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.border.Border;
 
+import controllers.BoardController;
+import engine.core.factories.AbstractFactory;
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
+import game.core.ControllerFactory;
+import game.core.ModelFactory;
+import model.TileModel;
 
 /**
  * This view represents the visual contents of a single tile in this game
@@ -43,13 +49,30 @@ public class TileView extends PanelView {
     /**
      * Normal border style of this view
      */
-    private final Border DEFAULT_BORDER_STYLE = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
+    private final Border BORDER_STYLE = BorderFactory.createMatteBorder(0, 1, 1, 0, new Color(146, 146, 146));
+    
+    /**
+     * The background color of this tile
+     */
+    private final Color BACKGROUND_STYLE = new Color(204, 204, 204);
 
+    /**
+     * Constructs a new instance of this class type
+     */
     public TileView() {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));	
-        setBorder(DEFAULT_BORDER_STYLE);
+        // Set the controller to the be the common board controller 
+        BoardController controller = AbstractSignalFactory.getFactory(ControllerFactory.class).get(BoardController.class);
+        getViewProperties().setEntity(controller);
+        
+        // Create a new tile model and listen in on it
+        controller.addTileModel(AbstractFactory.getFactory(ModelFactory.class).add(new TileModel(this), false));
+        
+        // Set the rest of the layout data for this page
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBorder(BORDER_STYLE);
+        setBackground(BACKGROUND_STYLE);
     }
-
+    
     @Override public void initializeComponents() {
     }
 

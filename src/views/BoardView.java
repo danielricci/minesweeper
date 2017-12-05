@@ -28,8 +28,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import controllers.BoardController;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
+import game.core.ControllerFactory;
 import game.core.ViewFactory;
 
 /**
@@ -46,9 +48,9 @@ public class BoardView extends PanelView {
     public BoardView() {
 
         // Set the controller associated to this view
-        //getViewProperties().setEntity(
-        //	AbstractSignalFactory.getFactory(ControllerFactory.class).add(new BoardController(), true)
-        //);	
+        getViewProperties().setEntity(
+            AbstractSignalFactory.getFactory(ControllerFactory.class).add(new BoardController(), true)
+        );
 
         setLayout(new GridBagLayout());
     }
@@ -63,11 +65,11 @@ public class BoardView extends PanelView {
 
         // Get the board dimensions
         // TODO - this should be whatever the current game difficulty is set to
-        Dimension boardDimensions = new Dimension(20, 20);
+        Dimension boardDimensions = new Dimension(16, 16);
 
         // Create the board based on the specified dimensions
         for(int row = 0, dimensionsX = boardDimensions.width; row < dimensionsX; ++row) {
-            for(int col =  0, dimensionsY = boardDimensions.height; col < dimensionsY; ++col) {		
+            for(int col =  0, dimensionsY = boardDimensions.height; col < dimensionsY; ++col) {
                 // Create a tile and add it to our board
                 TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new TileView(), false);
                 view.setPreferredSize(new Dimension(16, 16));
@@ -79,6 +81,9 @@ public class BoardView extends PanelView {
                 view.render();
             }
         }
+        
+        // Link all the tile views together
+        getViewProperties().getEntity(BoardController.class).generateLogicalTileLinks();
     }
 
     @Override public void initializeComponentBindings() {

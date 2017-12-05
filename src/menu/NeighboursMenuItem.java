@@ -26,33 +26,31 @@ package menu;
 
 import java.awt.event.ActionEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
-import javax.swing.JMenuItem;
 
-import application.MainApplication;
 import engine.core.navigation.AbstractMenuItem;
-import engine.core.navigation.MenuBuilder;
 import engine.utils.globalisation.Localization;
 import resources.LocalizedStrings;
 
 /**
- * The menu item for a new game in the debugger
+ * The menu item for displaying the immediate neighbours of a selected tile
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class DebugGameMenuItem extends AbstractMenuItem {
+public class NeighboursMenuItem extends AbstractMenuItem {
 
     /**
      * Constructs a new instance of this class type
      * 
      * @param parent The parent of this menu item
      */
-    public DebugGameMenuItem(JComponent parent) {
-        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNew)), parent);
+    public NeighboursMenuItem(JComponent parent) {
+        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNeighbours)), parent);
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+        
     }
 }

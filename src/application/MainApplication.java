@@ -41,6 +41,7 @@ import menu.ExitMenuItem;
 import menu.ExpertModeMenuItem;
 import menu.IntermediateModeMenuItem;
 import menu.MarksMenuItem;
+import menu.NeighboursMenuItem;
 import menu.NewGameMenuItem;
 import resources.LocalizedStrings;
 
@@ -109,6 +110,8 @@ public final class MainApplication extends AbstractApplication {
         .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Debug))
         .addMenuItem(DebugGameMenuItem.class)
         .addSeparator()
+        .addMenuItem(NeighboursMenuItem.class)
+        .addSeparator()
         .addMenuItem(DebuggerWindowMenuItem.class);
     }
 
@@ -135,8 +138,14 @@ public final class MainApplication extends AbstractApplication {
         // Populate the help menu
         populateHelpMenu();
 
-        // Call new game and pack the window
-        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+        // If the game is in debug mode then call the debug mode new game, else call the normal new game
+        if(isDebug()) {
+            MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebugGameMenuItem.class).onExecute(null);
+        }
+        else {
+            MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+        }
+        
         MainApplication.instance().pack();
 
         // Center the application in the middle of the screen. This must be done after a call is done to pack()
