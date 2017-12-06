@@ -35,15 +35,15 @@ import game.core.ControllerFactory;
 import game.core.ViewFactory;
 
 /**
- * The board view displays the board and all of the boards contents
+ * The board view displays the board and all of the board contents
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
 public class BoardView extends PanelView {
-
+   
     /**
-     * Constructs a new instance of this type
+     * Constructs a new instance of this class type
      */
     public BoardView() {
 

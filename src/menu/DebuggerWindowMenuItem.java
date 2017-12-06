@@ -29,9 +29,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
+import engine.core.factories.AbstractFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
+import game.core.ViewFactory;
 import resources.LocalizedStrings;
+import views.DebuggerBoardView;
+import views.dialogs.DebuggerDialog;
 
 /**
  * The menu item for the debugger window
@@ -51,5 +55,14 @@ public class DebuggerWindowMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
+        ViewFactory viewFactory = AbstractFactory.getFactory(ViewFactory.class);
+        if(viewFactory.exists(DebuggerBoardView.class)) {
+            DebuggerDialog dialog = viewFactory.get(DebuggerDialog.class);
+            if(dialog == null) {
+                dialog = viewFactory.add(new DebuggerDialog(), true);
+            }
+            
+            dialog.render();
+        }
     }
 }
