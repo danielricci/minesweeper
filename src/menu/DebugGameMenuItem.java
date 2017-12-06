@@ -30,10 +30,12 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
 import application.MainApplication;
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
-import engine.core.navigation.MenuBuilder;
 import engine.utils.globalisation.Localization;
+import game.core.ViewFactory;
 import resources.LocalizedStrings;
+import views.DebuggerBoardView;
 
 /**
  * The menu item for a new game in the debugger
@@ -53,6 +55,18 @@ public class DebugGameMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+        // Flush the application before continuing
+        if(!MainApplication.instance().clear()) {
+            return;
+        }
+
+        // Create the board view
+        DebuggerBoardView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new DebuggerBoardView(), true);
+
+        // Add the view to the application
+        MainApplication.instance().add(view);
+
+        // Render the specified view
+        view.render();
     }
 }
