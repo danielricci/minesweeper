@@ -4,13 +4,17 @@ BeginnerMode,Beginner
 BestTimes,Best Times
 CustomMode,Custom
 Debug,Debug
+DebugNeighbours,Toggle Neighbours
 DebugNew,New
 DebugWindow,Debugger Window
 ExpertMode,Expert
 Exit,Exit
 Game,Game
+Generate,Generate
 GitHub,https://github.com/danielricci/minesweeper
 Help,Help
 IntermediateMode,Intermediate
 Marks,Marks [?]
+Mines,Mines
 New,New
+Clear,Clear

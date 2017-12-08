@@ -34,6 +34,7 @@ public enum LocalizedStrings {
     About,
     BeginnerMode,
     BestTimes,
+    Clear,
     CustomMode,
     Debug,
     DebugNeighbours,
@@ -42,9 +43,11 @@ public enum LocalizedStrings {
     ExpertMode,
     Exit,
     Game,
+    Generate,
     GitHub,
     Help,
     IntermediateMode,
     Marks,
-    New, 
+    Mines,
+    New
 }
