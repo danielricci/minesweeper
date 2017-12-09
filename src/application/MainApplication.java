@@ -89,16 +89,16 @@ public final class MainApplication extends AbstractApplication {
         MenuBuilder.start(getJMenuBar())
         .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Game))
         .addMenuItem(NewGameMenuItem.class)
-            .addSeparator() 
+        .addSeparator() 
         .addMenuItem(BeginnerModeMenuItem.class)
         .addMenuItem(IntermediateModeMenuItem.class)
         .addMenuItem(ExpertModeMenuItem.class)
         .addMenuItem(CustomModeMenuItem.class)
-            .addSeparator()
+        .addSeparator()
         .addMenuItem(MarksMenuItem.class)
-            .addSeparator()
+        .addSeparator()
         .addMenuItem(BestTimesMenuItem.class)
-            .addSeparator()
+        .addSeparator()
         .addMenuItem(ExitMenuItem.class);
     }
 
@@ -146,7 +146,7 @@ public final class MainApplication extends AbstractApplication {
         else {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
         }
-        
+
         MainApplication.instance().pack();
 
         // Center the application in the middle of the screen. This must be done after a call is done to pack()
@@ -155,6 +155,8 @@ public final class MainApplication extends AbstractApplication {
     }
 
     @Override protected void onBeforeEngineDataInitialized() {
+        EngineProperties.instance().setProperty(Property.DATA_PATH_XML, "/generated/tilemap.xml");
+        EngineProperties.instance().setProperty(Property.DATA_PATH_SHEET, "/generated/tilemap.png");
         EngineProperties.instance().setProperty(Property.LOCALIZATION_PATH_CVS, "resources/LocalizedStrings.csv");
         EngineProperties.instance().setProperty(Property.ENGINE_OUTPUT, "true");
         //EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
