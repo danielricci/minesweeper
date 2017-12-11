@@ -140,6 +140,7 @@ public class TileView extends PanelView {
     
     @Override public void update(AbstractEventArgs event) {
         super.update(event);
+        
         if(event instanceof ModelEventArgs)
         {
             ModelEventArgs args = (ModelEventArgs) event;
@@ -150,6 +151,10 @@ public class TileView extends PanelView {
             else {
                 this.setBackground(DEFAULT_BACKGROUND_COLOR);               
             }
+            
+            addRenderableContent(tileModel.getEntity());
         }
+        
+        repaint();
     }
 }

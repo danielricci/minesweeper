@@ -91,13 +91,13 @@ public class BoardController extends BaseController {
 
             // Link the tile rows together
             linkTiles(
-                // Previous row
-                i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
-                // Current Row
-                Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
-                // Next Row
-                i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
-            );
+                    // Previous row
+                    i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
+                            // Current Row
+                            Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
+                            // Next Row
+                            i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
+                    );
         }
     }
 
@@ -135,7 +135,7 @@ public class BoardController extends BaseController {
 
         // Get the context of the listener
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-         
+
         // Go through the list of tile model neighbors
         for(TileModel tile : getAllNeighbors(tileModel)) {
             tile.setHighlighted(highlighted);

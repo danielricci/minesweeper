@@ -24,6 +24,10 @@
 
 package views;
 
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  * This view represents the debuggable version of the application where tests can be performed
  * 
@@ -44,5 +48,15 @@ public class DebuggerBoardView extends BoardView {
 
     @Override public void initializeComponentBindings() {
         super.initializeComponentBindings();
+
+        for(Component component : getComponents()) {
+            if(component instanceof TileView) {
+                component.addMouseListener(new MouseAdapter() {
+                    @Override public void mouseReleased(MouseEvent event) {
+                        System.out.println("DO IT");
+                    }
+                });
+            }
+        }
     }
 }
