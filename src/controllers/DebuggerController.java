@@ -24,7 +24,9 @@
 
 package controllers;
 
+import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
+import game.core.ControllerFactory;
 
 /**
  * This controller is responsible for the functionality related to debugging operations within the application for testing purposes
@@ -38,7 +40,7 @@ public class DebuggerController extends BaseController {
      * The flag associated to the state of mines being inserted
      */
     private boolean _isMinesEnabled;
-    
+
     /**
      * Sets the state of the mines insertion
      * 
@@ -47,7 +49,7 @@ public class DebuggerController extends BaseController {
     public void setMinesEnabled(boolean isMinesEnabled) {
         _isMinesEnabled = isMinesEnabled;
     }
-    
+
     /**
      * Gets the state of the mines insertion
      * 
@@ -57,4 +59,10 @@ public class DebuggerController extends BaseController {
         return _isMinesEnabled;
     }
 
+    /**
+     * Clear the board of it's contents
+     */
+    public void clearContents() {
+        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).clearEntities();
+    }
 }

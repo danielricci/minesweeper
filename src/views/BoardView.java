@@ -29,7 +29,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import controllers.BoardController;
-import controllers.DebuggerController;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
 import game.core.ControllerFactory;
@@ -42,7 +41,7 @@ import game.core.ViewFactory;
  *
  */
 public class BoardView extends PanelView {
-   
+
     /**
      * Constructs a new instance of this class type
      */
@@ -50,7 +49,7 @@ public class BoardView extends PanelView {
 
         // Set the controller associated to this view
         getViewProperties().setEntity(
-            AbstractSignalFactory.getFactory(ControllerFactory.class).add(new DebuggerController(), true)
+            AbstractSignalFactory.getFactory(ControllerFactory.class).add(new BoardController(), true)
         );
 
         setLayout(new GridBagLayout());
@@ -82,7 +81,7 @@ public class BoardView extends PanelView {
                 view.render();
             }
         }
-        
+
         // Link all the tile views together
         getViewProperties().getEntity(BoardController.class).generateLogicalTileLinks();
     }

@@ -29,6 +29,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import controllers.BoardController;
+import controllers.DebuggerController;
+import engine.communication.internal.signal.ISignalListener;
+import engine.core.factories.AbstractFactory;
+import game.core.ControllerFactory;
 
 /**
  * This view represents the debuggable version of the application where tests can be performed
@@ -53,10 +57,13 @@ public class DebuggerBoardView extends BoardView {
             if(component instanceof TileView) {
                 component.addMouseListener(new MouseAdapter() {
                     @Override public void mouseReleased(MouseEvent event) {
-                        BoardController controller = DebuggerBoardView.this.getViewProperties().getEntity(BoardController.class);
-                       // controller.set
-//                        TileView tileView = (TileView) event.getSource();
-  //                      tileView.
+                        DebuggerController debuggerController = AbstractFactory.getFactory(ControllerFactory.class).get(DebuggerController.class);
+                        if(debuggerController != null) {
+                            if(debuggerController.getIsMinesEnabled()) {
+                                BoardController controller = DebuggerBoardView.this.getViewProperties().getEntity(BoardController.class);
+                                controller.setDebugMine((ISignalListener) event.getSource());
+                            }
+                        }
                     }
                 });
             }

@@ -35,8 +35,10 @@ import javax.swing.JPanel;
 
 import application.MainApplication;
 import controllers.DebuggerController;
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.DialogView;
 import engine.utils.globalisation.Localization;
+import game.core.ControllerFactory;
 import resources.LocalizedStrings;
 
 /**
@@ -68,7 +70,7 @@ public class DebuggerDialog extends DialogView {
         super(MainApplication.instance(), Localization.instance().getLocalizedString(LocalizedStrings.DebugWindow), 300, 300);
 
         // Set the controller for this dialog view
-        //getViewProperties().setEntity(AbstractSignalFactory.getFactory(ControllerFactory.class).add(new DebuggerController(), true);
+        getViewProperties().setEntity(AbstractSignalFactory.getFactory(ControllerFactory.class).add(new DebuggerController(), true));
 
         // Set the view properties for this dialog view
         setResizable(false);
@@ -120,6 +122,9 @@ public class DebuggerDialog extends DialogView {
             @Override public void mouseReleased(MouseEvent event) {
                 _generateButton.setEnabled(true);
                 _minesCheckBox.setEnabled(true);
+                
+                DebuggerController controller = DebuggerDialog.this.getViewProperties().getEntity(DebuggerController.class);
+                controller.clearContents();
             }
         });
     }

@@ -31,12 +31,15 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
+import entities.MineEntity;
+import generated.DataLookup.BOMB_INDICATORS;
 import models.TileModel;
 
 /**
@@ -185,10 +188,37 @@ public class BoardController extends BaseController {
                     allNeighbors.add(right);
                 }
                 break;
+            case LEFT:
+                break;
+            case RIGHT:
+                break;
+            default:
+                break;
             }
         }
 
         // return the list of neighbors
         return allNeighbors;
+    }
+
+    /**
+     * Clears all the tiles of their entities
+     */
+    public void clearEntities() {
+        _tileModels.keySet().stream().filter(z -> z.getEntity() != null).parallel().forEach(z -> z.setEntity(null));
+    }
+    
+    /**
+     * Sets a debug mine onto the specified listeners model
+     * 
+     * @param listener The listener to set the mine
+     */
+    public void setDebugMine(ISignalListener listener) {
+        Optional<TileModel> optional = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst();
+        if(optional.isPresent())
+        {
+            TileModel tileModel = optional.get();
+            tileModel.setEntity(tileModel.getEntity() == null ? new MineEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
+        }
     }
 }
