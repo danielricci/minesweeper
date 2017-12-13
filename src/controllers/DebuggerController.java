@@ -65,4 +65,11 @@ public class DebuggerController extends BaseController {
     public void clearContents() {
         AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).clearEntities();
     }
+
+    /**
+     * Generates the board contents
+     */
+    public void generateBoard() {
+        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoard();
+    }
 }

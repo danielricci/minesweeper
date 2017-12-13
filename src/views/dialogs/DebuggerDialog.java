@@ -100,11 +100,13 @@ public class DebuggerDialog extends DialogView {
     }
 
     @Override public void initializeComponentBindings() {
-
+        
+        // Get a reference to the debugger controller
+        DebuggerController controller = DebuggerDialog.this.getViewProperties().getEntity(DebuggerController.class);
+        
         // Mouse listener for when the mines button is clicked
         _minesCheckBox.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent e) {
-                DebuggerController controller = DebuggerDialog.this.getViewProperties().getEntity(DebuggerController.class);
                 controller.setMinesEnabled(_minesCheckBox.isSelected());
             }
         });
@@ -120,11 +122,12 @@ public class DebuggerDialog extends DialogView {
         // Mouse listener for when the clear button is clicked
         _clearButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent event) {
+                
+                // Clear the contents of the board
+                controller.clearContents();
+                
                 _generateButton.setEnabled(true);
                 _minesCheckBox.setEnabled(true);
-                
-                DebuggerController controller = DebuggerDialog.this.getViewProperties().getEntity(DebuggerController.class);
-                controller.clearContents();
             }
         });
     }

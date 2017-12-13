@@ -221,4 +221,11 @@ public class BoardController extends BaseController {
             tileModel.setEntity(tileModel.getEntity() == null ? new MineEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
         }
     }
+
+    /**
+     * Generates the tiles of the board
+     */
+    public void generateBoard() {
+        
+    }
 }
