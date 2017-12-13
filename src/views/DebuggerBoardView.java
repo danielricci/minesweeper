@@ -28,6 +28,8 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import controllers.BoardController;
+
 /**
  * This view represents the debuggable version of the application where tests can be performed
  * 
@@ -42,18 +44,19 @@ public class DebuggerBoardView extends BoardView {
     public DebuggerBoardView() {
     }
 
-    @Override public void initializeComponents() {
-        super.initializeComponents();
-    }
-
     @Override public void initializeComponentBindings() {
         super.initializeComponentBindings();
 
+        // Go through all the tile views that have been created and add a mouse
+        // listener such that when clicked it will perform the specified action
         for(Component component : getComponents()) {
             if(component instanceof TileView) {
                 component.addMouseListener(new MouseAdapter() {
                     @Override public void mouseReleased(MouseEvent event) {
-                        System.out.println("DO IT");
+                        BoardController controller = DebuggerBoardView.this.getViewProperties().getEntity(BoardController.class);
+                       // controller.set
+//                        TileView tileView = (TileView) event.getSource();
+  //                      tileView.
                     }
                 });
             }

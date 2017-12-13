@@ -29,6 +29,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import controllers.BoardController;
+import controllers.DebuggerController;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
 import game.core.ControllerFactory;
@@ -49,7 +50,7 @@ public class BoardView extends PanelView {
 
         // Set the controller associated to this view
         getViewProperties().setEntity(
-            AbstractSignalFactory.getFactory(ControllerFactory.class).add(new BoardController(), true)
+            AbstractSignalFactory.getFactory(ControllerFactory.class).add(new DebuggerController(), true)
         );
 
         setLayout(new GridBagLayout());
