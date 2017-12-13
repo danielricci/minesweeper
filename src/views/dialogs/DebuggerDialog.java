@@ -116,6 +116,7 @@ public class DebuggerDialog extends DialogView {
             @Override public void mouseReleased(MouseEvent event) {
                 _generateButton.setEnabled(false);
                 _minesCheckBox.setEnabled(false);
+                controller.generateBoard();
             }
         });
 
