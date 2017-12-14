@@ -38,7 +38,7 @@ import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import entities.MineEntity;
+import entities.MineIndicatorEntity;
 import generated.DataLookup.BOMB_INDICATORS;
 import models.TileModel;
 
@@ -207,7 +207,7 @@ public class BoardController extends BaseController {
     public void clearEntities() {
         _tileModels.keySet().stream().filter(z -> z.getEntity() != null).parallel().forEach(z -> z.setEntity(null));
     }
-    
+
     /**
      * Sets a debug mine onto the specified listeners model
      * 
@@ -218,7 +218,7 @@ public class BoardController extends BaseController {
         if(optional.isPresent())
         {
             TileModel tileModel = optional.get();
-            tileModel.setEntity(tileModel.getEntity() == null ? new MineEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
+            tileModel.setEntity(tileModel.getEntity() == null ? new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
         }
     }
 
@@ -228,4 +228,29 @@ public class BoardController extends BaseController {
     public void generateBoard() {
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

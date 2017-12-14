@@ -24,24 +24,22 @@
 
 package entities;
 
-import generated.DataLookup.BOMB_INDICATORS;
-import generated.DataLookup.DATALAYERNAME;
+import generated.DataLookup;
 
 /**
- * A representation of a mine entity
+ * A representation of a mine numeral
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class MineEntity extends AbstractMineEntity {
+public class MineNumeralEntity extends AbstractGameEntity {
 
     /**
      * Constructs a new instance of this class type
      *
-     * @param indicator The type of indicator to set
+     * @param numeral The initial numeral to set for this entity
      */
-    public MineEntity(BOMB_INDICATORS indicator) {
-        super(DATALAYERNAME.BOMB_INDICATORS);
-        setActiveData(indicator.toString());
+    public MineNumeralEntity(DataLookup.BOMB_NUMERALS numeral) {
+        setActiveData(numeral);
     }
 }

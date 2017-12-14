@@ -24,24 +24,22 @@
 
 package entities;
 
-import game.gameplay.AbstractDataEntity;
-import generated.DataLookup.DATALAYERNAME;
+import generated.DataLookup;
 
 /**
- * Abstract representation of a mine
+ * A representation of a mine indicator
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public abstract class AbstractMineEntity extends AbstractDataEntity {
+public class MineIndicatorEntity extends AbstractGameEntity {
 
     /**
-     * 
      * Constructs a new instance of this class type
      *
-     * @param layerName The layer name to set
+     * @param indicator The type of indicator to set
      */
-    public AbstractMineEntity(DATALAYERNAME layerName) {
-        super(layerName.toString());
+    public MineIndicatorEntity(DataLookup.BOMB_INDICATORS indicator) {
+        setActiveData(indicator);
     }
 }
