@@ -65,7 +65,11 @@ public class DebuggerController extends BaseController {
      * Clear the board of it's contents
      */
     public void clearContents() {
-        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).clearEntities();
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+                AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).clearEntities();
+            }
+        });
     }
 
     /**
