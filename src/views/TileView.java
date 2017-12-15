@@ -58,16 +58,6 @@ public class TileView extends PanelView {
     public static final String EVENT_NEIGHBORS = "EVENT_NEIGHBORS";
     
     /**
-     * Event associated to show neighbors
-     */
-    public static final String EVENT_SHOW_NEIGHBORS = "EVENT_SHOW_NEIGHBORS";
-    
-    /**
-     * Event associated to hiding neighbors
-     */
-    public static final String EVENT_HIDE_NEIGHBORS = "EVENT_HIDE_NEIGHBORS";
-
-    /**
      * This flag when set to true with perform a neighbor highlight on this tile when you mouse over it
      */
     private boolean _highlightNeighbors;
@@ -133,7 +123,7 @@ public class TileView extends PanelView {
                 // what was currently highlighted would not be properly removed
                 if(!_highlightNeighbors) {
                     getViewProperties().getEntity(BoardController.class).showTileNeighborsDebug(TileView.this, false);
-                }
+                }                
             }
         });
     }
@@ -145,16 +135,16 @@ public class TileView extends PanelView {
         {
             ModelEventArgs args = (ModelEventArgs) event;
             TileModel tileModel = (TileModel) args.getSource();
+
             if(tileModel.getIsHighlighted()) {     
                 this.setBackground(HIGHLIGHTED_COLOR);
             }
             else {
-                this.setBackground(DEFAULT_BACKGROUND_COLOR);               
+                this.setBackground(DEFAULT_BACKGROUND_COLOR);
+                addRenderableContent(tileModel.getEntity());
             }
             
-            addRenderableContent(tileModel.getEntity());
-        }
-        
-        repaint();
+            repaint();
+        }        
     }
 }
