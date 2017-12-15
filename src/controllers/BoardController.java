@@ -39,6 +39,7 @@ import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
 import entities.MineIndicatorEntity;
+import entities.MineNumeralEntity;
 import generated.DataLookup.BOMB_INDICATORS;
 import models.TileModel;
 
@@ -215,8 +216,7 @@ public class BoardController extends BaseController {
      */
     public void setDebugMine(ISignalListener listener) {
         Optional<TileModel> optional = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst();
-        if(optional.isPresent())
-        {
+        if(optional.isPresent()) {
             TileModel tileModel = optional.get();
             tileModel.setEntity(tileModel.getEntity() == null ? new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
         }
@@ -226,31 +226,13 @@ public class BoardController extends BaseController {
      * Generates the tiles of the board
      */
     public void generateBoard() {
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        for(TileModel tileModel : _tileModels.keySet()) {
+            if(tileModel.getEntity() == null) {
+               long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
+               if(count > 0) {
+                   tileModel.setEntity(new MineNumeralEntity(count));
+               }
+            }
+        }
+    }   
 }

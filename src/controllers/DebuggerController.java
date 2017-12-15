@@ -24,6 +24,8 @@
 
 package controllers;
 
+import java.util.concurrent.Executors;
+
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
 import game.core.ControllerFactory;
@@ -70,6 +72,10 @@ public class DebuggerController extends BaseController {
      * Generates the board contents
      */
     public void generateBoard() {
-        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoard();
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+                AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoard();
+            }
+        });
     }
 }
