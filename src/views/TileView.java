@@ -58,9 +58,15 @@ public class TileView extends PanelView {
     public static final String EVENT_NEIGHBORS = "EVENT_NEIGHBORS";
     
     /**
+     * The event associated to displaying the empty tiles with respect to this tile
+     */
+    public static final String EVENT_EMPTY_TILES = "EVENT_EMPTY_TILES";
+    
+    /**
      * This flag when set to true with perform a neighbor highlight on this tile when you mouse over it
      */
     private boolean _highlightNeighbors;
+    
 
     /**
      * Normal border style of this view
@@ -118,29 +124,41 @@ public class TileView extends PanelView {
             @Override public void signalReceived(BooleanEventArgs event) {
                 _highlightNeighbors = event.getResult();
                 
-                // If the highlight is being removed, force the model to remove its highlight. This will prevent a bug
-                // where if you are highlighting tiles and you navigate with your keyboard to remove highlight, then
-                // what was currently highlighted would not be properly removed
                 if(!_highlightNeighbors) {
                     getViewProperties().getEntity(BoardController.class).showTileNeighborsDebug(TileView.this, false);
                 }                
             }
+        });        
+        addSignalListener(EVENT_EMPTY_TILES, new ISignalReceiver<BooleanEventArgs>() {
+            @Override public void signalReceived(BooleanEventArgs event) {
+                _highlightNeighbors = event.getResult();
+                
+                if(!_highlightNeighbors) {
+                    getViewProperties().getEntity(BoardController.class).showEmptyTileNeighborsDebug(TileView.this, false);
+                }
+            }
         });
+
     }
     
     @Override public void update(AbstractEventArgs event) {
         super.update(event);
         
-        if(event instanceof ModelEventArgs)
-        {
+        if(event instanceof ModelEventArgs) {
+            
+            // Get the tile model
             ModelEventArgs args = (ModelEventArgs) event;
             TileModel tileModel = (TileModel) args.getSource();
 
+            // Set the highlighted state
             if(tileModel.getIsHighlighted()) {     
                 this.setBackground(HIGHLIGHTED_COLOR);
             }
             else {
                 this.setBackground(DEFAULT_BACKGROUND_COLOR);
+                
+                // Add the renderable entity to be shown. This should not be shown if
+                // the tile is being highlighted
                 addRenderableContent(tileModel.getEntity());
             }
             

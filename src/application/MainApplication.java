@@ -35,13 +35,14 @@ import menu.AboutMenuItem;
 import menu.BeginnerModeMenuItem;
 import menu.BestTimesMenuItem;
 import menu.CustomModeMenuItem;
+import menu.DebugEmptyTilesMenuItem;
 import menu.DebugGameMenuItem;
 import menu.DebuggerWindowMenuItem;
 import menu.ExitMenuItem;
 import menu.ExpertModeMenuItem;
 import menu.IntermediateModeMenuItem;
 import menu.MarksMenuItem;
-import menu.NeighboursMenuItem;
+import menu.DebugNeighboursMenuItem;
 import menu.NewGameMenuItem;
 import resources.LocalizedStrings;
 
@@ -110,7 +111,8 @@ public final class MainApplication extends AbstractApplication {
         .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Debug))
         .addMenuItem(DebugGameMenuItem.class)
         .addSeparator()
-        .addMenuItem(NeighboursMenuItem.class)
+        .addMenuItem(DebugNeighboursMenuItem.class)
+        .addMenuItem(DebugEmptyTilesMenuItem.class)
         .addSeparator()
         .addMenuItem(DebuggerWindowMenuItem.class);
     }

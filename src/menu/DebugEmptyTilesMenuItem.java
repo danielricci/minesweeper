@@ -44,30 +44,29 @@ import views.TileView;
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class NeighboursMenuItem extends AbstractMenuItem {
+public class DebugEmptyTilesMenuItem extends AbstractMenuItem {
 
     /**
      * Constructs a new instance of this class type
      * 
      * @param parent The parent of this menu item
      */
-    public NeighboursMenuItem(JComponent parent) {
-        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNeighbours)), parent);
+    public DebugEmptyTilesMenuItem(JComponent parent) {
+        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugEmptyTiles)), parent);
     }
-
-    @Override public void onReset() {
-        super.onReset();
-        super.get(JCheckBoxMenuItem.class).setSelected(false);
+    
+    @Override protected String getGroupName() {
+        return "DebugTiles";
     }
-
+    
     @Override public boolean enabled() {
         return AbstractSignalFactory.isRunning();
     }
-
+    
     @Override public void onExecute(ActionEvent actionEvent) {
         AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
             TileView.class, 
-            new BooleanEventArgs(this, TileView.EVENT_NEIGHBORS, 
+            new BooleanEventArgs(this, TileView.EVENT_EMPTY_TILES, 
             get(JCheckBoxMenuItem.class).isSelected())
         );
     }

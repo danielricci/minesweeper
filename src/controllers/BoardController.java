@@ -146,6 +146,13 @@ public class BoardController extends BaseController {
         }
     }
 
+    public void showEmptyTileNeighborsDebug(ISignalListener listener, boolean highlighted) {
+    }
+
+    private List<TileModel> showEmptyTileNeighborsDebugImpl(TileModel tileModel) {
+        return null;
+    }
+
     /**
      * Gets all the neighbors associated to the particular model
      * 
@@ -228,10 +235,10 @@ public class BoardController extends BaseController {
     public void generateBoard() {
         for(TileModel tileModel : _tileModels.keySet()) {
             if(tileModel.getEntity() == null) {
-               long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
-               if(count > 0) {
-                   tileModel.setEntity(new MineNumeralEntity(count));
-               }
+                long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
+                if(count > 0) {
+                    tileModel.setEntity(new MineNumeralEntity(count));
+                }
             }
         }
     }   

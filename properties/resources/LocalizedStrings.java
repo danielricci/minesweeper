@@ -37,6 +37,7 @@ public enum LocalizedStrings {
     Clear,
     CustomMode,
     Debug,
+    DebugEmptyTiles,
     DebugNeighbours,
     DebugNew,
     DebugWindow,
