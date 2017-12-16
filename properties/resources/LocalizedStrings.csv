@@ -2,8 +2,10 @@ key,en_ca
 About,About Minesweeper
 BeginnerMode,Beginner
 BestTimes,Best Times
+Clear,Clear
 CustomMode,Custom
 Debug,Debug
+DebugEmptyTiles,Toggle Empty Tiles
 DebugNeighbours,Toggle Neighbours
 DebugNew,New
 DebugWindow,Debugger Window
@@ -17,4 +19,3 @@ IntermediateMode,Intermediate
 Marks,Marks [?]
 Mines,Mines
 New,New
-Clear,Clear
