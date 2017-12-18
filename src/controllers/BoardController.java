@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
@@ -146,11 +147,41 @@ public class BoardController extends BaseController {
         }
     }
 
+    /**
+     * Highlight the list of tiles associated to the specified listener
+     * 
+     * @param listener The listener
+     * @param highlighted The highlighted state
+     */
     public void showEmptyTileNeighborsDebug(ISignalListener listener, boolean highlighted) {
+        // Get the context of the listener
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+
+        // If there is a tile model found and it does not have an entity associated to its tile
+        // then get all the tiles adjacent to this one and set the highlighted flag accordingly
+        if(tileModel != null && tileModel.getEntity() == null) {
+            getAdjacentTilesFloodFill(tileModel).stream().forEach(z -> z.setHighlighted(highlighted));
+        }
     }
 
-    private List<TileModel> showEmptyTileNeighborsDebugImpl(TileModel tileModel) {
-        return null;
+    /**
+     * Gets adjacent tiles in a flood fill fashion w.r.t the specified initial tile model
+     * 
+     * @param initialTileModel The initial tile model to perform the flood fill on
+     * 
+     * @return The list of tile models included in the flood fill
+     */
+    private List<TileModel> getAdjacentTilesFloodFill(TileModel initialTileModel) {
+        List<TileModel> tiles = new ArrayList();
+        tiles.add(initialTileModel);
+
+        for(int i = 0; i < tiles.size(); ++i) {
+            tiles.addAll(
+                    getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getEntity() == null && !tiles.contains(z)).collect(Collectors.toList())
+                    );
+        }
+
+        return tiles;
     }
 
     /**
@@ -222,10 +253,16 @@ public class BoardController extends BaseController {
      * @param listener The listener to set the mine
      */
     public void setDebugMine(ISignalListener listener) {
-        Optional<TileModel> optional = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst();
-        if(optional.isPresent()) {
-            TileModel tileModel = optional.get();
-            tileModel.setEntity(tileModel.getEntity() == null ? new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND) : null);
+        
+        // Get the tile model of the listener specified
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+
+        // Set a mine on an empty tile or on a tile that does not have a mine. If it has a mine then remove it
+        if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof MineIndicatorEntity)) {
+            tileModel.setEntity(new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND));
+        }
+        else {
+            tileModel.setEntity(null);
         }
     }
 
@@ -234,7 +271,7 @@ public class BoardController extends BaseController {
      */
     public void generateBoard() {
         for(TileModel tileModel : _tileModels.keySet()) {
-            if(tileModel.getEntity() == null) {
+            if(tileModel.getEntity() == null || tileModel.getEntity() instanceof MineNumeralEntity) {
                 long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
                 if(count > 0) {
                     tileModel.setEntity(new MineNumeralEntity(count));

@@ -34,7 +34,9 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPanel;
 
 import application.MainApplication;
+import controllers.BoardController;
 import controllers.DebuggerController;
+import engine.core.factories.AbstractFactory;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.DialogView;
 import engine.utils.globalisation.Localization;
@@ -79,11 +81,6 @@ public class DebuggerDialog extends DialogView {
     }
 
     @Override public void initializeComponents() {
-
-        // Set the enabled states of the dialogs components 
-        _minesCheckBox.setEnabled(true);
-        _generateButton.setEnabled(true);
-
         // MINES Panel
         JPanel minesPanel = new JPanel();
         minesPanel.add(_minesCheckBox);
@@ -101,34 +98,29 @@ public class DebuggerDialog extends DialogView {
 
     @Override public void initializeComponentBindings() {
         
-        // Get a reference to the debugger controller
-        DebuggerController controller = DebuggerDialog.this.getViewProperties().getEntity(DebuggerController.class);
+        // Get a reference to the controllers being used
+        BoardController boardController = AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class);
+        DebuggerController debuggerController = getViewProperties().getEntity(DebuggerController.class);
+        
         
         // Mouse listener for when the mines button is clicked
         _minesCheckBox.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent e) {
-                controller.setMinesEnabled(_minesCheckBox.isSelected());
+                debuggerController.setMinesEnabled(_minesCheckBox.isSelected());
             }
         });
 
         // Mouse listener for when the generate button is clicked
         _generateButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent event) {
-                _generateButton.setEnabled(false);
-                _minesCheckBox.setEnabled(false);
-                controller.generateBoard();
+                boardController.generateBoard();
             }
         });
 
         // Mouse listener for when the clear button is clicked
         _clearButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent event) {
-                
-                // Clear the contents of the board
-                controller.clearContents();
-                
-                _generateButton.setEnabled(true);
-                _minesCheckBox.setEnabled(true);
+                boardController.clearEntities();
             }
         });
     }

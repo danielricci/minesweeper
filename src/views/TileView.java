@@ -63,11 +63,15 @@ public class TileView extends PanelView {
     public static final String EVENT_EMPTY_TILES = "EVENT_EMPTY_TILES";
     
     /**
-     * This flag when set to true with perform a neighbor highlight on this tile when you mouse over it
+     * This flag when set will perform a neighbor highlight on this tile when you mouse over it
      */
     private boolean _highlightNeighbors;
     
-
+    /**
+     * This flag when set will highlight all empty adjacent tiles to this tile continuously 
+     */
+    private boolean _highlightEmptySpaces;
+    
     /**
      * Normal border style of this view
      */
@@ -109,11 +113,17 @@ public class TileView extends PanelView {
                 if(_highlightNeighbors) {
                     getViewProperties().getEntity(BoardController.class).showTileNeighborsDebug(TileView.this, true);
                 }
+                else if(_highlightEmptySpaces) {
+                    getViewProperties().getEntity(BoardController.class).showEmptyTileNeighborsDebug(TileView.this, true);
+                }
             }
 
             @Override public void mouseExited(MouseEvent event) {               
                 if(_highlightNeighbors) {
                     getViewProperties().getEntity(BoardController.class).showTileNeighborsDebug(TileView.this, false);
+                }
+                else if(_highlightEmptySpaces) {
+                    getViewProperties().getEntity(BoardController.class).showEmptyTileNeighborsDebug(TileView.this, false);
                 }
             }
         });     
@@ -131,9 +141,9 @@ public class TileView extends PanelView {
         });        
         addSignalListener(EVENT_EMPTY_TILES, new ISignalReceiver<BooleanEventArgs>() {
             @Override public void signalReceived(BooleanEventArgs event) {
-                _highlightNeighbors = event.getResult();
+                _highlightEmptySpaces = event.getResult();
                 
-                if(!_highlightNeighbors) {
+                if(!_highlightEmptySpaces) {
                     getViewProperties().getEntity(BoardController.class).showEmptyTileNeighborsDebug(TileView.this, false);
                 }
             }
@@ -162,6 +172,7 @@ public class TileView extends PanelView {
                 addRenderableContent(tileModel.getEntity());
             }
             
+            System.out.println("Background is " + getBackground().toString());
             repaint();
         }        
     }

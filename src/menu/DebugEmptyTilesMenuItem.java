@@ -55,10 +55,6 @@ public class DebugEmptyTilesMenuItem extends AbstractMenuItem {
         super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugEmptyTiles)), parent);
     }
     
-    @Override protected String getGroupName() {
-        return "DebugTiles";
-    }
-    
     @Override public boolean enabled() {
         return AbstractSignalFactory.isRunning();
     }

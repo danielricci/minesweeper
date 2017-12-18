@@ -24,11 +24,7 @@
 
 package controllers;
 
-import java.util.concurrent.Executors;
-
-import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
-import game.core.ControllerFactory;
 
 /**
  * This controller is responsible for the functionality related to debugging operations within the application for testing purposes
@@ -53,33 +49,11 @@ public class DebuggerController extends BaseController {
     }
 
     /**
-     * Gets the state of the mines insertion
+     * Gets the value indicating if the debug session allows for ad-hoc insertion of mines
      * 
      * @return TRUE if mine insertion is enabled, FALSE otherwise
      */
     public boolean getIsMinesEnabled() {
         return _isMinesEnabled;
-    }
-
-    /**
-     * Clear the board of it's contents
-     */
-    public void clearContents() {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override public void run() {
-                AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).clearEntities();
-            }
-        });
-    }
-
-    /**
-     * Generates the board contents
-     */
-    public void generateBoard() {
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override public void run() {
-                AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoard();
-            }
-        });
     }
 }
