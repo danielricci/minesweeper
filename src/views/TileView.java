@@ -24,12 +24,14 @@
 
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.border.Border;
 
 import controllers.BoardController;
@@ -61,6 +63,11 @@ public class TileView extends PanelView {
      * The event associated to displaying the empty tiles with respect to this tile
      */
     public static final String EVENT_EMPTY_TILES = "EVENT_EMPTY_TILES";
+    
+    /**
+     * The button associated to this tile view that the user will click to expose the contents of this tile
+     */
+    private final JButton _tileButton = new JButton();
     
     /**
      * This flag when set will perform a neighbor highlight on this tile when you mouse over it
@@ -99,12 +106,11 @@ public class TileView extends PanelView {
         controller.addTileModel(AbstractFactory.getFactory(ModelFactory.class).add(new TileModel(this), false));
 
         // Set the rest of the layout data for this page
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setBorder(DEFAULT_BORDER);
-        setBackground(DEFAULT_BACKGROUND_COLOR);
+        setLayout(new BorderLayout());
     }
 
     @Override public void initializeComponents() {
+        add(_tileButton, BorderLayout.CENTER);
     }
 
     @Override public void initializeComponentBindings() {
@@ -126,7 +132,15 @@ public class TileView extends PanelView {
                     getViewProperties().getEntity(BoardController.class).showEmptyTileNeighborsDebug(TileView.this, false);
                 }
             }
-        });     
+        });
+        
+        _tileButton.addMouseListener(new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent e) {
+                _tileButton.setVisible(false);
+                setBorder(DEFAULT_BORDER);
+                setBackground(DEFAULT_BACKGROUND_COLOR);
+            }
+        });
     }
 
     @Override public void registerSignalListeners() {
