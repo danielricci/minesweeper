@@ -50,7 +50,7 @@ public class TileModel extends BaseModel {
     /**
      * Property indicating this tile is highlighted
      */
-    private boolean _highlighted;
+    private boolean _isHighlighted;
 
     /** 
      * Constructs a new instance of this class type
@@ -78,7 +78,7 @@ public class TileModel extends BaseModel {
      * @param highlighted If the tile model should be highlighted
      */
     public void setHighlighted(boolean highlighted) {
-        _highlighted = highlighted;
+        _isHighlighted = highlighted;
         setOperation(EVENT_HIGHLIGHT_CHANGED);
         doneUpdating();
     }
@@ -89,11 +89,13 @@ public class TileModel extends BaseModel {
      * @return If the tile model is highlighted
      */
     public boolean getIsHighlighted() {
-        return _highlighted;
+        return _isHighlighted;
     }
 
     /**
-     * @return
+     * Gets the data entity associated to this tile model
+     * 
+     * @return The data entity associated to this tile model
      */
     public AbstractDataEntity getEntity() {
         return _entity;

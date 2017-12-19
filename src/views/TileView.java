@@ -55,6 +55,11 @@ import models.TileModel;
 public class TileView extends PanelView {
 
     /**
+     * The event associated to displaying the button for this tile
+     */
+    public static final String EVENT_BUTTON = "EVENT_BUTTON";
+    
+    /**
      * The event associated to displaying the neighbours of this tile
      */
     public static final String EVENT_NEIGHBORS = "EVENT_NEIGHBORS";
@@ -82,7 +87,7 @@ public class TileView extends PanelView {
     /**
      * Normal border style of this view
      */
-    private final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(0, 1, 1, 0, new Color(146, 146, 146));
+    private final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(1, 1, 0, 0, new Color(146, 146, 146));
 
     /**
      * The background color of this tile
@@ -142,8 +147,6 @@ public class TileView extends PanelView {
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent e) {
                 _tileButton.setVisible(false);
-                setBorder(DEFAULT_BORDER);
-                setBackground(DEFAULT_BACKGROUND_COLOR);
             }
         });
     }
@@ -167,7 +170,13 @@ public class TileView extends PanelView {
                 }
             }
         });
-
+        addSignalListener(EVENT_BUTTON, new ISignalReceiver<BooleanEventArgs>() {
+            @Override public void signalReceived(BooleanEventArgs event) {
+                _tileButton.setVisible(!event.getResult());
+                setBorder(DEFAULT_BORDER);
+                setBackground(DEFAULT_BACKGROUND_COLOR);
+            }
+        });        
     }
     
     @Override public void update(AbstractEventArgs event) {
@@ -196,6 +205,10 @@ public class TileView extends PanelView {
                     this._tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
                 }
                 else {
+                    
+                    // Only set a border if the tile button is not visible
+                    setBorder(DEFAULT_BORDER);
+                    
                     // Render the entity specified within the tile model. In this case, it could
                     // be a bomb, a numeral, etc.
                     addRenderableContent(tileModel.getEntity());    

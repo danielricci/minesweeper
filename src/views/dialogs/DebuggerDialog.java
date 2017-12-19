@@ -36,12 +36,15 @@ import javax.swing.JPanel;
 import application.MainApplication;
 import controllers.BoardController;
 import controllers.DebuggerController;
+import engine.communication.internal.signal.arguments.BooleanEventArgs;
 import engine.core.factories.AbstractFactory;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.DialogView;
 import engine.utils.globalisation.Localization;
 import game.core.ControllerFactory;
+import game.core.ViewFactory;
 import resources.LocalizedStrings;
+import views.TileView;
 
 /**
  * This view represents the configuration window for debugging different game scenarios
@@ -55,6 +58,11 @@ public class DebuggerDialog extends DialogView {
      */
     private final JCheckBoxMenuItem _minesCheckBox = new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.Mines));
 
+    /**
+     * This checkbox when selected will allow you to place mines on the board
+     */
+    private final JCheckBoxMenuItem _buttonsHideCheckBox = new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.HideButtons));
+    
     /**
      * This button when clicked will generate the contents of the board
      */
@@ -87,6 +95,12 @@ public class DebuggerDialog extends DialogView {
         minesPanel.setMaximumSize(minesPanel.getPreferredSize());
         add(minesPanel);
 
+        // BUTTONS Panel
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(_buttonsHideCheckBox);
+        buttonsPanel.setMaximumSize(buttonsPanel.getPreferredSize());
+        add(buttonsPanel);
+
         // ACTIONS PANEL
         JPanel actionPanel = new JPanel();
         actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.X_AXIS));
@@ -103,10 +117,19 @@ public class DebuggerDialog extends DialogView {
         DebuggerController debuggerController = getViewProperties().getEntity(DebuggerController.class);
         
         
-        // Mouse listener for when the mines button is clicked
+        // Mouse listener for when the mines checkbox is clicked
         _minesCheckBox.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent e) {
                 debuggerController.setMinesEnabled(_minesCheckBox.isSelected());
+            }
+        });
+        
+        // Mouse listener for when the hide checkbox is selected
+        _buttonsHideCheckBox.addMouseListener(new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent e) {
+                AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
+                    TileView.class, new BooleanEventArgs(this, TileView.EVENT_BUTTON, _buttonsHideCheckBox.isSelected())
+                );
             }
         });
 
