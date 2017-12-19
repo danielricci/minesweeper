@@ -352,6 +352,15 @@
 &lt;/root&gt;
 </value>
         </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="tiles_empty" layers="tiles" friendly="Tile Empty"&gt;
+    &lt;p1 y="0.0" x="423.0"/&gt;
+    &lt;p2 y="16.0" x="439.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
     </data>
 </root>
 

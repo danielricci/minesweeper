@@ -30,7 +30,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
@@ -110,6 +110,11 @@ public class TileView extends PanelView {
     }
 
     @Override public void initializeComponents() {
+        
+        // Do not paint the borders of the button, it should simply be an image of sorts
+        _tileButton.setBorderPainted(false);
+        
+        // Add the tile to the middle of the panel
         add(_tileButton, BorderLayout.CENTER);
     }
 
@@ -170,23 +175,34 @@ public class TileView extends PanelView {
         
         if(event instanceof ModelEventArgs) {
             
-            // Get the tile model
-            ModelEventArgs args = (ModelEventArgs) event;
-            TileModel tileModel = (TileModel) args.getSource();
+            // Get the tile model associated to the event passed in
+            TileModel tileModel = (TileModel) event.getSource();
 
-            // Set the highlighted state
-            if(tileModel.getIsHighlighted()) {     
+            if(tileModel.getIsHighlighted()) {
+                
+                // Set the background to a highlighted state.
+                // Note: When the background is highlighted it signifies a debug mode so do not
+                //       draw anything else but the highlight
                 this.setBackground(HIGHLIGHTED_COLOR);
             }
             else {
+                
+                // Set the background to its default color state
                 this.setBackground(DEFAULT_BACKGROUND_COLOR);
                 
-                // Add the renderable entity to be shown. This should not be shown if
-                // the tile is being highlighted
-                addRenderableContent(tileModel.getEntity());
+                // If the button layer is still visible then show the background of the entity 
+                // over the button as an icon
+                if(_tileButton.isVisible()) {
+                    this._tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
+                }
+                else {
+                    // Render the entity specified within the tile model. In this case, it could
+                    // be a bomb, a numeral, etc.
+                    addRenderableContent(tileModel.getEntity());    
+                }
             }
-            
-            System.out.println("Background is " + getBackground().toString());
+
+            // Finalize the draw update procedure
             repaint();
         }        
     }

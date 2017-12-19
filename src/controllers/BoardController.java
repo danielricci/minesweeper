@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -253,7 +252,7 @@ public class BoardController extends BaseController {
      * @param listener The listener to set the mine
      */
     public void setDebugMine(ISignalListener listener) {
-        
+
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
 

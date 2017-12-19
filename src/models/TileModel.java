@@ -26,6 +26,7 @@ package models;
 
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.model.BaseModel;
+import entities.EmptyTileEntity;
 import game.gameplay.AbstractDataEntity;
 
 /**
@@ -58,6 +59,7 @@ public class TileModel extends BaseModel {
      */
     public TileModel(ISignalListener... listeners) {
         super(listeners);
+        setEntity(new EmptyTileEntity());
     }
     
     /**
