@@ -22,47 +22,46 @@
  * IN THE SOFTWARE.
  */
 
-package menu;
+package views;
 
-import java.awt.event.ActionEvent;
+import java.awt.Component;
 
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
+import javax.swing.BoxLayout;
 
-import engine.core.factories.AbstractFactory;
-import engine.core.navigation.AbstractMenuItem;
-import engine.utils.globalisation.Localization;
+import engine.api.IView;
+import engine.core.factories.AbstractSignalFactory;
+import engine.core.mvc.view.PanelView;
 import game.core.ViewFactory;
-import resources.LocalizedStrings;
-import views.DebuggerBoardView;
-import views.DebuggerDialog;
 
 /**
- * The menu item for the debugger window
- * 
+ * The main window view of the application
+ *
  * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
  *
  */
-public class DebuggerWindowMenuItem extends AbstractMenuItem {
+public class MainView extends PanelView {
 
-    /**
-     * Constructs a new instance of this class type
-     * 
-     * @param parent The parent component to this menu entity
-     */
-    public DebuggerWindowMenuItem(JComponent parent) {
-        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugWindow)), parent);
+    public MainView() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
-    @Override public void onExecute(ActionEvent actionEvent) {
-        ViewFactory viewFactory = AbstractFactory.getFactory(ViewFactory.class);
-        if(viewFactory.exists(DebuggerBoardView.class)) {
-            DebuggerDialog dialog = viewFactory.get(DebuggerDialog.class);
-            if(dialog == null) {
-                dialog = viewFactory.add(new DebuggerDialog(), true);
+    @Override public void initializeComponents() {
+        add(AbstractSignalFactory.getFactory(ViewFactory.class).add(new StatusBarView(), true));
+        add(AbstractSignalFactory.getFactory(ViewFactory.class).add(new DebuggerBoardView(), true));
+    }
+
+    @Override public void initializeComponentBindings() {
+        
+    }
+
+    @Override public void render() {
+        super.render();
+        
+        // TODO - is this a good candidate for putting into a more common area, perhaps where we initially define the render method above????
+        for(Component component : getComponents()) {
+            if(component instanceof IView) {
+                ((IView) component).render();
             }
-            
-            dialog.render();
         }
     }
 }

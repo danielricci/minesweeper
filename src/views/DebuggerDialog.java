@@ -22,7 +22,7 @@
  * IN THE SOFTWARE.
  */
 
-package views.dialogs;
+package views;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -44,7 +44,6 @@ import engine.utils.globalisation.Localization;
 import game.core.ControllerFactory;
 import game.core.ViewFactory;
 import resources.LocalizedStrings;
-import views.TileView;
 
 /**
  * This view represents the configuration window for debugging different game scenarios

@@ -22,51 +22,33 @@
  * IN THE SOFTWARE.
  */
 
-package menu;
+package controllers;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-
-import application.MainApplication;
-import engine.core.factories.AbstractSignalFactory;
-import engine.core.navigation.AbstractMenuItem;
-import engine.utils.globalisation.Localization;
-import game.core.ViewFactory;
-import resources.LocalizedStrings;
-import views.MainView;
+import engine.core.mvc.controller.BaseController;
+import models.GameTimerModel;
 
 /**
- * The menu item for a new game in the debugger
+ * This controller is responsible for the functionality related to the status bar of the application (game flags, game state, game timer)
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class DebugGameMenuItem extends AbstractMenuItem {
+public class StatusBarController extends BaseController {
 
+    //private final GameTimerModel _gameTimerModel = new GameTimerModel();
+    
+    //private final GameStateModel = new GameStateModel();
+    
+    //private final GameFlagsModel = new GameFlagsodel();
+    
     /**
      * Constructs a new instance of this class type
-     * 
-     * @param parent The parent of this menu item
      */
-    public DebugGameMenuItem(JComponent parent) {
-        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.DebugNew)), parent);
+    public StatusBarController() {
+        
     }
-
-    @Override public void onExecute(ActionEvent actionEvent) {
-        // Flush the application before continuing
-        if(!MainApplication.instance().clear()) {
-            return;
-        }
-
-        // Create the board view
-        MainView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new MainView(), true);
-
-        // Add the view to the application
-        MainApplication.instance().add(view);
-
-        // Render the specified view
-        view.render();
+    
+    public void startGameTimer() {
+        
     }
 }

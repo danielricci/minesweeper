@@ -1,0 +1,91 @@
+/**
+ * Daniel Ricci <thedanny09@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject
+ * to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+
+package models;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+
+import engine.core.mvc.model.BaseModel;
+import engine.utils.logging.Tracelog;
+import entities.GameTimerEntity;
+
+public final class GameTimerModel extends BaseModel {
+
+    /**
+     * The maximum value associated to this gamer model.
+     * 
+     * Note: The game generally does not count past this value, however
+     *       if you wish to increase this value then make sure the current
+     *       value is wide enough to support it.
+     */
+    public final static int MAX_VALUE = 999; 
+    
+    /**
+     * The game timer current value associated to this model
+     */
+    private int _timerValue;
+    
+    private List<GameTimerEntity> _timerEntities = new ArrayList();
+    
+    /**
+     * Constructs a new instance of this class type
+     * 
+     * @param precision A precision value greater than 0
+     */
+    public GameTimerModel(int precision) {
+        for(int i = 0; i < precision; ++i) {
+            _timerEntities.add(new GameTimerEntity(0));
+        }            
+    }
+
+    /**
+     * Sets the timer to the specified value
+     * 
+     * @param timerValue The value to set the timer to
+     */
+    public void setTimer(int timerValue) {
+        String numeralString = String.format("%03d", timerValue);
+        for(int i = 0, size = numeralString.length(); i < size; ++i) {
+            _timerEntities.get(i).setNumeral(Character.getNumericValue(numeralString.charAt(i)));
+        }
+        
+        _timerValue = timerValue;
+            
+        doneUpdating();
+    }
+    
+    public int getTimerValue() {
+        return _timerValue;
+    }
+    
+    /**
+     * Resets the timer
+     */
+    public void resetTimer() {
+        _timerValue = 0;
+        doneUpdating();
+    }
+}

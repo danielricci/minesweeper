@@ -143,7 +143,7 @@ public final class MainApplication extends AbstractApplication {
         // If the game is in debug mode then call the debug mode new game, else call the normal new game
         if(isDebug()) {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebugGameMenuItem.class).onExecute(null);
-            MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebuggerWindowMenuItem.class).onExecute(null);
+            //MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebuggerWindowMenuItem.class).onExecute(null);
         }
         else {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
