@@ -37,7 +37,7 @@ import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
 import game.core.ViewFactory;
 import resources.LocalizedStrings;
-import views.BoardView;
+import views.MainView;
 
 /**
  * Menu item for starting a new game
@@ -65,7 +65,7 @@ public class NewGameMenuItem extends AbstractMenuItem {
         }
 
         // Create the board view
-        BoardView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new BoardView(), true);
+        MainView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new MainView(), true);
 
         // Add the view to the application
         MainApplication.instance().add(view);
