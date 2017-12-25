@@ -24,8 +24,10 @@
 package views;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import engine.core.factories.AbstractFactory;
@@ -44,23 +46,37 @@ public class StatusBarView extends PanelView {
     
     private JPanel _gameStatePanel = new JPanel();
 
+    private JPanel _gameTimerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    
+    private static final Color BACKGROUND_COLOR = new Color(192, 192, 192);
+    
     /**
      * Constructs a new instance of this class type
      */
     public StatusBarView() {
         setLayout(new GridLayout(1, 3));
+        setBorder(BorderFactory.createLoweredSoftBevelBorder());
     }
-
+    
     @Override public void initializeComponents() {
         
-        _flagsPanel.setBackground(Color.red);
-        _gameStatePanel.setBackground(Color.green);
+        _flagsPanel.setBackground(BACKGROUND_COLOR);
+        _gameStatePanel.setBackground(BACKGROUND_COLOR);
+        _gameTimerPanel.setBackground(BACKGROUND_COLOR);
         add(_flagsPanel);
         add(_gameStatePanel);
-        add(AbstractFactory.getFactory(ViewFactory.class).add(new GameTimerView(), false));
+        add(_gameTimerPanel);
+        
+        
+        _gameTimerPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new GameTimerView(), false));
     }
 
     @Override public void initializeComponentBindings() {
-        
+    }
+    
+
+    @Override public void render() {
+        super.render();
+        render(_gameTimerPanel);
     }
 }

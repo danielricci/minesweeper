@@ -28,6 +28,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
+
 import controllers.BoardController;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
@@ -53,6 +55,7 @@ public class BoardView extends PanelView {
         );
 
         setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createLoweredSoftBevelBorder());
     }
 
     @Override public void initializeComponents() {

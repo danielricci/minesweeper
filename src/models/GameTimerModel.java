@@ -26,20 +26,15 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
+import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
-import engine.utils.logging.Tracelog;
 import entities.GameTimerEntity;
 
 public final class GameTimerModel extends BaseModel {
 
     /**
      * The maximum value associated to this gamer model.
-     * 
-     * Note: The game generally does not count past this value, however
-     *       if you wish to increase this value then make sure the current
-     *       value is wide enough to support it.
      */
     public final static int MAX_VALUE = 999; 
     
@@ -48,16 +43,15 @@ public final class GameTimerModel extends BaseModel {
      */
     private int _timerValue;
     
-    private List<GameTimerEntity> _timerEntities = new ArrayList();
+    public List<GameTimerEntity> _timerEntities = new ArrayList();
     
     /**
      * Constructs a new instance of this class type
-     * 
-     * @param precision A precision value greater than 0
      */
-    public GameTimerModel(int precision) {
-        for(int i = 0; i < precision; ++i) {
-            _timerEntities.add(new GameTimerEntity(0));
+    public GameTimerModel() {
+        // By default, the precision is set to 3
+        for(int i = 0; i < 3; ++i) {
+            _timerEntities.add(new GameTimerEntity());
         }            
     }
 
@@ -69,7 +63,9 @@ public final class GameTimerModel extends BaseModel {
     public void setTimer(int timerValue) {
         String numeralString = String.format("%03d", timerValue);
         for(int i = 0, size = numeralString.length(); i < size; ++i) {
-            _timerEntities.get(i).setNumeral(Character.getNumericValue(numeralString.charAt(i)));
+            _timerEntities.get(i).setNumeral(
+                Character.getNumericValue(numeralString.charAt(i))
+            );
         }
         
         _timerValue = timerValue;
@@ -87,5 +83,9 @@ public final class GameTimerModel extends BaseModel {
     public void resetTimer() {
         _timerValue = 0;
         doneUpdating();
+    }
+
+    public IRenderable getEntity() {
+        return GameTimerEntity.flattenData(_timerEntities);
     }
 }

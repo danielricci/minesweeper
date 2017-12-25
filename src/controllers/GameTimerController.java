@@ -66,7 +66,7 @@ public final class GameTimerController extends BaseController {
     public GameTimerController() {
         
         // Create the model that will represent the timer data
-        _gameTimerModel = AbstractFactory.getFactory(ModelFactory.class).add(new GameTimerModel(3),  false);
+        _gameTimerModel = AbstractFactory.getFactory(ModelFactory.class).add(new GameTimerModel(),  false);
         
         // Create a timer task for running the timer. This task will
         // increment the value in the model by one every second

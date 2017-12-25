@@ -24,6 +24,8 @@
 
 package views;
 
+import java.awt.Dimension;
+
 import controllers.GameTimerController;
 import engine.communication.internal.signal.arguments.AbstractEventArgs;
 import engine.core.factories.AbstractFactory;
@@ -37,12 +39,15 @@ public class GameTimerView extends PanelView {
      * Constructs a new instance of this class type
      */
     public GameTimerView() {
-        
         // Create the controller and listen to the contents of its model
         GameTimerController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameTimerController(), false);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
         controller.startGameTimer();
+    }
+    
+    @Override public Dimension getPreferredSize() {
+        return new Dimension(39, 23);
     }
 
     @Override public void initializeComponents() {
@@ -52,7 +57,7 @@ public class GameTimerView extends PanelView {
     @Override public void initializeComponentBindings() {        
     
     }
-    
+       
     @Override public void update(AbstractEventArgs event) {
         super.update(event);
     
@@ -60,12 +65,10 @@ public class GameTimerView extends PanelView {
             
             // Get the model associated to the event received
             GameTimerModel gameTimerModel = (GameTimerModel) event.getSource();
-            //addRenderableContent(
-                //GameTimerModel.getTimerEntity(gameTimerModel.getTimerEntities()).getRenderableData()
-            //);
-            
+            addRenderableContent(gameTimerModel.getEntity());
             
             // Repaint this view
+            invalidate();
             repaint();
         }
     }

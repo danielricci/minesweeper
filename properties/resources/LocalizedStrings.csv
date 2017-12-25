@@ -20,3 +20,5 @@ IntermediateMode,Intermediate
 Marks,Marks [?]
 Mines,Mines
 New,New
+GameIcon,content/minesweeper-icon.png
+Title,Minesweeper

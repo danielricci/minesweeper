@@ -24,9 +24,11 @@
 
 package views;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
 
 import engine.api.IView;
 import engine.core.factories.AbstractSignalFactory;
@@ -34,15 +36,20 @@ import engine.core.mvc.view.PanelView;
 import game.core.ViewFactory;
 
 /**
- * The main window view of the application
+ * The main window of the application
  *
  * @author {@literal Daniel Ricci <thedanny09@gmail.com>}
  *
  */
 public class MainView extends PanelView {
 
+    private static final Color BACKGROUND_COLOR = new Color(192, 192, 192);
+
+    
     public MainView() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(new EmptyBorder(5, 5, 5, 5));
+        setBackground(BACKGROUND_COLOR);
     }
 
     @Override public void initializeComponents() {
@@ -51,13 +58,10 @@ public class MainView extends PanelView {
     }
 
     @Override public void initializeComponentBindings() {
-        
     }
 
     @Override public void render() {
         super.render();
-        
-        // TODO - is this a good candidate for putting into a more common area, perhaps where we initially define the render method above????
         for(Component component : getComponents()) {
             if(component instanceof IView) {
                 ((IView) component).render();

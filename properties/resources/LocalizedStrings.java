@@ -44,6 +44,7 @@ public enum LocalizedStrings {
     ExpertMode,
     Exit,
     Game,
+    GameIcon,
     Generate,
     GitHub,
     Help,
@@ -51,5 +52,6 @@ public enum LocalizedStrings {
     IntermediateMode,
     Marks,
     Mines,
-    New
+    New, 
+    Title 
 }

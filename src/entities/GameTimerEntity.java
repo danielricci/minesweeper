@@ -25,23 +25,23 @@
 package entities;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 
+import engine.core.graphics.RawData;
 import engine.utils.logging.Tracelog;
 import generated.DataLookup;
 
 public class GameTimerEntity extends AbstractGameEntity {
     
-    private static final String BOMB_CONSTANT = "TIMER_";
-
-    private List<GameTimerEntity> _timerEntities = new ArrayList();
+    private static final String BOMB_CONSTANT = "FLAG_";
  
     private int _numeral;
+    
+    public GameTimerEntity() {
+        setNumeralImpl();
+    }
     
     public GameTimerEntity(int numeral) {
         _numeral = numeral;
@@ -67,19 +67,25 @@ public class GameTimerEntity extends AbstractGameEntity {
             
         setNumeralImpl();            
     }
+    
+    public static RawData flattenData(List<GameTimerEntity> entities) {
+        
+        int width = entities.parallelStream().map(z -> z.getRenderableContent()).mapToInt(z -> z.getWidth(null)).sum();
+        int height = entities.get(0).getRenderableContent().getHeight(null);
+        
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics graphics = img.getGraphics();
+        
+        int xOffset = 0;
+        for(GameTimerEntity entity : entities) {
+            graphics.drawImage(entity.getRenderableContent(), xOffset, 0, null);
+            xOffset = xOffset + entity.getRenderableContent().getWidth(null);
+        }
+        
+        return new RawData(img);
+    }
 
     private void setNumeralImpl() {
-        setActiveData(DataLookup.TIMERS.valueOf(BOMB_CONSTANT + _numeral));
-    }
-    
-    @Override public Image getRenderableContent() {
-        List<Image> renderableList = _timerEntities.stream().map(z -> z.getRenderableContent()).collect(Collectors.toList());
-        int width = renderableList.parallelStream().map(z -> z.getWidth(null)).mapToInt(Integer::intValue).sum();
-        int height = renderableList.get(0).getHeight(null);
-        
-        Image img = new BufferedImage(width,  height, BufferedImage.TYPE_INT_ARGB);
-        Graphics graphics = img.getGraphics();
-        //graphics.r
-        return null;
+        setActiveData(DataLookup.FLAG_COUNTERS.valueOf(BOMB_CONSTANT + _numeral));
     }
 }

@@ -37,12 +37,12 @@ import menu.BestTimesMenuItem;
 import menu.CustomModeMenuItem;
 import menu.DebugEmptyTilesMenuItem;
 import menu.DebugGameMenuItem;
+import menu.DebugNeighboursMenuItem;
 import menu.DebuggerWindowMenuItem;
 import menu.ExitMenuItem;
 import menu.ExpertModeMenuItem;
 import menu.IntermediateModeMenuItem;
 import menu.MarksMenuItem;
-import menu.DebugNeighboursMenuItem;
 import menu.NewGameMenuItem;
 import resources.LocalizedStrings;
 
@@ -129,6 +129,10 @@ public final class MainApplication extends AbstractApplication {
     @Override protected void onInitializeWindow() {
         super.onInitializeWindow();
 
+        setTitle(Localization.instance().getLocalizedString(LocalizedStrings.Title));
+        setIconImage(Localization.instance().getLocalizedData(LocalizedStrings.GameIcon));
+        
+        
         // Populate the game menu
         populateGameMenu();
 
