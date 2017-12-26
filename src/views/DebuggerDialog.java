@@ -63,11 +63,6 @@ public class DebuggerDialog extends DialogView {
     private final JCheckBoxMenuItem _buttonsHideCheckBox = new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.HideButtons));
     
     /**
-     * This button when clicked will generate the contents of the board
-     */
-    private final JButton _generateButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.Generate));
-
-    /**
      * This button when clicked will clear the contents of the board
      */
     private final JButton _clearButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.Clear));
@@ -103,7 +98,6 @@ public class DebuggerDialog extends DialogView {
         // ACTIONS PANEL
         JPanel actionPanel = new JPanel();
         actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.X_AXIS));
-        actionPanel.add(_generateButton);
         actionPanel.add(_clearButton);
         actionPanel.setMaximumSize(actionPanel.getPreferredSize());
         add(actionPanel);
@@ -129,13 +123,6 @@ public class DebuggerDialog extends DialogView {
                 AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
                     TileView.class, new BooleanEventArgs(this, TileView.EVENT_BUTTON, _buttonsHideCheckBox.isSelected())
                 );
-            }
-        });
-
-        // Mouse listener for when the generate button is clicked
-        _generateButton.addMouseListener(new MouseAdapter() {
-            @Override public void mouseReleased(MouseEvent event) {
-                boardController.generateBoard();
             }
         });
 

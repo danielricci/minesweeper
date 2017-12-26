@@ -38,6 +38,7 @@ import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
+import entities.EmptyTileEntity;
 import entities.MineIndicatorEntity;
 import entities.MineNumeralEntity;
 import generated.DataLookup.BOMB_INDICATORS;
@@ -256,26 +257,52 @@ public class BoardController extends BaseController {
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
 
-        // Set a mine on an empty tile or on a tile that does not have a mine. If it has a mine then remove it
+        // Set a mine on an empty tile or on a tile that does not have a mine.
         if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof MineIndicatorEntity)) {
             tileModel.setEntity(new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND));
         }
         else {
+            // Remove the contents of the entity
             tileModel.setEntity(null);
+
+            // Update the numeral of the currently selected tile. When you remove
+            // the entity, it could still hold a numeral because of surrounding tiles
+            // that are mines
+            generate(tileModel);
+        }
+        
+        // Update the surrounding neighbors to reflect the mine change
+        for(TileModel tile : getAllNeighbors(tileModel)) {
+            if(tile.getEntity() == null || tile.getEntity() instanceof MineNumeralEntity || tile.getEntity() instanceof EmptyTileEntity) {
+                generate(tile);
+            }
         }
     }
 
     /**
-     * Generates the tiles of the board
+     * Generate the entire board of mine numerals
      */
     public void generateBoard() {
         for(TileModel tileModel : _tileModels.keySet()) {
-            if(tileModel.getEntity() == null || tileModel.getEntity() instanceof MineNumeralEntity) {
-                long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
-                if(count > 0) {
-                    tileModel.setEntity(new MineNumeralEntity(count));
-                }
+            generate(tileModel);
+        }
+    }
+    
+    /**
+     * Generate the board w.r.t the specified tile model
+     * 
+     * @param tileModel The tile model to use as a start point when performing
+     *                  the neighborly generation
+     */
+    private void generate(TileModel tileModel) {
+        if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof EmptyTileEntity) {
+            long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
+            if(count > 0) {
+                tileModel.setEntity(new MineNumeralEntity(count));
+            }
+            else {
+                tileModel.setEntity(null);
             }
         }
-    }   
+    }
 }
