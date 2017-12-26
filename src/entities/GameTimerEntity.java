@@ -29,13 +29,14 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.logging.Level;
 
+import application.MainApplication;
 import engine.core.graphics.RawData;
 import engine.utils.logging.Tracelog;
 import generated.DataLookup;
 
 public class GameTimerEntity extends AbstractGameEntity {
     
-    private static final String BOMB_CONSTANT = "FLAG_";
+    private static final String BOMB_CONSTANT = "TIMER_";
  
     private int _numeral;
     
@@ -86,6 +87,11 @@ public class GameTimerEntity extends AbstractGameEntity {
     }
 
     private void setNumeralImpl() {
-        setActiveData(DataLookup.FLAG_COUNTERS.valueOf(BOMB_CONSTANT + _numeral));
+        if(MainApplication.instance().isDebug()) {
+            setActiveData(DataLookup.NUMERAL_DEBUG.valueOf(BOMB_CONSTANT + _numeral));
+        }
+        else {
+            setActiveData(DataLookup.NUMERAL.valueOf(BOMB_CONSTANT + _numeral));
+        }
     }
 }

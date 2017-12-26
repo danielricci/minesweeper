@@ -38,6 +38,6 @@ public final class EmptyTileEntity extends AbstractGameEntity {
      * Constructs a new instance of this class type
      */
     public EmptyTileEntity() {
-        setActiveData(DataLookup.TILES.TILES_EMPTY);
+        setActiveData(DataLookup.TILE_STATE.BOMB_BLANK);
     }
 }

@@ -24,7 +24,7 @@
 
 package entities;
 
-import generated.DataLookup.BOMB_NUMERALS;
+import generated.DataLookup;
 
 /**
  * A representation of a mine numeral
@@ -41,6 +41,6 @@ public class MineNumeralEntity extends AbstractGameEntity {
      * @param numeral The initial numeral to set for this entity
      */
     public MineNumeralEntity(long numeral) {
-        setActiveData(BOMB_NUMERALS.valueOf("BOMB_" + numeral));
+        setActiveData(DataLookup.MINE_NUMBER.valueOf("BOMB_" + numeral));
     }
 }

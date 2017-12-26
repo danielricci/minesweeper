@@ -41,7 +41,7 @@ import engine.utils.logging.Tracelog;
 import entities.EmptyTileEntity;
 import entities.MineIndicatorEntity;
 import entities.MineNumeralEntity;
-import generated.DataLookup.BOMB_INDICATORS;
+import generated.DataLookup;
 import models.TileModel;
 
 /**
@@ -259,7 +259,7 @@ public class BoardController extends BaseController {
 
         // Set a mine on an empty tile or on a tile that does not have a mine.
         if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof MineIndicatorEntity)) {
-            tileModel.setEntity(new MineIndicatorEntity(BOMB_INDICATORS.BOUND_FOUND));
+            tileModel.setEntity(new MineIndicatorEntity(DataLookup.TILE_STATE.BOUND_FOUND));
         }
         else {
             // Remove the contents of the entity

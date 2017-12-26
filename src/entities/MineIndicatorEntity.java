@@ -39,7 +39,7 @@ public class MineIndicatorEntity extends AbstractGameEntity {
      *
      * @param indicator The type of indicator to set
      */
-    public MineIndicatorEntity(DataLookup.BOMB_INDICATORS indicator) {
+    public MineIndicatorEntity(DataLookup.TILE_STATE indicator) {
         setActiveData(indicator);
     }
 }
