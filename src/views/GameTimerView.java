@@ -43,7 +43,6 @@ public class GameTimerView extends PanelView {
         GameTimerController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameTimerController(), false);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
-        controller.startGameTimer();
     }
     
     @Override public Dimension getPreferredSize() {
