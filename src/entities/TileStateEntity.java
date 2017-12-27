@@ -32,12 +32,21 @@ import generated.DataLookup;
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public final class EmptyTileEntity extends AbstractGameEntity {
+public final class TileStateEntity extends AbstractGameEntity {
 
     /**
      * Constructs a new instance of this class type
      */
-    public EmptyTileEntity() {
+    public TileStateEntity() {
         setActiveData(DataLookup.TILE_STATE.BOMB_BLANK);
+    }
+    
+    /**
+     * Constructs a new instance of this class type
+     * 
+     * @param tileState The tile state to set
+     */
+    public TileStateEntity(DataLookup.TILE_STATE tileState) {
+        setActiveData(tileState);
     }
 }

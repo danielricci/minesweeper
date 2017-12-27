@@ -38,7 +38,7 @@ import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import entities.EmptyTileEntity;
+import entities.TileStateEntity;
 import entities.MineIndicatorEntity;
 import entities.MineNumeralEntity;
 import generated.DataLookup;
@@ -273,7 +273,7 @@ public class BoardController extends BaseController {
         
         // Update the surrounding neighbors to reflect the mine change
         for(TileModel tile : getAllNeighbors(tileModel)) {
-            if(tile.getEntity() == null || tile.getEntity() instanceof MineNumeralEntity || tile.getEntity() instanceof EmptyTileEntity) {
+            if(tile.getEntity() == null || tile.getEntity() instanceof MineNumeralEntity || tile.getEntity() instanceof TileStateEntity) {
                 generate(tile);
             }
         }
@@ -295,7 +295,7 @@ public class BoardController extends BaseController {
      *                  the neighborly generation
      */
     private void generate(TileModel tileModel) {
-        if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof EmptyTileEntity) {
+        if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof TileStateEntity) {
             long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
             if(count > 0) {
                 tileModel.setEntity(new MineNumeralEntity(count));
