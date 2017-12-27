@@ -26,6 +26,8 @@ package models;
 
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.model.BaseModel;
+import entities.AbstractGameEntity;
+import entities.ButtonStateEntity;
 import entities.TileStateEntity;
 import game.gameplay.AbstractDataEntity;
 
@@ -43,9 +45,9 @@ public class TileModel extends BaseModel {
     public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
 
     /**
-     * The data associated to this tile model
+     * The current tile state entity of this model.
      */
-    private AbstractDataEntity _entity;
+    private TileStateEntity _tileStateEntity;
     
     /**
      * Property indicating this tile is highlighted
@@ -67,7 +69,7 @@ public class TileModel extends BaseModel {
      * 
      * @param data The game data to set into this model
      */
-    public <T extends AbstractDataEntity> void setEntity(T entity) {
+    public void setEntity(AbstractGameEntity entity) {
         _entity = entity;
         doneUpdating();
     }

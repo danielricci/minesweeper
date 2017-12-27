@@ -26,20 +26,8 @@ package entities;
 
 import generated.DataLookup;
 
-/**
- * A representation of a mine indicator
- * 
- * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
- *
- */
-public class MineIndicatorEntity extends AbstractGameEntity {
-
-    /**
-     * Constructs a new instance of this class type
-     *
-     * @param indicator The type of indicator to set
-     */
-    public MineIndicatorEntity(DataLookup.TILE_STATE indicator) {
-        setActiveData(indicator);
+public final class ButtonStateEntity extends AbstractGameEntity {
+    public ButtonStateEntity() {
+        setActiveData(DataLookup.BUTTON_STATE.BUTTON_BLANK);
     }
 }

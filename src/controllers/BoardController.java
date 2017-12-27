@@ -38,9 +38,11 @@ import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import entities.TileStateEntity;
-import entities.MineIndicatorEntity;
+import entities.AbstractGameEntity;
+import entities.GameTimerEntity;
+import entities.GameStateEntity;
 import entities.MineNumeralEntity;
+import entities.TileStateEntity;
 import generated.DataLookup;
 import models.TileModel;
 
@@ -258,8 +260,8 @@ public class BoardController extends BaseController {
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
 
         // Set a mine on an empty tile or on a tile that does not have a mine.
-        if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof MineIndicatorEntity)) {
-            tileModel.setEntity(new MineIndicatorEntity(DataLookup.TILE_STATE.BOUND_FOUND));
+        if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof GameStateEntity)) {
+            tileModel.setEntity(new GameStateEntity(DataLookup.TILE_STATE.BOUND_FOUND));
         }
         else {
             // Remove the contents of the entity
@@ -271,7 +273,7 @@ public class BoardController extends BaseController {
             generate(tileModel);
         }
         
-        // Update the surrounding neighbors to reflect the mine change
+        // Update the surrounding neighbors to reflect the mine change  
         for(TileModel tile : getAllNeighbors(tileModel)) {
             if(tile.getEntity() == null || tile.getEntity() instanceof MineNumeralEntity || tile.getEntity() instanceof TileStateEntity) {
                 generate(tile);
@@ -294,15 +296,24 @@ public class BoardController extends BaseController {
      * @param tileModel The tile model to use as a start point when performing
      *                  the neighborly generation
      */
+    // TODO - get rid of 'null' entities for the tilemodel
     private void generate(TileModel tileModel) {
         if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof TileStateEntity) {
-            long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof MineIndicatorEntity).count();
+            long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof GameStateEntity).count();
             if(count > 0) {
                 tileModel.setEntity(new MineNumeralEntity(count));
             }
             else {
                 tileModel.setEntity(null);
             }
+        }
+    }
+
+    public void cycleButtonControl(ISignalListener listener) {
+        // Get the tile model of the listener specified
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        if(tileModel.getEntity() != null) {
+            //TileStateEntity entity = tileModel.getEntity();
         }
     }
 }

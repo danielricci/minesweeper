@@ -4,7 +4,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="status_running" layers="game_state" friendly="Running"&gt;
+&lt;root name="game_running" layers="game_state" friendly="Game Running"&gt;
     &lt;p1 y="0.0" x="0.0"/&gt;
     &lt;p2 y="26.0" x="26.0"/&gt;
 &lt;/root&gt;
@@ -13,7 +13,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="status_move" layers="game_state" friendly="Moving"&gt;
+&lt;root name="Game_Moving" layers="game_state" friendly="Game Moving"&gt;
     &lt;p1 y="0.0" x="26.0"/&gt;
     &lt;p2 y="26.0" x="52.0"/&gt;
 &lt;/root&gt;
@@ -22,7 +22,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="status_win" layers="game_state" friendly="Win"&gt;
+&lt;root name="Game_Won" layers="game_state" friendly="Game Woon"&gt;
     &lt;p1 y="0.0" x="52.0"/&gt;
     &lt;p2 y="26.0" x="78.0"/&gt;
 &lt;/root&gt;
@@ -31,7 +31,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="status_lose" layers="game_state" friendly="Lose"&gt;
+&lt;root name="Game_Lost" layers="game_state" friendly="Game Lost"&gt;
     &lt;p1 y="0.0" x="78.0"/&gt;
     &lt;p2 y="26.0" x="104.0"/&gt;
 &lt;/root&gt;
@@ -49,7 +49,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bomb_flagged" layers="tile_state" friendly="Bomb Flagged"&gt;
+&lt;root name="bomb_misflagged" layers="tile_state" friendly="Bomb Misflagged"&gt;
     &lt;p1 y="0.0" x="120.0"/&gt;
     &lt;p2 y="16.0" x="136.0"/&gt;
 &lt;/root&gt;
@@ -58,36 +58,9 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bomb_misflagged" layers="tile_state" friendly="Bomb Misflagged"&gt;
+&lt;root name="bound_found" layers="tile_state" friendly="Bomb Found"&gt;
     &lt;p1 y="0.0" x="136.0"/&gt;
     &lt;p2 y="16.0" x="152.0"/&gt;
-&lt;/root&gt;
-</value>
-        </entry>
-        <entry>
-            <key>generated.TileMapData</key>
-            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bomb_unsure" layers="tile_state" friendly="Bomb Unsure"&gt;
-    &lt;p1 y="16.0" x="104.0"/&gt;
-    &lt;p2 y="32.0" x="120.0"/&gt;
-&lt;/root&gt;
-</value>
-        </entry>
-        <entry>
-            <key>generated.TileMapData</key>
-            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bound_found" layers="tile_state" friendly="Bomb Found"&gt;
-    &lt;p1 y="16.0" x="120.0"/&gt;
-    &lt;p2 y="32.0" x="136.0"/&gt;
-&lt;/root&gt;
-</value>
-        </entry>
-        <entry>
-            <key>generated.TileMapData</key>
-            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bomb_blank" layers="tile_state" friendly="Bomb Blank"&gt;
-    &lt;p1 y="16.0" x="136.0"/&gt;
-    &lt;p2 y="32.0" x="152.0"/&gt;
 &lt;/root&gt;
 </value>
         </entry>
@@ -358,6 +331,33 @@
 &lt;root name="timer_9" layers="numeral" friendly="Timer 9"&gt;
     &lt;p1 y="23.0" x="410.0"/&gt;
     &lt;p2 y="46.0" x="423.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="button_blank" layers="button_state" friendly="Button Blank"&gt;
+    &lt;p1 y="0.0" x="423.0"/&gt;
+    &lt;p2 y="16.0" x="439.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="button_flag" layers="button_state" friendly="Button Flag"&gt;
+    &lt;p1 y="0.0" x="439.0"/&gt;
+    &lt;p2 y="16.0" x="455.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="button_mark" layers="button_state" friendly="Button Mark"&gt;
+    &lt;p1 y="0.0" x="455.0"/&gt;
+    &lt;p2 y="16.0" x="471.0"/&gt;
 &lt;/root&gt;
 </value>
         </entry>

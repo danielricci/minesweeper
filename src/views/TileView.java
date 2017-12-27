@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import controllers.BoardController;
@@ -145,8 +146,13 @@ public class TileView extends PanelView {
         });
         
         _tileButton.addMouseListener(new MouseAdapter() {
-            @Override public void mouseReleased(MouseEvent e) {
-                _tileButton.setVisible(false);
+            @Override public void mouseReleased(MouseEvent mouseEvent) {
+                if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+                    _tileButton.setVisible(false);    
+                }
+                else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    getViewProperties().getEntity(BoardController.class).cycleButtonControl(TileView.this);
+                }
             }
         });
     }
@@ -202,7 +208,7 @@ public class TileView extends PanelView {
                 // If the button layer is still visible then show the background of the entity 
                 // over the button as an icon
                 if(_tileButton.isVisible()) {
-                    this._tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
+                    _tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
                 }
                 else {
                     

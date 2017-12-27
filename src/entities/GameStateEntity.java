@@ -26,25 +26,9 @@ package entities;
 
 import generated.DataLookup;
 
-/**
- * The game representation of 
- * 
- * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
- *
- */
-public final class TileStateEntity extends AbstractTileEntity {
-    
-    
-    ButtonStateEntity _buttonStateEntity;
-    //        setActiveData(DataLookup.BUTTON_STATE.BUTTON_BLANK);
+public class GameStateEntity extends AbstractGameEntity {
 
-    
-    /**
-     * Constructs a new instance of this class type
-     * 
-     * @param tileState The tile state to set
-     */
-    public TileStateEntity(DataLookup.TILE_STATE tileState) {
-        setActiveData(tileState);
+    public GameStateEntity(DataLookup.GAME_STATE gameState) {
+        setActiveData(gameState);
     }
 }

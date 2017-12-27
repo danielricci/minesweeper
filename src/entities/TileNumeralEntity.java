@@ -24,23 +24,10 @@
 
 package entities;
 
-import generated.DataLookup;
+import generated.DataLookup.MINE_NUMBER;
 
-/**
- * A representation of a mine numeral
- * 
- * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
- *
- */
-public class MineNumeralEntity extends AbstractGameEntity {
-    
-    /**
-     * 
-     * Constructs a new instance of this class type
-     *
-     * @param numeral The initial numeral to set for this entity
-     */
-    public MineNumeralEntity(long numeral) {
-        setActiveData(DataLookup.MINE_NUMBER.valueOf("BOMB_" + numeral));
+public final class TileNumeralEntity extends AbstractTileEntity {
+    public TileNumeralEntity(long numeral) {
+        setActiveData(MINE_NUMBER.valueOf("BOMB_" + numeral));
     }
 }
