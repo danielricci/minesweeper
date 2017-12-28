@@ -261,7 +261,8 @@ public class BoardController extends BaseController {
 
         // Set a mine on an empty tile or on a tile that does not have a mine.
         if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof GameStateEntity)) {
-            tileModel.setEntity(new GameStateEntity(DataLookup.TILE_STATE.BOUND_FOUND));
+            System.out.print("TODODODODODODDO");
+            //tileModel.setEntity(new GameStateEntity(DataLookup.TILE_STATE.BOUND_FOUND));
         }
         else {
             // Remove the contents of the entity
@@ -301,7 +302,7 @@ public class BoardController extends BaseController {
         if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof TileStateEntity) {
             long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof GameStateEntity).count();
             if(count > 0) {
-                tileModel.setEntity(new MineNumeralEntity(count));
+                //tileModel.setEntity(new MineNumeralEntity(count));
             }
             else {
                 tileModel.setEntity(null);

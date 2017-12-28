@@ -26,8 +26,11 @@ package entities;
 
 import generated.DataLookup.MINE_NUMBER;
 
-public final class TileNumeralEntity extends AbstractTileEntity {
-    public TileNumeralEntity(long numeral) {
-        setActiveData(MINE_NUMBER.valueOf("BOMB_" + numeral));
+public final class MineNumeralEntity extends AbstractGameEntity {
+    
+    private static final String BOMB = "BOMB_";
+    
+    public MineNumeralEntity(long numeral) {
+        setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));
     }
 }

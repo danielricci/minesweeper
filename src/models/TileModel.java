@@ -26,8 +26,6 @@ package models;
 
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.model.BaseModel;
-import entities.AbstractGameEntity;
-import entities.ButtonStateEntity;
 import entities.TileStateEntity;
 import game.gameplay.AbstractDataEntity;
 
@@ -65,12 +63,12 @@ public class TileModel extends BaseModel {
     }
     
     /**
-     * Sets the specified data into this model
+     * Sets the entity of this tile model
      * 
-     * @param data The game data to set into this model
+     * @param tileStateEntity The tile entity of this model
      */
-    public void setEntity(AbstractGameEntity entity) {
-        _entity = entity;
+    public void setEntity(TileStateEntity tileStateEntity) {
+        _tileStateEntity = tileStateEntity;
         doneUpdating();
     }
     
@@ -100,6 +98,6 @@ public class TileModel extends BaseModel {
      * @return The data entity associated to this tile model
      */
     public AbstractDataEntity getEntity() {
-        return _entity;
+        return _tileStateEntity;
     }
 }

@@ -24,27 +24,20 @@
 
 package entities;
 
-import generated.DataLookup;
+import java.awt.Image;
 
-/**
- * The game representation of 
- * 
- * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
- *
- */
-public final class TileStateEntity extends AbstractTileEntity {
+public final class TileStateEntity extends AbstractGameEntity {
     
+    private ButtonStateEntity _buttonStateEntity;
     
-    ButtonStateEntity _buttonStateEntity;
-    //        setActiveData(DataLookup.BUTTON_STATE.BUTTON_BLANK);
-
+    private MineNumeralEntity _tileNumeralEntity;
     
-    /**
-     * Constructs a new instance of this class type
-     * 
-     * @param tileState The tile state to set
-     */
-    public TileStateEntity(DataLookup.TILE_STATE tileState) {
-        setActiveData(tileState);
+    public TileStateEntity() {
+        _buttonStateEntity = new ButtonStateEntity();
+    }
+ 
+    
+    @Override public Image getRenderableContent() {
+        return _buttonStateEntity.getRenderableContent();
     }
 }

@@ -148,7 +148,9 @@ public class TileView extends PanelView {
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
-                    _tileButton.setVisible(false);    
+                    _tileButton.setVisible(false);
+                    setBorder(DEFAULT_BORDER);
+                    setBackground(DEFAULT_BACKGROUND_COLOR);
                 }
                 else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
                     getViewProperties().getEntity(BoardController.class).cycleButtonControl(TileView.this);
@@ -223,6 +225,6 @@ public class TileView extends PanelView {
 
             // Finalize the draw update procedure
             repaint();
-        }        
+        }
     }
 }
