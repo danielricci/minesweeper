@@ -24,10 +24,17 @@
 
 package entities;
 
-import generated.DataLookup;
+import generated.DataLookup.BUTTON_STATE;
 
 public final class ButtonStateEntity extends AbstractGameEntity {
+    
+    private BUTTON_STATE _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
+    
     public ButtonStateEntity() {
-        setActiveData(DataLookup.BUTTON_STATE.BUTTON_BLANK);
+        setActiveData(_currentButtonState);
+    }
+    
+    public boolean isEmpty() {
+        return _currentButtonState == BUTTON_STATE.BUTTON_BLANK;
     }
 }

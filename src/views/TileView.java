@@ -148,12 +148,16 @@ public class TileView extends PanelView {
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
-                    _tileButton.setVisible(false);
+                    
+                    // Set the border and the background color for this tile
                     setBorder(DEFAULT_BORDER);
                     setBackground(DEFAULT_BACKGROUND_COLOR);
+                    
+                    // Remove the visibility of the button
+                    _tileButton.setVisible(false);
                 }
                 else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
-                    getViewProperties().getEntity(BoardController.class).cycleButtonControl(TileView.this);
+                    // TODO
                 }
             }
         });
@@ -213,12 +217,6 @@ public class TileView extends PanelView {
                     _tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
                 }
                 else {
-                    
-                    // Only set a border if the tile button is not visible
-                    setBorder(DEFAULT_BORDER);
-                    
-                    // Render the entity specified within the tile model. In this case, it could
-                    // be a bomb, a numeral, etc.
                     addRenderableContent(tileModel.getEntity());    
                 }
             }

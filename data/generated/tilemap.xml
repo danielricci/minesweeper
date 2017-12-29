@@ -58,7 +58,7 @@
         <entry>
             <key>generated.TileMapData</key>
             <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
-&lt;root name="bound_found" layers="tile_state" friendly="Bomb Found"&gt;
+&lt;root name="bomb_revealed" layers="tile_state" friendly="Bomb Revealed"&gt;
     &lt;p1 y="0.0" x="136.0"/&gt;
     &lt;p2 y="16.0" x="152.0"/&gt;
 &lt;/root&gt;

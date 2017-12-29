@@ -27,7 +27,6 @@ package models;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.model.BaseModel;
 import entities.TileStateEntity;
-import game.gameplay.AbstractDataEntity;
 
 /**
  * The model representation of a tile 
@@ -45,7 +44,7 @@ public class TileModel extends BaseModel {
     /**
      * The current tile state entity of this model.
      */
-    private TileStateEntity _tileStateEntity;
+    private final TileStateEntity _tileStateEntity = new TileStateEntity();
     
     /**
      * Property indicating this tile is highlighted
@@ -59,16 +58,11 @@ public class TileModel extends BaseModel {
      */
     public TileModel(ISignalListener... listeners) {
         super(listeners);
-        setEntity(new TileStateEntity());
+        doneUpdating();
     }
-    
-    /**
-     * Sets the entity of this tile model
-     * 
-     * @param tileStateEntity The tile entity of this model
-     */
-    public void setEntity(TileStateEntity tileStateEntity) {
-        _tileStateEntity = tileStateEntity;
+
+    public void reset() {
+        _tileStateEntity.reset();
         doneUpdating();
     }
     
@@ -97,7 +91,7 @@ public class TileModel extends BaseModel {
      * 
      * @return The data entity associated to this tile model
      */
-    public AbstractDataEntity getEntity() {
+    public TileStateEntity getEntity() {
         return _tileStateEntity;
     }
 }

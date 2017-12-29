@@ -30,7 +30,7 @@ public final class MineNumeralEntity extends AbstractGameEntity {
     
     private static final String BOMB = "BOMB_";
     
-    public MineNumeralEntity(long numeral) {
-        setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));
+    public void setNumeral(long numeral) {
+        setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
     }
 }

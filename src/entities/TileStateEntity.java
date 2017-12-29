@@ -26,18 +26,54 @@ package entities;
 
 import java.awt.Image;
 
+import generated.DataLookup.TILE_STATE;
+
 public final class TileStateEntity extends AbstractGameEntity {
     
-    private ButtonStateEntity _buttonStateEntity;
+    private final MineNumeralEntity _tileNumeralEntity = new MineNumeralEntity();
     
-    private MineNumeralEntity _tileNumeralEntity;
+    private ButtonStateEntity _buttonStateEntity = new ButtonStateEntity();
     
-    public TileStateEntity() {
-        _buttonStateEntity = new ButtonStateEntity();
-    }
- 
+    private TILE_STATE _tileState = null;
     
     @Override public Image getRenderableContent() {
+        if(hasActiveData()) {
+            return super.getRenderableContent();
+        }
+        
+        if(_buttonStateEntity != null && _buttonStateEntity.hasActiveData()) {
+            return _buttonStateEntity.getRenderableContent();
+        }
+        
+        
         return _buttonStateEntity.getRenderableContent();
+    }
+
+    @Override public void reset() {
+        super.reset();
+      
+        _buttonStateEntity.reset();
+        _tileNumeralEntity.reset();
+    }
+    
+    public void setTileState(TILE_STATE tileState) {
+        super.setActiveData(tileState);
+        _tileState = tileState;
+    }
+
+    public MineNumeralEntity getMineNumeralEntity() {
+        return _tileNumeralEntity;
+    }
+    
+    public void clearButtonState() {
+        _buttonStateEntity = null;
+    }
+    
+    public ButtonStateEntity getButtonStateEntity() {
+        return _buttonStateEntity;
+    }
+    
+    public boolean hasMine() {
+        return _tileState == TILE_STATE.BOMB_REVEALED;
     }
 }

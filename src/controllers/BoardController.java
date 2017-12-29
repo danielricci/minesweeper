@@ -38,12 +38,7 @@ import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import entities.AbstractGameEntity;
-import entities.GameTimerEntity;
-import entities.GameStateEntity;
-import entities.MineNumeralEntity;
-import entities.TileStateEntity;
-import generated.DataLookup;
+import generated.DataLookup.TILE_STATE;
 import models.TileModel;
 
 /**
@@ -57,19 +52,12 @@ public class BoardController extends BaseController {
     /**
      * The dimensions of the game
      */
-    // TODO - remove hardcoded assignment
     private Dimension _boardDimensions = new Dimension(16,16);
 
     /**
      * The list of neighbors logically associated to a specified controller
      */
     private final Map<TileModel, Map<EntityMovement, TileModel>> _tileModels = new LinkedHashMap();
-
-    /**
-     * Constructs a new instance of this class type
-     */
-    public BoardController() {
-    }
 
     /**
      * Adds the specified tile model to the list of available tiles
@@ -246,7 +234,7 @@ public class BoardController extends BaseController {
      * Clears all the tiles of their entities
      */
     public void clearEntities() {
-        _tileModels.keySet().stream().filter(z -> z.getEntity() != null).parallel().forEach(z -> z.setEntity(null));
+        //_tileModels.keySet().stream().filter(z -> z.getEntity() != null).parallel().forEach(z -> z.setEntity(null));
     }
 
     /**
@@ -258,63 +246,20 @@ public class BoardController extends BaseController {
 
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-
-        // Set a mine on an empty tile or on a tile that does not have a mine.
-        if(tileModel.getEntity() == null || !(tileModel.getEntity() instanceof GameStateEntity)) {
-            System.out.print("TODODODODODODDO");
-            //tileModel.setEntity(new GameStateEntity(DataLookup.TILE_STATE.BOUND_FOUND));
-        }
-        else {
-            // Remove the contents of the entity
-            tileModel.setEntity(null);
-
-            // Update the numeral of the currently selected tile. When you remove
-            // the entity, it could still hold a numeral because of surrounding tiles
-            // that are mines
-            generate(tileModel);
-        }
+        tileModel.getEntity().setTileState(TILE_STATE.BOMB_REVEALED);
+        tileModel.doneUpdating();
         
         // Update the surrounding neighbors to reflect the mine change  
         for(TileModel tile : getAllNeighbors(tileModel)) {
-            if(tile.getEntity() == null || tile.getEntity() instanceof MineNumeralEntity || tile.getEntity() instanceof TileStateEntity) {
-                generate(tile);
-            }
-        }
-    }
-
-    /**
-     * Generate the entire board of mine numerals
-     */
-    public void generateBoard() {
-        for(TileModel tileModel : _tileModels.keySet()) {
-            generate(tileModel);
+            generateTileNumeral(tile);
         }
     }
     
-    /**
-     * Generate the board w.r.t the specified tile model
-     * 
-     * @param tileModel The tile model to use as a start point when performing
-     *                  the neighborly generation
-     */
-    // TODO - get rid of 'null' entities for the tilemodel
-    private void generate(TileModel tileModel) {
-        if(tileModel.getEntity()  == null || tileModel.getEntity() instanceof MineNumeralEntity || tileModel.getEntity() instanceof TileStateEntity) {
-            long count = getAllNeighbors(tileModel).stream().filter(z -> z.getEntity() instanceof GameStateEntity).count();
-            if(count > 0) {
-                //tileModel.setEntity(new MineNumeralEntity(count));
-            }
-            else {
-                tileModel.setEntity(null);
-            }
-        }
-    }
-
-    public void cycleButtonControl(ISignalListener listener) {
-        // Get the tile model of the listener specified
-        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-        if(tileModel.getEntity() != null) {
-            //TileStateEntity entity = tileModel.getEntity();
+    private void generateTileNumeral(TileModel tileModel) {
+        long count = getAllNeighbors(tileModel).stream().filter(z -> !z.getEntity().hasMine()).count();
+        if(count > 0) {
+            tileModel.getEntity().getMineNumeralEntity().setNumeral(count);
+            tileModel.doneUpdating();
         }
     }
 }
