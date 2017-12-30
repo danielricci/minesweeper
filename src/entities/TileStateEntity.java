@@ -28,52 +28,65 @@ import java.awt.Image;
 
 import generated.DataLookup.TILE_STATE;
 
+/**
+ * Represents a tile state entity that holds all the contents of a singular data entity in the game
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class TileStateEntity extends AbstractGameEntity {
-    
+        
+    /**
+     * Hold a reference to any potential numeral entities within this tile
+     */
     private final MineNumeralEntity _tileNumeralEntity = new MineNumeralEntity();
-    
-    private ButtonStateEntity _buttonStateEntity = new ButtonStateEntity();
-    
+
+    /**
+     * The currently active state of this entity
+     */
     private TILE_STATE _tileState = null;
     
-    @Override public Image getRenderableContent() {
-        if(hasActiveData()) {
-            return super.getRenderableContent();
-        }
-        
-        if(_buttonStateEntity != null && _buttonStateEntity.hasActiveData()) {
-            return _buttonStateEntity.getRenderableContent();
-        }
-        
-        
-        return _buttonStateEntity.getRenderableContent();
-    }
-
-    @Override public void reset() {
-        super.reset();
-      
-        _buttonStateEntity.reset();
-        _tileNumeralEntity.reset();
-    }
-    
-    public void setTileState(TILE_STATE tileState) {
-        super.setActiveData(tileState);
-        _tileState = tileState;
-    }
-
+    /**
+     * Gets the mine numeral entity associated to this entity
+     * 
+     * @return The mine numeral entity associated to this entity
+     */
     public MineNumeralEntity getMineNumeralEntity() {
         return _tileNumeralEntity;
     }
-    
-    public void clearButtonState() {
-        _buttonStateEntity = null;
-    }
-    
-    public ButtonStateEntity getButtonStateEntity() {
-        return _buttonStateEntity;
-    }
-    
+
+    /**
+     * Gets if this entity is in a 'bomb revealed' state
+     * 
+     * @return TRUE if this entity is in a 'bomb revealed' state, FALSE otherwise
+     */
     public boolean hasMine() {
         return _tileState == TILE_STATE.BOMB_REVEALED;
+    }
+
+    /**
+     * Sets the current state of this entity
+     * 
+     * @param tileState The state to set this entity to
+     */
+    public void setTileState(TILE_STATE tileState) {
+        
+        // Call the super functionality
+        super.setActiveData(tileState);
+        
+        // Store a reference to the current state for further use
+        _tileState = tileState;
+    }
+
+    @Override public Image getRenderableContent() {
+      
+        if(hasActiveData()) {
+            return super.getRenderableContent();
+        }
+        if(_tileNumeralEntity.hasActiveData()) {
+            return _tileNumeralEntity.getRenderableContent();
+        }
+        
+        return null;
     }
 }

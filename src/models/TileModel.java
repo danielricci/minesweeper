@@ -24,8 +24,12 @@
 
 package models;
 
+import java.util.ArrayList;
+
 import engine.communication.internal.signal.ISignalListener;
+import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
+import entities.ButtonStateEntity;
 import entities.TileStateEntity;
 
 /**
@@ -37,19 +41,14 @@ import entities.TileStateEntity;
 public class TileModel extends BaseModel {
 
     /**
-     * Signal indicating that this model's highlight state has changed
+     * The button state entity of this tile model
      */
-    public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
-
-    /**
-     * The current tile state entity of this model.
-     */
-    private final TileStateEntity _tileStateEntity = new TileStateEntity();
+    private final ButtonStateEntity _buttonStateEntity = new ButtonStateEntity();
     
     /**
-     * Property indicating this tile is highlighted
+     * The tile state entity of this tile model
      */
-    private boolean _isHighlighted;
+    private final TileStateEntity _tileStateEntity = new TileStateEntity();
 
     /** 
      * Constructs a new instance of this class type
@@ -60,17 +59,52 @@ public class TileModel extends BaseModel {
         super(listeners);
         doneUpdating();
     }
-
-    public void reset() {
-        _tileStateEntity.reset();
-        doneUpdating();
+        
+    /**
+     * Gets button state entity associated to this tile model
+     * 
+     * @return The button state entity associated to this tile model
+     */
+    public ButtonStateEntity getButtonStateEntity() {
+        return _buttonStateEntity;
     }
+
+    /**
+     * Gets the tile state entity associated to this tile model
+     * 
+     * @return The tile state entity associated to this tile model
+     */
+    public TileStateEntity getTileStateEntity() {
+        return _tileStateEntity;
+    }
+    
+    public ArrayList<IRenderable> getRenderableContent() {
+        return new ArrayList<IRenderable>() {{
+            add(_buttonStateEntity);
+            add(_tileStateEntity);
+        }};
+    }
+    
+    /** EVERYTHING BELOW THIS LINE HAS GOT TO GO...*/
+    /**
+     * Signal indicating that this model's highlight state has changed
+     */
+    // TODO - delete - should not be couple with real game logic
+    public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
+    
+    
+    /**
+     * Property indicating this tile is highlighted
+     */
+    // TODO - delete - should not be couple with real game logic
+    private boolean _isHighlighted;
     
     /**
      * Sets the highlight state of this model
      * 
      * @param highlighted If the tile model should be highlighted
      */
+    // TODO - delete - should not be couple with real game logic
     public void setHighlighted(boolean highlighted) {
         _isHighlighted = highlighted;
         setOperation(EVENT_HIGHLIGHT_CHANGED);
@@ -82,16 +116,8 @@ public class TileModel extends BaseModel {
      * 
      * @return If the tile model is highlighted
      */
+    // TODO - delete - should not be couple with real game logic
     public boolean getIsHighlighted() {
         return _isHighlighted;
-    }
-
-    /**
-     * Gets the data entity associated to this tile model
-     * 
-     * @return The data entity associated to this tile model
-     */
-    public TileStateEntity getEntity() {
-        return _tileStateEntity;
     }
 }

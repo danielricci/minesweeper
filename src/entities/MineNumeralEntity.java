@@ -26,10 +26,25 @@ package entities;
 
 import generated.DataLookup.MINE_NUMBER;
 
+/**
+ * This class represents the data associated to a numeral entity
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class MineNumeralEntity extends AbstractGameEntity {
     
+    /**
+     * The constant field associated to the mine numeral
+     */
+    // TODO - change "BOMB_" to MINE_
     private static final String BOMB = "BOMB_";
     
+    /**
+     * Sets the numeral of the mine
+     * 
+     * @param numeral The numeral of the mine
+     */
     public void setNumeral(long numeral) {
         setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
     }

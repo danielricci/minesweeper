@@ -25,7 +25,6 @@
 package controllers;
 
 import engine.core.mvc.controller.BaseController;
-import models.GameTimerModel;
 
 /**
  * This controller is responsible for the functionality related to the status bar of the application (game flags, game state, game timer)

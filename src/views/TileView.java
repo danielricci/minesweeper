@@ -56,50 +56,50 @@ import models.TileModel;
 public class TileView extends PanelView {
 
     /**
+     * The event associated to displaying the empty tiles with respect to this tile
+     */
+    public static final String EVENT_DEBUG_FLOODFILL = "EVENT_EMPTY_TILES";
+
+    /**
      * The event associated to displaying the button for this tile
      */
-    public static final String EVENT_BUTTON = "EVENT_BUTTON";
+    public static final String EVENT_SHOW_TILE_BUTTONS = "EVENT_BUTTON";
     
     /**
      * The event associated to displaying the neighbours of this tile
      */
-    public static final String EVENT_NEIGHBORS = "EVENT_NEIGHBORS";
+    public static final String EVENT_SHOW_NEIGHBORS = "EVENT_NEIGHBORS";
     
-    /**
-     * The event associated to displaying the empty tiles with respect to this tile
-     */
-    public static final String EVENT_EMPTY_TILES = "EVENT_EMPTY_TILES";
-    
-    /**
-     * The button associated to this tile view that the user will click to expose the contents of this tile
-     */
-    private final JButton _tileButton = new JButton();
-    
-    /**
-     * This flag when set will perform a neighbor highlight on this tile when you mouse over it
-     */
-    private boolean _highlightNeighbors;
-    
-    /**
-     * This flag when set will highlight all empty adjacent tiles to this tile continuously 
-     */
-    private boolean _highlightEmptySpaces;
-    
-    /**
-     * Normal border style of this view
-     */
-    private final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(1, 1, 0, 0, new Color(146, 146, 146));
-
     /**
      * The background color of this tile
      */
-    private final Color DEFAULT_BACKGROUND_COLOR = new Color(204, 204, 204);
-    
+    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(204, 204, 204);
+
+    /**
+     * Normal border style of this view
+     */
+    private static final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(1, 1, 0, 0, new Color(146, 146, 146));
+
     /**
      * The color used when a tile is highlighted
      */
     private static final Color HIGHLIGHTED_COLOR = Color.BLUE;
 
+    /**
+     * This flag when set will highlight all empty adjacent tiles to this tile continuously 
+     */
+    private boolean _highlightEmptySpaces;
+
+    /**
+     * This flag when set will perform a neighbor highlight on this tile when you mouse over it
+     */
+    private boolean _highlightNeighbors;
+
+    /**
+     * The button associated to this tile view that the user will click to expose the contents of this tile
+     */
+    private final JButton _tileButton = new JButton();
+    
     /**
      * Constructs a new instance of this class type
      */
@@ -125,7 +125,7 @@ public class TileView extends PanelView {
     }
 
     @Override public void initializeComponentBindings() {
-        this.addMouseListener(new MouseAdapter() {
+        addMouseListener(new MouseAdapter() {
             @Override public void mouseEntered(MouseEvent event) {
                 if(_highlightNeighbors) {
                     getViewProperties().getEntity(BoardController.class).showTileNeighborsDebug(TileView.this, true);
@@ -145,17 +145,26 @@ public class TileView extends PanelView {
             }
         });
         
+        // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
+                
+                // LEFT MOUSE CLICK EVENT
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     
                     // Set the border and the background color for this tile
-                    setBorder(DEFAULT_BORDER);
-                    setBackground(DEFAULT_BACKGROUND_COLOR);
+                    //setBorder(DEFAULT_BORDER);
+                    //setBackground(DEFAULT_BACKGROUND_COLOR);
                     
                     // Remove the visibility of the button
-                    _tileButton.setVisible(false);
-                }
+                    if(_tileButton.isVisible()) {
+                        _tileButton.setVisible(false);
+                    
+                        // Call the controller to notify that the button has been hidden
+                        getViewProperties().getEntity(BoardController.class).buttonTriggeredEvent(TileView.this);
+                    }
+                }   
+                // RIGHT MOUSE CLICK EVENT
                 else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
                     // TODO
                 }
@@ -164,7 +173,7 @@ public class TileView extends PanelView {
     }
 
     @Override public void registerSignalListeners() {
-        addSignalListener(EVENT_NEIGHBORS, new ISignalReceiver<BooleanEventArgs>() {
+        addSignalListener(EVENT_SHOW_NEIGHBORS, new ISignalReceiver<BooleanEventArgs>() {
             @Override public void signalReceived(BooleanEventArgs event) {
                 _highlightNeighbors = event.getResult();
                 
@@ -173,7 +182,7 @@ public class TileView extends PanelView {
                 }                
             }
         });        
-        addSignalListener(EVENT_EMPTY_TILES, new ISignalReceiver<BooleanEventArgs>() {
+        addSignalListener(EVENT_DEBUG_FLOODFILL, new ISignalReceiver<BooleanEventArgs>() {
             @Override public void signalReceived(BooleanEventArgs event) {
                 _highlightEmptySpaces = event.getResult();
                 
@@ -182,42 +191,42 @@ public class TileView extends PanelView {
                 }
             }
         });
-        addSignalListener(EVENT_BUTTON, new ISignalReceiver<BooleanEventArgs>() {
+        addSignalListener(EVENT_SHOW_TILE_BUTTONS, new ISignalReceiver<BooleanEventArgs>() {
             @Override public void signalReceived(BooleanEventArgs event) {
-                _tileButton.setVisible(!event.getResult());
+                
+                boolean visible = !event.getResult(); 
+                _tileButton.setVisible(visible);
+
                 setBorder(DEFAULT_BORDER);
                 setBackground(DEFAULT_BACKGROUND_COLOR);
+                
+                // Call the controller to notify that the button has been hidden
+                getViewProperties().getEntity(BoardController.class).buttonTriggeredEvent(TileView.this);
             }
         });        
     }
     
     @Override public void update(AbstractEventArgs event) {
+        System.out.println("TileView::update");
         super.update(event);
         
         if(event instanceof ModelEventArgs) {
-            
             // Get the tile model associated to the event passed in
             TileModel tileModel = (TileModel) event.getSource();
-
+                        
             if(tileModel.getIsHighlighted()) {
-                
-                // Set the background to a highlighted state.
-                // Note: When the background is highlighted it signifies a debug mode so do not
-                //       draw anything else but the highlight
                 this.setBackground(HIGHLIGHTED_COLOR);
             }
             else {
                 
                 // Set the background to its default color state
                 this.setBackground(DEFAULT_BACKGROUND_COLOR);
-                
-                // If the button layer is still visible then show the background of the entity 
-                // over the button as an icon
+
                 if(_tileButton.isVisible()) {
-                    _tileButton.setIcon(new ImageIcon(tileModel.getEntity().getRenderableContent()));    
+                    _tileButton.setIcon(new ImageIcon(tileModel.getButtonStateEntity().getRenderableContent()));    
                 }
                 else {
-                    addRenderableContent(tileModel.getEntity());    
+                    addRenderableContent(tileModel.getTileStateEntity());    
                 }
             }
 

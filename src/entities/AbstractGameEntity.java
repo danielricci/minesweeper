@@ -33,7 +33,4 @@ import game.gameplay.AbstractDataEntity;
  *
  */
 public abstract class AbstractGameEntity extends AbstractDataEntity {
-    public void reset() {
-        
-    }
 }

@@ -68,7 +68,7 @@ public class BoardView extends PanelView {
 
         // Get the board dimensions
         // TODO - this should be whatever the current game difficulty is set to
-        Dimension boardDimensions = new Dimension(16, 16);
+        Dimension boardDimensions = new Dimension(9, 9);
 
         // Create the board based on the specified dimensions
         for(int row = 0, dimensionsX = boardDimensions.width; row < dimensionsX; ++row) {

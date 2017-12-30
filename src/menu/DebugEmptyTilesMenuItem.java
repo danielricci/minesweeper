@@ -62,7 +62,7 @@ public class DebugEmptyTilesMenuItem extends AbstractMenuItem {
     @Override public void onExecute(ActionEvent actionEvent) {
         AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
             TileView.class, 
-            new BooleanEventArgs(this, TileView.EVENT_EMPTY_TILES, 
+            new BooleanEventArgs(this, TileView.EVENT_DEBUG_FLOODFILL, 
             get(JCheckBoxMenuItem.class).isSelected())
         );
     }

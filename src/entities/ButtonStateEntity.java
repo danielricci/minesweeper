@@ -26,15 +26,57 @@ package entities;
 
 import generated.DataLookup.BUTTON_STATE;
 
+/**
+ * This class is associated to the button state of a singular entity
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class ButtonStateEntity extends AbstractGameEntity {
     
+    /**
+     * The current button state of this entity
+     */
     private BUTTON_STATE _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
+
+    /**
+     * A flag indicating if this entity's state is enabled
+     * 
+     * Note: By default the state should be set to enabled
+     */
+    private boolean _isEnabled = true;
     
+    /**
+     * Constructs a new instance of this class type
+     */
     public ButtonStateEntity() {
         setActiveData(_currentButtonState);
     }
     
+    /**
+     * Gets if this entity is considered 'empty' by comparing it against a blank button state
+     * 
+     * @return True if this entity is empty, false otherwise
+     */
     public boolean isEmpty() {
         return _currentButtonState == BUTTON_STATE.BUTTON_BLANK;
+    }
+    
+    /**
+     * Gets if this entity is enabled
+     * 
+     * @return True if this entity is enabled, false otherwise
+     */
+    public boolean isEnabled() {
+        return _isEnabled;
+    }
+    
+    /**
+     * Sets the enabled state of this entity
+     * 
+     * @param isEnabled The enabled state to set this entity to
+     */
+    public void setIsEnabled(boolean isEnabled) {
+        _isEnabled = isEnabled;
     }
 }

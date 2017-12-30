@@ -62,7 +62,7 @@ public class DebugNeighboursMenuItem extends AbstractMenuItem {
     @Override public void onExecute(ActionEvent actionEvent) {
         AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
             TileView.class, 
-            new BooleanEventArgs(this, TileView.EVENT_NEIGHBORS, 
+            new BooleanEventArgs(this, TileView.EVENT_SHOW_NEIGHBORS, 
             get(JCheckBoxMenuItem.class).isSelected())
         );
     }

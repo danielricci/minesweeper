@@ -52,7 +52,7 @@ public class BoardController extends BaseController {
     /**
      * The dimensions of the game
      */
-    private Dimension _boardDimensions = new Dimension(16,16);
+    private Dimension _boardDimensions = new Dimension(9, 9);
 
     /**
      * The list of neighbors logically associated to a specified controller
@@ -149,7 +149,7 @@ public class BoardController extends BaseController {
 
         // If there is a tile model found and it does not have an entity associated to its tile
         // then get all the tiles adjacent to this one and set the highlighted flag accordingly
-        if(tileModel != null && tileModel.getEntity() == null) {
+        if(tileModel != null && tileModel.getTileStateEntity() == null) {
             getAdjacentTilesFloodFill(tileModel).stream().forEach(z -> z.setHighlighted(highlighted));
         }
     }
@@ -167,7 +167,7 @@ public class BoardController extends BaseController {
 
         for(int i = 0; i < tiles.size(); ++i) {
             tiles.addAll(
-                    getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getEntity() == null && !tiles.contains(z)).collect(Collectors.toList())
+                    getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getTileStateEntity() == null && !tiles.contains(z)).collect(Collectors.toList())
                     );
         }
 
@@ -246,7 +246,7 @@ public class BoardController extends BaseController {
 
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-        tileModel.getEntity().setTileState(TILE_STATE.BOMB_REVEALED);
+        tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_REVEALED);
         tileModel.doneUpdating();
         
         // Update the surrounding neighbors to reflect the mine change  
@@ -256,10 +256,27 @@ public class BoardController extends BaseController {
     }
     
     private void generateTileNumeral(TileModel tileModel) {
-        long count = getAllNeighbors(tileModel).stream().filter(z -> !z.getEntity().hasMine()).count();
+        long count = getAllNeighbors(tileModel).stream().filter(z -> z.getTileStateEntity().hasMine()).count();
         if(count > 0) {
-            tileModel.getEntity().getMineNumeralEntity().setNumeral(count);
-            tileModel.doneUpdating();
+            tileModel.getTileStateEntity().getMineNumeralEntity().setNumeral(count);
+        }
+        tileModel.doneUpdating();
+    }
+
+    /**
+     * Handles the event when a button on the specified listener has been triggered
+     * 
+     * @param listener The listener from where the event took place
+     */
+    public void buttonTriggeredEvent(ISignalListener listener) {
+        // Get the tile model of the listener specified
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        tileModel.getButtonStateEntity().setIsEnabled(false);
+        tileModel.doneUpdating();
+        
+        // Update the surrounding neighbors to reflect the mine change  
+        for(TileModel tile : getAllNeighbors(tileModel)) {
+            generateTileNumeral(tile);
         }
     }
 }
