@@ -121,7 +121,7 @@ public class DebuggerDialog extends DialogView {
         _buttonsHideCheckBox.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent e) {
                 AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
-                    TileView.class, new BooleanEventArgs(this, TileView.EVENT_SHOW_TILE_BUTTONS, _buttonsHideCheckBox.isSelected())
+                    TileView.class, new BooleanEventArgs(DebuggerDialog.this, TileView.EVENT_SHOW_TILE_BUTTONS, _buttonsHideCheckBox.isSelected())
                 );
             }
         });

@@ -58,17 +58,17 @@ public class TileView extends PanelView {
     /**
      * The event associated to displaying the empty tiles with respect to this tile
      */
-    public static final String EVENT_DEBUG_FLOODFILL = "EVENT_EMPTY_TILES";
+    public static final String EVENT_DEBUG_FLOODFILL = "EVENT_DEBUG_FLOODFILL";
 
     /**
      * The event associated to displaying the button for this tile
      */
-    public static final String EVENT_SHOW_TILE_BUTTONS = "EVENT_BUTTON";
+    public static final String EVENT_SHOW_TILE_BUTTONS = "EVENT_SHOW_TILE_BUTTONS";
     
     /**
      * The event associated to displaying the neighbours of this tile
      */
-    public static final String EVENT_SHOW_NEIGHBORS = "EVENT_NEIGHBORS";
+    public static final String EVENT_SHOW_NEIGHBORS = "EVENT_SHOW_NEIGHBORS";
     
     /**
      * The background color of this tile
@@ -207,7 +207,6 @@ public class TileView extends PanelView {
     }
     
     @Override public void update(AbstractEventArgs event) {
-        System.out.println("TileView::update");
         super.update(event);
         
         if(event instanceof ModelEventArgs) {
