@@ -153,8 +153,8 @@ public class TileView extends PanelView {
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     
                     // Set the border and the background color for this tile
-                    //setBorder(DEFAULT_BORDER);
-                    //setBackground(DEFAULT_BACKGROUND_COLOR);
+                    setBorder(DEFAULT_BORDER);
+                    setBackground(DEFAULT_BACKGROUND_COLOR);
                     
                     // Remove the visibility of the button
                     if(_tileButton.isVisible()) {
