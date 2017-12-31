@@ -30,7 +30,7 @@ import controllers.GameTimerController;
 import engine.communication.internal.signal.arguments.AbstractEventArgs;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.ControllerFactory;
+import game.core.factories.ControllerFactory;
 import models.GameTimerModel;
 
 public class GameTimerView extends PanelView {

@@ -32,7 +32,7 @@ import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
-import game.core.ModelFactory;
+import game.core.factories.ModelFactory;
 import models.GameTimerModel;
 
 /**

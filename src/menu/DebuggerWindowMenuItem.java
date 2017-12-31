@@ -32,7 +32,7 @@ import javax.swing.JMenuItem;
 import engine.core.factories.AbstractFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
-import game.core.ViewFactory;
+import game.core.factories.ViewFactory;
 import resources.LocalizedStrings;
 import views.DebuggerBoardView;
 import views.DebuggerDialog;

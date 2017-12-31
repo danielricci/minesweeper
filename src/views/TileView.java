@@ -43,8 +43,8 @@ import engine.communication.internal.signal.arguments.ModelEventArgs;
 import engine.core.factories.AbstractFactory;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.ControllerFactory;
-import game.core.ModelFactory;
+import game.core.factories.ControllerFactory;
+import game.core.factories.ModelFactory;
 import models.TileModel;
 
 /**

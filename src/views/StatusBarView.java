@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.ViewFactory;
+import game.core.factories.ViewFactory;
 
 /**
  * The status view shows the game information such as timers, counters, and game state facial gestures

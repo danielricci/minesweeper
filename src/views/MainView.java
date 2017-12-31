@@ -33,7 +33,7 @@ import javax.swing.border.EmptyBorder;
 import engine.api.IView;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.ViewFactory;
+import game.core.factories.ViewFactory;
 
 /**
  * The main window of the application

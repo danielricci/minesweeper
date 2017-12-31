@@ -33,8 +33,8 @@ import javax.swing.BorderFactory;
 import controllers.BoardController;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.ControllerFactory;
-import game.core.ViewFactory;
+import game.core.factories.ControllerFactory;
+import game.core.factories.ViewFactory;
 
 /**
  * The board view displays the board and all of the board contents

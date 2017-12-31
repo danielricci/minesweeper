@@ -32,7 +32,7 @@ import controllers.BoardController;
 import controllers.DebuggerController;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
-import game.core.ControllerFactory;
+import game.core.factories.ControllerFactory;
 
 /**
  * This view represents the debuggable version of the application where tests can be performed
