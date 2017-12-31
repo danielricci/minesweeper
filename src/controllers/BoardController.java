@@ -149,7 +149,7 @@ public class BoardController extends BaseController {
 
         // If there is a tile model found and it does not have an entity associated to its tile
         // then get all the tiles adjacent to this one and set the highlighted flag accordingly
-        if(tileModel != null && tileModel.getTileStateEntity() == null) {
+        if(tileModel != null && tileModel.getTileStateEntity().isEmpty()) {
             getAdjacentTilesFloodFill(tileModel).stream().forEach(z -> z.setHighlighted(highlighted));
         }
     }
@@ -165,10 +165,8 @@ public class BoardController extends BaseController {
         List<TileModel> tiles = new ArrayList();
         tiles.add(initialTileModel);
 
-        for(int i = 0; i < tiles.size(); ++i) {
-            tiles.addAll(
-                    getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getTileStateEntity() == null && !tiles.contains(z)).collect(Collectors.toList())
-                    );
+        for(int i = 0;  i < tiles.size(); ++i) {
+            tiles.addAll(getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getTileStateEntity().isEmpty() && !tiles.contains(z)).collect(Collectors.toList()));
         }
 
         return tiles;

@@ -89,4 +89,13 @@ public final class TileStateEntity extends AbstractGameEntity {
         
         return null;
     }
+
+    /**
+     * Gets if this entity is empty
+     * 
+     * @return TRUE if this entity and all of its associated entities are empty, FALSE otherwise
+     */
+    public boolean isEmpty() {
+        return !(hasActiveData() || _tileNumeralEntity.hasActiveData());
+    }
 }
