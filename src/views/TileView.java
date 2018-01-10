@@ -73,17 +73,17 @@ public class TileView extends PanelView {
     /**
      * The background color of this tile
      */
-    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(204, 204, 204);
+    private final Color DEFAULT_BACKGROUND_COLOR = new Color(204, 204, 204);
 
     /**
      * Normal border style of this view
      */
-    private static final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(1, 1, 0, 0, new Color(146, 146, 146));
+    private final Border DEFAULT_BORDER = BorderFactory.createMatteBorder(1, 1, 0, 0, new Color(146, 146, 146));
 
     /**
      * The color used when a tile is highlighted
      */
-    private static final Color HIGHLIGHTED_COLOR = Color.BLUE;
+    private final Color HIGHLIGHTED_COLOR = Color.BLUE;
 
     /**
      * This flag when set will highlight all empty adjacent tiles to this tile continuously 
@@ -148,25 +148,27 @@ public class TileView extends PanelView {
         // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
-                
-                // LEFT MOUSE CLICK EVENT
-                if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+
+                // Only perform operations on the button itself if the button is actually visible
+                if(_tileButton.isVisible()) {
+                    if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     
-                    // Set the border and the background color for this tile
-                    setBorder(DEFAULT_BORDER);
-                    setBackground(DEFAULT_BACKGROUND_COLOR);
+                        // Set the border and the background color for this tile
+                        setBorder(DEFAULT_BORDER);
+                        setBackground(DEFAULT_BACKGROUND_COLOR);
                     
-                    // Remove the visibility of the button
-                    if(_tileButton.isVisible()) {
+                        // Remove the visibility of the button
                         _tileButton.setVisible(false);
                     
                         // Call the controller to notify that the button has been hidden
-                        getViewProperties().getEntity(BoardController.class).buttonTriggeredEvent(TileView.this);
+                        getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
                     }
-                }   
-                // RIGHT MOUSE CLICK EVENT
-                else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
-                    // TODO
+                    else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                        _tileButton.setVisible(false);
+                    
+                        // Call the controller to notify that the button has been hidden
+                        getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
+                    }
                 }
             }
         });
@@ -201,7 +203,7 @@ public class TileView extends PanelView {
                 setBackground(DEFAULT_BACKGROUND_COLOR);
                 
                 // Call the controller to notify that the button has been hidden
-                getViewProperties().getEntity(BoardController.class).buttonTriggeredEvent(TileView.this);
+                getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
             }
         });        
     }

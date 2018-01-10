@@ -262,11 +262,11 @@ public class BoardController extends BaseController {
     }
 
     /**
-     * Handles the event when a button on the specified listener has been triggered
+     * Handles the event when a button on the specified listener has been selected
      * 
      * @param listener The listener from where the event took place
      */
-    public void buttonTriggeredEvent(ISignalListener listener) {
+    public void buttonSelectedEvent(ISignalListener listener) {
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         tileModel.getButtonStateEntity().setIsEnabled(false);
