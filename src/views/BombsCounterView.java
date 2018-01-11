@@ -21,56 +21,54 @@
 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 * IN THE SOFTWARE.
 */
+
 package views;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
+import controllers.BombsCounterController;
+import engine.communication.internal.signal.arguments.AbstractEventArgs;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.view.PanelView;
-import game.core.factories.ViewFactory;
+import game.core.factories.ControllerFactory;
+import models.BombsCounterModel;
 
-/**
- * The status view shows the game information such as timers, counters, and game state facial gestures
- * 
- * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
- *
- */
-public class StatusBarView extends PanelView {
-
-    private JPanel _bombsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    
-    private JPanel _gameStatePanel = new JPanel();
-
-    private JPanel _gameTimerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+public class BombsCounterView extends PanelView {
     
     /**
      * Constructs a new instance of this class type
      */
-    public StatusBarView() {
-        setLayout(new GridLayout(1, 3));
-        setBorder(BorderFactory.createLoweredSoftBevelBorder());
+    public BombsCounterView() {
+        // Create the controller and listen to the contents of its model
+        BombsCounterController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new BombsCounterController(), false);
+        getViewProperties().setEntity(controller);
+        controller.addListener(this);
     }
     
-    @Override public void initializeComponents() {
-        
-        _bombsPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new BombsCounterView(), false));
-        _gameTimerPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new GameTimerView(), false));
-        
-        add(_bombsPanel);
-        add(_gameStatePanel);
-        add(_gameTimerPanel);
+    @Override public Dimension getPreferredSize() {
+        return new Dimension(39, 23);
     }
 
-    @Override public void initializeComponentBindings() {
+    @Override public void initializeComponents() {
+
     }
+
+    @Override public void initializeComponentBindings() {        
     
-    @Override public void render() {
-        super.render();
-        render(_bombsPanel);
-        render(_gameTimerPanel);
+    }
+       
+    @Override public void update(AbstractEventArgs event) {
+        super.update(event);
+    
+        if(event.getSource() instanceof BombsCounterModel) {
+            
+            // Get the model associated to the event received
+            BombsCounterModel bombsCounterModel = (BombsCounterModel) event.getSource();
+            addRenderableContent(bombsCounterModel.getEntity());
+            
+            // Repaint this view
+            invalidate();
+            repaint();
+        }
     }
 }
