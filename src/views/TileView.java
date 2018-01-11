@@ -164,10 +164,8 @@ public class TileView extends PanelView {
                         getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
                     }
                     else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
-                        _tileButton.setVisible(false);
-                    
                         // Call the controller to notify that the button has been hidden
-                        getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
+                        getViewProperties().getEntity(BoardController.class).buttonStateChangeEvent(TileView.this);
                     }
                 }
             }

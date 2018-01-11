@@ -86,13 +86,13 @@ public class BoardController extends BaseController {
 
             // Link the tile rows together
             linkTiles(
-                    // Previous row
-                    i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
-                            // Current Row
-                            Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
-                            // Next Row
-                            i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
-                    );
+                // Previous row
+                i - 1 >= 0 ? Arrays.copyOfRange(tiles, (i - 1) * columns, ((i - 1) * columns) + columns) : null,
+                // Current Row
+                Arrays.copyOfRange(tiles, i * columns, (i * columns) + columns),
+                // Next Row
+                i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
+            );
         }
     }
 
@@ -246,13 +246,16 @@ public class BoardController extends BaseController {
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_REVEALED);
         tileModel.doneUpdating();
-        
+
         // Update the surrounding neighbors to reflect the mine change  
-        for(TileModel tile : getAllNeighbors(tileModel)) {
-            generateTileNumeral(tile);
-        }
+        getAllNeighbors(tileModel).stream().forEach(z -> generateTileNumeral(z));
     }
     
+    /**
+     * Generates the numeral of a specified tile model
+     * 
+     * @param tileModel The tile model to generate the numeral on
+     */
     private void generateTileNumeral(TileModel tileModel) {
         long count = getAllNeighbors(tileModel).stream().filter(z -> z.getTileStateEntity().hasMine()).count();
         if(count > 0) {
@@ -271,10 +274,20 @@ public class BoardController extends BaseController {
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         tileModel.getButtonStateEntity().setIsEnabled(false);
         tileModel.doneUpdating();
-        
+
         // Update the surrounding neighbors to reflect the mine change  
-        for(TileModel tile : getAllNeighbors(tileModel)) {
-            generateTileNumeral(tile);
-        }
+        getAllNeighbors(tileModel).stream().forEach(z -> generateTileNumeral(z));
+    }
+    
+    /**
+     * Handles the event when a button on the specifier listener has it's state changed
+     * 
+     * @param listener The listener from where the event took place
+     */
+    public void buttonStateChangeEvent(ISignalListener listener) {
+        // Get the tile model of the listener specified
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        tileModel.getButtonStateEntity().changeState();
+        tileModel.doneUpdating();
     }
 }

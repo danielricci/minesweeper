@@ -79,4 +79,22 @@ public final class ButtonStateEntity extends AbstractGameEntity {
     public void setIsEnabled(boolean isEnabled) {
         _isEnabled = isEnabled;
     }
+    
+    /**
+     * Changes the state of this button to the next available state
+     */
+    public void changeState() {
+        switch(_currentButtonState) {
+        case BUTTON_BLANK:
+            _currentButtonState = BUTTON_STATE.BUTTON_FLAG;
+            break;
+        case BUTTON_FLAG:
+            _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
+            break;
+        default:
+            return;
+        }
+        
+        setActiveData(_currentButtonState);
+    }
 }
