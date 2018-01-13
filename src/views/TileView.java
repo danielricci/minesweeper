@@ -156,10 +156,7 @@ public class TileView extends PanelView {
                         // Set the border and the background color for this tile
                         setBorder(DEFAULT_BORDER);
                         setBackground(DEFAULT_BACKGROUND_COLOR);
-                    
-                        // Remove the visibility of the button
-                        _tileButton.setVisible(false);
-                    
+                        
                         // Call the controller to notify that the button has been hidden
                         getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
                     }
@@ -210,9 +207,13 @@ public class TileView extends PanelView {
         super.update(event);
         
         if(event instanceof ModelEventArgs) {
+            
             // Get the tile model associated to the event passed in
             TileModel tileModel = (TileModel) event.getSource();
-                        
+            
+            // Set the visibility state of the button overlayed on this tile view
+            _tileButton.setVisible(tileModel.getButtonStateEntity().isEnabled());
+            
             if(tileModel.getIsHighlighted()) {
                 this.setBackground(HIGHLIGHTED_COLOR);
             }

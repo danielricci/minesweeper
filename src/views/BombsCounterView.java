@@ -40,7 +40,7 @@ public class BombsCounterView extends PanelView {
      */
     public BombsCounterView() {
         // Create the controller and listen to the contents of its model
-        BombsCounterController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new BombsCounterController(), false);
+        BombsCounterController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new BombsCounterController(), true);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
     }

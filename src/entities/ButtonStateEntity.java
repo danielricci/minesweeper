@@ -56,10 +56,19 @@ public final class ButtonStateEntity extends AbstractGameEntity {
     /**
      * Gets if this entity is considered 'empty' by comparing it against a blank button state
      * 
-     * @return True if this entity is empty, false otherwise
+     * @return TRUE if this entity is empty, FALSE otherwise
      */
     public boolean isEmpty() {
         return _currentButtonState == BUTTON_STATE.BUTTON_BLANK;
+    }
+    
+    /**
+     * Gets if this entity is considered to be flagged
+     * 
+     * @return TRUE if this button is in a flagged state, FALSE otherwise
+     */
+    public boolean isFlagged() {
+        return _currentButtonState == BUTTON_STATE.BUTTON_FLAG;
     }
     
     /**

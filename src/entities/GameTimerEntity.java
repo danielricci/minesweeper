@@ -53,6 +53,11 @@ public class GameTimerEntity extends AbstractGameEntity {
         return _numeral;
     }
     
+    public void setNumeralEmpty() {
+        _numeral = Integer.MIN_VALUE;
+        setNumeralImpl();
+    }
+    
     public void setNumeral(int numeral) {
         
         if(numeral == _numeral) {
@@ -61,7 +66,7 @@ public class GameTimerEntity extends AbstractGameEntity {
     
         _numeral = numeral;
         
-        if(numeral < 0 || numeral > 9) {
+        if(numeral > 9) {
             numeral = 0;
             Tracelog.log(Level.WARNING, true, "Game timer entity exceeded expected range, defaulting to an acceptable value");
         }
@@ -88,10 +93,10 @@ public class GameTimerEntity extends AbstractGameEntity {
 
     private void setNumeralImpl() {
         if(MainApplication.instance().isDebug()) {
-            setActiveData(DataLookup.NUMERAL_DEBUG.valueOf(BOMB_CONSTANT + _numeral));
+            setActiveData(_numeral < 0 ? DataLookup.NUMERAL_DEBUG.TIMER_EMPTY : DataLookup.NUMERAL_DEBUG.valueOf(BOMB_CONSTANT + _numeral));
         }
         else {
-            setActiveData(DataLookup.NUMERAL.valueOf(BOMB_CONSTANT + _numeral));
+            setActiveData(_numeral < 0 ? DataLookup.NUMERAL.TIMER_EMPTY : DataLookup.NUMERAL.valueOf(BOMB_CONSTANT + _numeral));
         }
     }
 }

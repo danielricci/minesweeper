@@ -40,7 +40,7 @@ public class GameTimerView extends PanelView {
      */
     public GameTimerView() {
         // Create the controller and listen to the contents of its model
-        GameTimerController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameTimerController(), false);
+        GameTimerController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameTimerController(), true);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
     }

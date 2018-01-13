@@ -62,10 +62,15 @@ public final class BombsCounterModel extends BaseModel {
      */
     public void setTimer(int timerValue) {
         String numeralString = String.format("%03d", timerValue);
-        for(int i = 0, size = numeralString.length(); i < size; ++i) {
+        
+        for(int i = (timerValue < 0 ? 1 : 0), size = numeralString.length(); i < size; ++i) {
             _timerEntities.get(i).setNumeral(
                 Character.getNumericValue(numeralString.charAt(i))
             );
+        }
+
+        if(timerValue < 0) {
+            _timerEntities.get(0).setNumeralEmpty();
         }
         
         _timerValue = timerValue;

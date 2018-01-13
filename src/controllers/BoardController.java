@@ -36,8 +36,10 @@ import java.util.stream.Collectors;
 
 import core.EntityMovement;
 import engine.communication.internal.signal.ISignalListener;
+import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
+import game.core.factories.ControllerFactory;
 import generated.DataLookup.TILE_STATE;
 import models.TileModel;
 
@@ -272,11 +274,16 @@ public class BoardController extends BaseController {
     public void buttonSelectedEvent(ISignalListener listener) {
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-        tileModel.getButtonStateEntity().setIsEnabled(false);
-        tileModel.doneUpdating();
+        
+        // If the tile has a valid button state and it is empty (no flag, etc) then remove the button state
+        // and update the tile with the surrounding neighbor tiles
+        if(tileModel.getButtonStateEntity().isEnabled() && tileModel.getButtonStateEntity().isEmpty()) {
+            tileModel.getButtonStateEntity().setIsEnabled(false);
+            tileModel.doneUpdating();
 
-        // Update the surrounding neighbors to reflect the mine change  
-        getAllNeighbors(tileModel).stream().forEach(z -> generateTileNumeral(z));
+            // Update the surrounding neighbors to reflect the mine change  
+            getAllNeighbors(tileModel).stream().forEach(z -> generateTileNumeral(z));
+        }
     }
     
     /**
@@ -289,5 +296,12 @@ public class BoardController extends BaseController {
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         tileModel.getButtonStateEntity().changeState();
         tileModel.doneUpdating();
+        
+        if(tileModel.getButtonStateEntity().isFlagged()) {
+            AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).decrementCounter();
+        }
+        else {
+            AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).incrementCounter();
+        }
     }
 }
