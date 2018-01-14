@@ -43,8 +43,8 @@ public class StatusBarView extends PanelView {
 
     private JPanel _bombsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
-    private JPanel _gameStatePanel = new JPanel();
-
+    private JPanel _gameStatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    
     private JPanel _gameTimerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     
     /**
@@ -58,6 +58,7 @@ public class StatusBarView extends PanelView {
     @Override public void initializeComponents() {
         
         _bombsPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new BombsCounterView(), false));
+        _gameStatePanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new GameStateView(), false));
         _gameTimerPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new GameTimerView(), false));
         
         add(_bombsPanel);
