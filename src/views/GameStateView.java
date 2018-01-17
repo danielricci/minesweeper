@@ -24,6 +24,13 @@
 
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import controllers.GameStateController;
 import engine.communication.internal.signal.arguments.AbstractEventArgs;
 import engine.core.factories.AbstractFactory;
@@ -33,6 +40,8 @@ import models.GameStateModel;
 
 public class GameStateView extends PanelView {
     
+    private JButton _gameStateButton = new JButton();
+    
     /**
      * Constructs a new instance of this class type
      */
@@ -41,9 +50,19 @@ public class GameStateView extends PanelView {
         GameStateController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameStateController(), true);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
+        setLayout(new BorderLayout());
+    }
+    
+    @Override public Dimension getPreferredSize() {
+        return new Dimension(24, 24);
     }
     
     @Override public void initializeComponents() {
+        // Do not paint the borders of the button, it should simply be an image of sorts
+        _gameStateButton.setBorderPainted(false);
+        
+        // Add the tile to the middle of the panel
+        add(_gameStateButton, BorderLayout.CENTER);
     }
 
     @Override public void initializeComponentBindings() {        
@@ -53,14 +72,9 @@ public class GameStateView extends PanelView {
         super.update(event);
     
         if(event.getSource() instanceof GameStateModel) {
-            
             // Get the model associated to the event received
-            GameStateModel bombsCounterModel = (GameStateModel) event.getSource();
-            addRenderableContent(bombsCounterModel.getEntity());
-            
-            // Repaint this view
-            invalidate();
-            repaint();
+            GameStateModel gameStateModel = (GameStateModel) event.getSource();
+            _gameStateButton.setIcon(new ImageIcon(gameStateModel.getEntity().getRenderableContent()));    
         }
     }
 }

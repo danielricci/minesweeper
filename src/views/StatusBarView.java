@@ -23,10 +23,13 @@
 */
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import engine.core.factories.AbstractFactory;
@@ -43,7 +46,7 @@ public class StatusBarView extends PanelView {
 
     private JPanel _bombsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
-    private JPanel _gameStatePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    private JPanel _gameStatePanel = new JPanel();
     
     private JPanel _gameTimerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     
@@ -51,11 +54,14 @@ public class StatusBarView extends PanelView {
      * Constructs a new instance of this class type
      */
     public StatusBarView() {
-        setLayout(new GridLayout(1, 3));
+        GridLayout layout = new GridLayout(1, 3);
+        setLayout(layout);
         setBorder(BorderFactory.createLoweredSoftBevelBorder());
     }
     
     @Override public void initializeComponents() {
+
+        _gameStatePanel.setLayout(new BoxLayout(_gameStatePanel, BoxLayout.X_AXIS));
         
         _bombsPanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new BombsCounterView(), false));
         _gameStatePanel.add(AbstractFactory.getFactory(ViewFactory.class).add(new GameStateView(), false));
@@ -71,7 +77,9 @@ public class StatusBarView extends PanelView {
     
     @Override public void render() {
         super.render();
+        
         render(_bombsPanel);
+        render(_gameStatePanel);
         render(_gameTimerPanel);
     }
 }

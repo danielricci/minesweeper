@@ -24,11 +24,16 @@
 
 package entities;
 
-import generated.DataLookup;
+import generated.DataLookup.GAME_STATE;
 
 public class GameStateEntity extends AbstractGameEntity {
 
-    public GameStateEntity(DataLookup.GAME_STATE gameState) {
-        setActiveData(gameState);
+    /**
+     * The current game state of the game
+     */
+    public GAME_STATE _currentGameState = GAME_STATE.GAME_RUNNING;
+    
+    public GameStateEntity() {
+        setActiveData(_currentGameState);
     }
 }

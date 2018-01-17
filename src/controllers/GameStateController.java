@@ -28,18 +28,18 @@ import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
 import game.core.factories.ModelFactory;
-import models.BombsCounterModel;
+import models.GameStateModel;
 
 public final class GameStateController extends BaseController {
 
-    private final BombsCounterModel _bombsCounterModel;
+    private final GameStateModel _gameStateModel;
  
     /**
      * Constructs a new instance of this class type
      */
     public GameStateController() {
         // Create the model that will represent the timer data
-        _bombsCounterModel = AbstractFactory.getFactory(ModelFactory.class).add(new BombsCounterModel(),  false);
+        _gameStateModel = AbstractFactory.getFactory(ModelFactory.class).add(new GameStateModel(),  false);
     }
     
     /**
@@ -48,18 +48,6 @@ public final class GameStateController extends BaseController {
      * @param listener The listener to associated to the underlying model of this controller
      */
     public void addListener(ISignalListener listener) {
-        _bombsCounterModel.addListener(listener);
-    }
-
-    public void incrementCounter() {
-        _bombsCounterModel.setTimer(_bombsCounterModel.getTimerValue() + 1);
-    }
-    
-    public void decrementCounter() {
-        _bombsCounterModel.setTimer(_bombsCounterModel.getTimerValue() - 1);
-    }
-    
-    public void resetCounter() {
-        _bombsCounterModel.setTimer(0);
+        _gameStateModel.addListener(listener);
     }
 }

@@ -24,65 +24,15 @@
 
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
-import entities.GameTimerEntity;
+import entities.GameStateEntity;
 
 public final class GameStateModel extends BaseModel {
 
-    /**
-     * The maximum value associated to this gamer model.
-     */
-    public final static int MAX_VALUE = 999; 
-    
-    /**
-     * The game timer current value associated to this model
-     */
-    private int _timerValue;
-    
-    public List<GameTimerEntity> _timerEntities = new ArrayList();
-    
-    /**
-     * Constructs a new instance of this class type
-     */
-    public GameStateModel() {
-        // By default, the precision is set to 3
-        for(int i = 0; i < 3; ++i) {
-            _timerEntities.add(new GameTimerEntity());
-        }            
-    }
+    private GameStateEntity _gameStateEntity = new GameStateEntity();
 
-    /**
-     * Sets the timer to the specified value
-     * 
-     * @param timerValue The value to set the timer to
-     */
-    public void setTimer(int timerValue) {
-        String numeralString = String.format("%03d", timerValue);
-        
-        for(int i = (timerValue < 0 ? 1 : 0), size = numeralString.length(); i < size; ++i) {
-            _timerEntities.get(i).setNumeral(
-                Character.getNumericValue(numeralString.charAt(i))
-            );
-        }
-
-        if(timerValue < 0) {
-            _timerEntities.get(0).setNumeralEmpty();
-        }
-        
-        _timerValue = timerValue;
-            
-        doneUpdating();
-    }
-    
-    public int getTimerValue() {
-        return _timerValue;
-    }
-    
     public IRenderable getEntity() {
-        return GameTimerEntity.flattenData(_timerEntities);
+        return _gameStateEntity;
     }
 }
