@@ -26,6 +26,7 @@ package application;
 
 import java.awt.EventQueue;
 
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.MenuBuilder;
 import engine.core.system.AbstractApplication;
 import engine.core.system.EngineProperties;
@@ -73,7 +74,7 @@ public final class MainApplication extends AbstractApplication {
                 boolean debugMode = false;
                 for(String arg : args) {
                     if(arg.trim().equalsIgnoreCase("-debug")) {
-                        debugMode = true;
+                        debugMode = false;
                         break;
                     }
                 }
@@ -125,6 +126,22 @@ public final class MainApplication extends AbstractApplication {
         .addMenu(Localization.instance().getLocalizedString(LocalizedStrings.Help))
         .addMenuItem(AboutMenuItem.class);
     }
+    
+    @Override public boolean clear() {
+
+        // Clear the factory
+        AbstractSignalFactory.reset();
+        
+        this.getContentPane().removeAll();
+
+        // validate this container and all of the sub-components
+        validate();
+
+        // Repaint everything to apply the changes made
+        repaint();
+
+        return super.clear();
+    }
 
     @Override protected void onInitializeWindow() {
         super.onInitializeWindow();
@@ -147,17 +164,10 @@ public final class MainApplication extends AbstractApplication {
         // If the game is in debug mode then call the debug mode new game, else call the normal new game
         if(isDebug()) {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebugGameMenuItem.class).onExecute(null);
-            //MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebuggerWindowMenuItem.class).onExecute(null);
         }
         else {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
         }
-
-        MainApplication.instance().pack();
-
-        // Center the application in the middle of the screen. This must be done after a call is done to pack()
-        // or it will not be centered properly
-        setLocationRelativeTo(null);
     }
 
     @Override protected void onBeforeEngineDataInitialized() {

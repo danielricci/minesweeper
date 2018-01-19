@@ -29,8 +29,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 
+import application.MainApplication;
+import controllers.BoardController;
+import core.GameSettings;
+import engine.core.factories.AbstractFactory;
 import engine.core.navigation.AbstractMenuItem;
+import engine.core.navigation.MenuBuilder;
 import engine.utils.globalisation.Localization;
+import game.core.factories.ControllerFactory;
 import resources.LocalizedStrings;
 
 /**
@@ -55,5 +61,9 @@ public class IntermediateModeMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
+        BoardController controller = AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class);
+        controller.setGameSettings(GameSettings.INTERMEDITE);
+        MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(actionEvent);
+
     }
 }

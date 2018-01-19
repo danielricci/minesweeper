@@ -72,5 +72,12 @@ public class NewGameMenuItem extends AbstractMenuItem {
 
         // Render the specified view
         view.render();
+ 
+        // Fit the application with its new dimensions
+        MainApplication.instance().pack();
+
+        // Center the application in the middle of the screen. This must be done after a call is done to pack()
+        // or it will not be centered properly
+        MainApplication.instance().setLocationRelativeTo(null);
     }
 }

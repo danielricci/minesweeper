@@ -62,4 +62,8 @@ public final class BombsCounterController extends BaseController {
     public void resetCounter() {
         _bombsCounterModel.setTimer(0);
     }
+    
+    public void setCounter(int count) {
+        _bombsCounterModel.setTimer(count);
+    }
 }

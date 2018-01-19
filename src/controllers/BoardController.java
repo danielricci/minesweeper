@@ -35,6 +35,7 @@ import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import core.EntityMovement;
+import core.GameSettings;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
@@ -52,10 +53,10 @@ import models.TileModel;
 public class BoardController extends BaseController {
 
     /**
-     * The dimensions of the game
+     * The default game settings
      */
-    private Dimension _boardDimensions = new Dimension(9, 9);
-
+    private static GameSettings GAME_SETTINGS = GameSettings.BEGINNER;
+    
     /**
      * The list of neighbors logically associated to a specified controller
      */
@@ -70,6 +71,9 @@ public class BoardController extends BaseController {
         if(_tileModels.putIfAbsent(tileModel, null) != null) {
             Tracelog.log(Level.SEVERE, true, "Attempting to add a tile model to the tile models list when it has already been added");
         }
+        
+        // Set the counter of the bombs based on the currently set game settings
+        ControllerFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).setCounter(GAME_SETTINGS.MINES);
     }
 
     /**
@@ -84,7 +88,7 @@ public class BoardController extends BaseController {
         TileModel[] tiles = _tileModels.keySet().toArray(new TileModel[0]);
 
         // For every row that exists within our setup model
-        for(int i = 0, rows = _boardDimensions.height, columns = _boardDimensions.width; i < rows; ++i) {
+        for(int i = 0, rows = GAME_SETTINGS.getDimensions().height, columns = GAME_SETTINGS.getDimensions().width; i < rows; ++i) {
 
             // Link the tile rows together
             linkTiles(
@@ -106,7 +110,7 @@ public class BoardController extends BaseController {
      * @param bottomRow The bottom row
      */
     private void linkTiles(TileModel[] topRow, TileModel[] neutralRow, TileModel[] bottomRow) {
-        for(int i = 0, columns = _boardDimensions.width; i < columns; ++i) {
+        for(int i = 0, columns = GAME_SETTINGS.getDimensions().width; i < columns; ++i) {
 
             // Represents the structural view of a particular tile
             Map<EntityMovement, TileModel> neighbors = new HashMap<EntityMovement, TileModel>();
@@ -303,5 +307,13 @@ public class BoardController extends BaseController {
         else {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).incrementCounter();
         }
+    }
+    
+    public void setGameSettings(GameSettings gameSettings) {
+        GAME_SETTINGS = gameSettings;
+    }
+
+    public Dimension getDimensions() {
+        return GAME_SETTINGS.getDimensions();
     }
 }

@@ -66,13 +66,10 @@ public class BoardView extends PanelView {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
 
-        // Get the board dimensions
-        // TODO - this should be whatever the current game difficulty is set to
-        Dimension boardDimensions = new Dimension(9, 9);
-
         // Create the board based on the specified dimensions
-        for(int row = 0, dimensionsX = boardDimensions.width; row < dimensionsX; ++row) {
-            for(int col =  0, dimensionsY = boardDimensions.height; col < dimensionsY; ++col) {
+        BoardController controller = getViewProperties().getEntity(BoardController.class);
+        for(int row = 0, dimensionsX = controller.getDimensions().width; row < dimensionsX; ++row) {
+            for(int col =  0, dimensionsY = controller.getDimensions().height; col < dimensionsY; ++col) {
                 // Create a tile and add it to our board
                 TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new TileView(), false);
                 view.setPreferredSize(new Dimension(16, 16));
