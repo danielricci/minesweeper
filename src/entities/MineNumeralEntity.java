@@ -46,6 +46,11 @@ public final class MineNumeralEntity extends AbstractGameEntity {
      * @param numeral The numeral of the mine
      */
     public void setNumeral(long numeral) {
-        setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
+        if(numeral <= 0) {
+            setActiveData(null);
+        }
+        else {
+            setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
+        }
     }
 }

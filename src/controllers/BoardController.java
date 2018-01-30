@@ -55,7 +55,7 @@ public class BoardController extends BaseController {
     /**
      * The default game settings
      */
-    private static GameSettings GAME_SETTINGS = GameSettings.BEGINNER;
+    private static GameSettings GAME_SETTINGS = GameSettings.INTERMEDITE;
     
     /**
      * The list of neighbors logically associated to a specified controller
@@ -250,7 +250,13 @@ public class BoardController extends BaseController {
 
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
-        tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_REVEALED);
+        if(tileModel.getTileStateEntity().hasMine()) {
+            tileModel.getTileStateEntity().setTileState(null);
+        }
+        else {
+            tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_REVEALED);            
+        }
+        
         tileModel.doneUpdating();
 
         // Update the surrounding neighbors to reflect the mine change  
@@ -266,6 +272,9 @@ public class BoardController extends BaseController {
         long count = getAllNeighbors(tileModel).stream().filter(z -> z.getTileStateEntity().hasMine()).count();
         if(count > 0) {
             tileModel.getTileStateEntity().getMineNumeralEntity().setNumeral(count);
+        }
+        else {
+            tileModel.getTileStateEntity().getMineNumeralEntity().setNumeral(0);
         }
         tileModel.doneUpdating();
     }

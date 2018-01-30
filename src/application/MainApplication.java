@@ -74,7 +74,7 @@ public final class MainApplication extends AbstractApplication {
                 boolean debugMode = false;
                 for(String arg : args) {
                     if(arg.trim().equalsIgnoreCase("-debug")) {
-                        debugMode = false;
+                        debugMode = true;
                         break;
                     }
                 }
