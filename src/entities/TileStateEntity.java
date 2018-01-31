@@ -98,4 +98,10 @@ public final class TileStateEntity extends AbstractGameEntity {
     public boolean isEmpty() {
         return !(hasActiveData() || _tileNumeralEntity.hasActiveData());
     }
+    
+    @Override public void reset() {
+        _tileNumeralEntity.reset();
+        _tileState = null;
+        setTileState(null);
+    }
 }

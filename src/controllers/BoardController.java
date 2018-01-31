@@ -234,12 +234,6 @@ public class BoardController extends BaseController {
         return allNeighbors;
     }
 
-    /**
-     * Clears all the tiles of their entities
-     */
-    public void clearEntities() {
-        //_tileModels.keySet().stream().filter(z -> z.getEntity() != null).parallel().forEach(z -> z.setEntity(null));
-    }
 
     /**
      * Sets a debug mine onto the specified listeners model
@@ -318,11 +312,36 @@ public class BoardController extends BaseController {
         }
     }
     
+    /**
+     * Sets the game settings state
+     * 
+     * @param gameSettings The game settings to set
+     */
     public void setGameSettings(GameSettings gameSettings) {
         GAME_SETTINGS = gameSettings;
     }
 
+    /**
+     * Gets the dimensions of the game settings
+     * 
+     * @return The dimensions associated to the game settings
+     */
     public Dimension getDimensions() {
         return GAME_SETTINGS.getDimensions();
+    }
+    
+    public void startGame() {
+    
+    }
+    
+    /**
+     * Clears all the tiles of their entities
+     */
+    public void clearEntities() {
+        for(TileModel model : _tileModels.keySet()) {
+            model.getTileStateEntity().reset();
+            //model.getButtonStateEntity().reset();
+            model.doneUpdating();
+        }
     }
 }
