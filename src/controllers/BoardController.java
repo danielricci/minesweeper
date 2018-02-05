@@ -27,10 +27,12 @@ package controllers;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -55,7 +57,7 @@ public class BoardController extends BaseController {
     /**
      * The default game settings
      */
-    private static GameSettings GAME_SETTINGS = GameSettings.INTERMEDITE;
+    private static GameSettings GAME_SETTINGS = GameSettings.EXPERT;
     
     /**
      * The list of neighbors logically associated to a specified controller
@@ -242,8 +244,15 @@ public class BoardController extends BaseController {
      */
     public void setDebugMine(ISignalListener listener) {
 
-        // Get the tile model of the listener specified
-        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        TileModel tileModel = null;
+        
+        if(listener instanceof TileModel) {
+            tileModel = (TileModel) listener;
+        }
+        else {
+            tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();    
+        }
+        
         if(tileModel.getTileStateEntity().hasMine()) {
             tileModel.getTileStateEntity().setTileState(null);
         }
@@ -330,18 +339,42 @@ public class BoardController extends BaseController {
         return GAME_SETTINGS.getDimensions();
     }
     
-    public void startGame() {
-    
+    /**
+     * Generates the board of random entities
+     */
+    public void generateBoardEntries() {
+        
+        // Clear the entities currently on the board, but do not refresh the view, wait until
+        // this operation is completed
+        _tileModels.keySet().stream().forEach(z -> z.setSuppressUpdates(true));
+        clearEntities();
+        
+        // Get the current list of tiles and randomize them in a new list
+        List<TileModel> tiles = new ArrayList(_tileModels.keySet());
+        Collections.shuffle(tiles, new Random(System.nanoTime()));
+        
+        // Go through the newly randomize local list and assign mine
+        for(int i = 0, size = GAME_SETTINGS.MINES - 1; i < size; ++i) {
+            setDebugMine(tiles.get(i));
+        }
+        
+        // Re-apply the update functionality and perform the update
+        _tileModels.keySet().stream().forEach(z -> z.setSuppressUpdates(false));
+        _tileModels.keySet().parallelStream().forEach(z -> z.doneUpdating());
     }
     
     /**
      * Clears all the tiles of their entities
      */
     public void clearEntities() {
+        
+        // Go through all the tile models and reset their data elements
         for(TileModel model : _tileModels.keySet()) {
-            model.getTileStateEntity().reset();
-            //model.getButtonStateEntity().reset();
-            model.doneUpdating();
+            model.getTileStateEntity().reset();    
+            model.getButtonStateEntity().reset();
         }
+        
+        // Update all of the tile models
+        _tileModels.keySet().parallelStream().forEach(z -> z.doneUpdating());
     }
 }

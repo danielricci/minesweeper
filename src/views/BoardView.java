@@ -48,7 +48,6 @@ public class BoardView extends PanelView {
      * Constructs a new instance of this class type
      */
     public BoardView() {
-
         // Set the controller associated to this view
         getViewProperties().setEntity(
             AbstractSignalFactory.getFactory(ControllerFactory.class).add(new BoardController(), true)
@@ -68,8 +67,8 @@ public class BoardView extends PanelView {
 
         // Create the board based on the specified dimensions
         BoardController controller = getViewProperties().getEntity(BoardController.class);
-        for(int row = 0, dimensionsX = controller.getDimensions().width; row < dimensionsX; ++row) {
-            for(int col =  0, dimensionsY = controller.getDimensions().height; col < dimensionsY; ++col) {
+        for(int row = 0, dimensionsX = controller.getDimensions().height; row < dimensionsX; ++row) {
+            for(int col =  0, dimensionsY = controller.getDimensions().width; col < dimensionsY; ++col) {
                 // Create a tile and add it to our board
                 TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new TileView(), false);
                 view.setPreferredSize(new Dimension(16, 16));

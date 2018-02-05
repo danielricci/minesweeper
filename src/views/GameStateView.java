@@ -26,6 +26,8 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,7 +66,12 @@ public class GameStateView extends PanelView {
         add(_gameStateButton, BorderLayout.CENTER);
     }
 
-    @Override public void initializeComponentBindings() {        
+    @Override public void initializeComponentBindings() {
+        _gameStateButton.addMouseListener(new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent mouseEvent) {
+                getViewProperties().getEntity(GameStateController.class).generateBoardEntries();
+            }
+        });
     }
        
     @Override public void update(AbstractEventArgs event) {

@@ -37,7 +37,6 @@ public final class MineNumeralEntity extends AbstractGameEntity {
     /**
      * The constant field associated to the mine numeral
      */
-    // TODO - change "BOMB_" to MINE_
     private static final String BOMB = "BOMB_";
     
     /**
@@ -52,5 +51,9 @@ public final class MineNumeralEntity extends AbstractGameEntity {
         else {
             setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
         }
+    }
+    
+    @Override public void reset() {
+        setNumeral(0);
     }
 }

@@ -101,7 +101,6 @@ public final class TileStateEntity extends AbstractGameEntity {
     
     @Override public void reset() {
         _tileNumeralEntity.reset();
-        _tileState = null;
         setTileState(null);
     }
 }

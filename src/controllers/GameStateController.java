@@ -27,6 +27,7 @@ package controllers;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
+import game.core.factories.ControllerFactory;
 import game.core.factories.ModelFactory;
 import models.GameStateModel;
 
@@ -49,5 +50,12 @@ public final class GameStateController extends BaseController {
      */
     public void addListener(ISignalListener listener) {
         _gameStateModel.addListener(listener);
+    }
+
+    /**
+     * Generates new entries onto the board
+     */
+    public void generateBoardEntries() {
+        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoardEntries();
     }
 }

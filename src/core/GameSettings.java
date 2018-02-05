@@ -11,7 +11,7 @@ import java.awt.Dimension;
 public enum GameSettings { 
     BEGINNER(8, 8, 10),
     INTERMEDITE(16, 16, 40),
-    EXPERT(30, 16, 99);
+    EXPERT(16, 30, 99);
     
     public final int ROWS;
     public final int COLUMNS;
