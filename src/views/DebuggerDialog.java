@@ -58,7 +58,7 @@ public class DebuggerDialog extends DialogView {
     private final JCheckBoxMenuItem _minesCheckBox = new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.Mines));
 
     /**
-     * This checkbox when selected will allow you to place mines on the board
+     * This checkbox when selected will hide all the buttons from the board
      */
     private final JCheckBoxMenuItem _buttonsHideCheckBox = new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.HideButtons));
     

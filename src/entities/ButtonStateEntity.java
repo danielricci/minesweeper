@@ -85,7 +85,7 @@ public final class ButtonStateEntity extends AbstractGameEntity {
      * 
      * @param isEnabled The enabled state to set this entity to
      */
-    public void setIsEnabled(boolean isEnabled) {
+    public void setIsButtonEnabled(boolean isEnabled) {
         _isEnabled = isEnabled;
     }
     
@@ -108,7 +108,7 @@ public final class ButtonStateEntity extends AbstractGameEntity {
     }
     
     @Override public void reset() {
-        setIsEnabled(true);
+        setIsButtonEnabled(true);
         _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
         setActiveData(_currentButtonState);
     }

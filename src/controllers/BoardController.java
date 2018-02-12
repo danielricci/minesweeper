@@ -102,6 +102,9 @@ public class BoardController extends BaseController {
                 i + 1 >= 0 ? Arrays.copyOfRange(tiles, (i + 1) * columns, ((i + 1) * columns) + columns) : null
             );
         }
+        
+        // Generate the board entries
+        generateBoardEntries();
     }
 
     /**
@@ -238,11 +241,11 @@ public class BoardController extends BaseController {
 
 
     /**
-     * Sets a debug mine onto the specified listeners model
+     * Sets a mine onto the specified listeners model
      * 
      * @param listener The listener to set the mine
      */
-    public void setDebugMine(ISignalListener listener) {
+    public void setMine(ISignalListener listener) {
 
         TileModel tileModel = null;
         
@@ -288,17 +291,44 @@ public class BoardController extends BaseController {
      * @param listener The listener from where the event took place
      */
     public void buttonSelectedEvent(ISignalListener listener) {
+
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        
+        // Check to see if there are any buttons that have already been revealed, if not then this is considered
+        // to be the first move.  The first move is always a valid move, so make sure that if there is a mine, that
+        // it is placed at a different location
+        if(_tileModels.keySet().stream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
+            
+            // If there is a mine on the selected tile then have it removed
+            if(tileModel.getTileStateEntity().hasMine()) {
+                // Toggle off the mine
+                setMine(listener);
+                
+                // Pick a new tile to have set as the mine
+                TileModel newTile = _tileModels.keySet().stream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
+                setMine(newTile);
+            }
+        }
         
         // If the tile has a valid button state and it is empty (no flag, etc) then remove the button state
         // and update the tile with the surrounding neighbor tiles
         if(tileModel.getButtonStateEntity().isEnabled() && tileModel.getButtonStateEntity().isEmpty()) {
-            tileModel.getButtonStateEntity().setIsEnabled(false);
+
+            // Remove the button
+            tileModel.getButtonStateEntity().setIsButtonEnabled(false);
+            
+            // Indicate that the model update has been finished
             tileModel.doneUpdating();
 
-            // Update the surrounding neighbors to reflect the mine change  
-            getAllNeighbors(tileModel).stream().forEach(z -> generateTileNumeral(z));
+            // If the model selected is considered empty then get the floodfill
+            // of adjacent cells and have them discovered
+            if(tileModel.getTileStateEntity().isEmpty()) {
+                for(TileModel adjacentTile : getAdjacentTilesFloodFill(tileModel)) {
+                    adjacentTile.getButtonStateEntity().setIsButtonEnabled(false);
+                    adjacentTile.doneUpdating();
+                }
+            }
         }
     }
     
@@ -354,8 +384,8 @@ public class BoardController extends BaseController {
         Collections.shuffle(tiles, new Random(System.nanoTime()));
         
         // Go through the newly randomize local list and assign mine
-        for(int i = 0, size = GAME_SETTINGS.MINES - 1; i < size; ++i) {
-            setDebugMine(tiles.get(i));
+        for(int i = 0, size = GAME_SETTINGS.MINES; i < size; ++i) {
+            setMine(tiles.get(i));
         }
         
         // Re-apply the update functionality and perform the update

@@ -61,7 +61,7 @@ public class DebuggerBoardView extends BoardView {
                         if(debuggerController != null) {
                             if(debuggerController.getIsMinesEnabled()) {
                                 BoardController controller = DebuggerBoardView.this.getViewProperties().getEntity(BoardController.class);
-                                controller.setDebugMine((ISignalListener) event.getSource());
+                                controller.setMine((ISignalListener) event.getSource());
                             }
                         }
                     }

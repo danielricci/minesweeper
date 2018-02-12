@@ -113,6 +113,9 @@ public class TileView extends PanelView {
 
         // Set the rest of the layout data for this page
         setLayout(new BorderLayout());
+        
+        setBorder(DEFAULT_BORDER);
+        setBackground(DEFAULT_BACKGROUND_COLOR);
     }
 
     @Override public void initializeComponents() {
@@ -144,7 +147,7 @@ public class TileView extends PanelView {
                 }
             }
         });
-        
+     
         // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
@@ -191,7 +194,7 @@ public class TileView extends PanelView {
         addSignalListener(EVENT_SHOW_TILE_BUTTONS, new ISignalReceiver<BooleanEventArgs>() {
             @Override public void signalReceived(BooleanEventArgs event) {
                 
-                boolean visible = !event.getResult(); 
+                boolean visible = !event.getResult();
                 _tileButton.setVisible(visible);
 
                 setBorder(DEFAULT_BORDER);
