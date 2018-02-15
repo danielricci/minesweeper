@@ -39,10 +39,18 @@ public final class BombsCounterModel extends BaseModel {
     public final static int MAX_VALUE = 999; 
     
     /**
+     * The initial value associated to the bombs counter
+     */
+    private int _initialTimerValue;
+    
+    /**
      * The game timer current value associated to this model
      */
     private int _timerValue;
     
+    /**
+     * The entity list representation of the numerical timer
+     */
     public List<GameTimerEntity> _timerEntities = new ArrayList();
     
     /**
@@ -55,6 +63,16 @@ public final class BombsCounterModel extends BaseModel {
         }            
     }
 
+    /**
+     * Sets the initial timer value for this model
+     * 
+     * @param initialTimerValue The initial timer value
+     */
+    public void setInitialTimer(int initialTimerValue) {
+        _initialTimerValue = initialTimerValue;
+        setTimer(initialTimerValue);
+    }
+    
     /**
      * Sets the timer to the specified value
      * 
@@ -76,6 +94,10 @@ public final class BombsCounterModel extends BaseModel {
         _timerValue = timerValue;
             
         doneUpdating();
+    }
+    
+    public void resetTimer() {
+        setTimer(_initialTimerValue);
     }
     
     public int getTimerValue() {

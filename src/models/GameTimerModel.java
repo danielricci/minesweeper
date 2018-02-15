@@ -81,8 +81,7 @@ public final class GameTimerModel extends BaseModel {
      * Resets the timer
      */
     public void resetTimer() {
-        _timerValue = 0;
-        doneUpdating();
+        setTimer(0);
     }
 
     public IRenderable getEntity() {

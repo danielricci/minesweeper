@@ -56,6 +56,14 @@ public final class GameStateController extends BaseController {
      * Generates new entries onto the board
      */
     public void generateBoardEntries() {
+        
+        // Reset the flags counter 
+        AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).resetCounter();
+        
+        // Reset the game timer
+        AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).resetGameTimer();
+        
+        // Generate the board entities
         AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoardEntries();
     }
 }

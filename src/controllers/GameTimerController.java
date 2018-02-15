@@ -52,13 +52,7 @@ public final class GameTimerController extends BaseController {
     /**
      * The timer associated to updating values it the timer model
      */
-    private final Timer _timer = new Timer(true);
-    
-    /**
-     * The task that will be scheduled by the timer to perform 
-     * on the timer model
-     */
-    private final TimerTask _timerTask;
+    private Timer _timer;
     
     /**
      * Constructs a new instance of this class type
@@ -67,24 +61,6 @@ public final class GameTimerController extends BaseController {
         
         // Create the model that will represent the timer data
         _gameTimerModel = AbstractFactory.getFactory(ModelFactory.class).add(new GameTimerModel(),  false);
-        
-        // Create a timer task for running the timer. This task will
-        // increment the value in the model by one every second
-        _timerTask = new TimerTask() {
-            @Override public void run() {
-                // Calculate the next second value and if it
-                // is within the allocated threshold then apply
-                // the change
-                int tempValue = _gameTimerModel.getTimerValue() + 1;
-                if(tempValue <= GameTimerModel.MAX_VALUE) {
-                    _gameTimerModel.setTimer(tempValue);       
-                }
-                else {
-                    Tracelog.log(Level.WARNING, true, "Maximum time exceeded, stopping timer");
-                    cancel();
-                }
-            }
-        };
     }
     
     
@@ -109,15 +85,35 @@ public final class GameTimerController extends BaseController {
      * Starts the game timer
      */
     public void startGameTimer() {
-        // Start the timer
-        _timer.schedule(_timerTask,  0, 1000);
+        
+        // Create a timer task for running the timer. This task will
+        // increment the value in the model by one every second
+        TimerTask timerTask = new TimerTask() {
+            @Override public void run() {
+                // Calculate the next second value and if it
+                // is within the allocated threshold then apply
+                // the change
+                int tempValue = _gameTimerModel.getTimerValue() + 1;
+                if(tempValue <= GameTimerModel.MAX_VALUE) {
+                    _gameTimerModel.setTimer(tempValue);       
+                }
+                else {
+                    Tracelog.log(Level.WARNING, true, "Maximum time exceeded, stopping timer");
+                    cancel();
+                }
+            }
+        };
+        
+        _timer = new Timer(true);
+        _timer.schedule(timerTask,  0, 1000);
     }
     
     /**
      * Stops the game timer
      */
     public void stopGameTimer() {
-        // Cancel the game timer
-        _timer.cancel();
+        if(_timer != null) {
+            _timer.cancel();
+        }
     }    
 }
