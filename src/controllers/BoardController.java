@@ -57,7 +57,7 @@ public class BoardController extends BaseController {
     /**
      * The default game settings
      */
-    private static GameSettings GAME_SETTINGS = GameSettings.EXPERT;
+    private static GameSettings GAME_SETTINGS = GameSettings.BEGINNER;
     
     /**
      * The list of neighbors logically associated to a specified controller

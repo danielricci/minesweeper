@@ -62,6 +62,9 @@ public class GameStateView extends PanelView {
         // Do not paint the borders of the button, it should simply be an image of sorts
         _gameStateButton.setBorderPainted(false);
         
+        // Hide everything about the button, except for the icon that will be draw later
+        _gameStateButton.setContentAreaFilled(false);
+        
         // Add the tile to the middle of the panel
         add(_gameStateButton, BorderLayout.CENTER);
     }
