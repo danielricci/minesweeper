@@ -115,5 +115,11 @@ public final class GameTimerController extends BaseController {
         if(_timer != null) {
             _timer.cancel();
         }
-    }    
+    }
+    
+    @Override public boolean clear() {
+        boolean result = super.clear();
+        stopGameTimer();
+        return result;
+    }
 }
