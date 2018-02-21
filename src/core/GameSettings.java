@@ -11,11 +11,12 @@ import java.awt.Dimension;
 public enum GameSettings { 
     BEGINNER(8, 8, 10),
     INTERMEDITE(16, 16, 40),
-    EXPERT(16, 30, 99);
+    EXPERT(16, 30, 99),
+    CUSTOM(0, 0, 0);
     
-    public final int ROWS;
-    public final int COLUMNS;
-    public final int MINES;
+    public int ROWS;
+    public int COLUMNS;
+    public int MINES;
     
     GameSettings(int rows, int columns, int mines) {
         ROWS = rows;
@@ -25,5 +26,14 @@ public enum GameSettings {
     
     public Dimension getDimensions() {
         return new Dimension(COLUMNS, ROWS);
+    }
+    
+    public static GameSettings getCustomGameSetting(int rows, int columns, int mines) {
+        GameSettings settings = GameSettings.CUSTOM;
+        settings.ROWS = rows;
+        settings.COLUMNS = columns;
+        settings.MINES = mines;
+        
+        return settings;
     }
 }
