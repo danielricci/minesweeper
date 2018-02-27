@@ -32,12 +32,18 @@ import generated.DataLookup.GAME_STATE;
 public final class GameStateModel extends BaseModel {
 
     private GameStateEntity _gameStateEntity = new GameStateEntity();
+ 
+    /**
+     * Sets the game state
+     *  
+     * @param gameState The game state
+     */
+    public void setGameState(GAME_STATE gameState) {
+        _gameStateEntity.setGameState(gameState);
+        doneUpdating();
+    }
 
     public IRenderable getEntity() {
-        return _gameStateEntity;
-    }
-    
-    public GameStateEntity getGameState() {
         return _gameStateEntity;
     }
 }

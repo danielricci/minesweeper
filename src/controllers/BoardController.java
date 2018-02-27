@@ -296,22 +296,26 @@ public class BoardController extends BaseController {
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         
-        // Check to see if there are any buttons that have already been revealed, if not then this is considered
-        // to be the first move.  The first move is always a valid move, so make sure that if there is a mine, that
-        // it is placed at a different location
-        if(_tileModels.keySet().stream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
-            if(tileModel.getButtonStateEntity().isEmpty()) {
-                // Set the timer of the game
-                AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).startGameTimer();
-                
-                // If there is a mine on the selected tile then have it removed
-                if(tileModel.getTileStateEntity().hasMine()) {
-                    // Toggle off the mine
-                    setMine(listener);
+        // If the move is actually being perform, then and only then should we start the actual game timer and make
+        // sure that the tile does not have a mine for the first move.
+        if(performingMove) {
+            // Check to see if there are any buttons that have already been revealed, if not then this is considered
+            // to be the first move.  The first move is always a valid move, so make sure that if there is a mine, that
+            // it is placed at a different location
+            if(_tileModels.keySet().stream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
+                if(tileModel.getButtonStateEntity().isEmpty()) {
+                    // Set the timer of the game
+                    AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).startGameTimer();
                     
-                    // Pick a new tile to have set as the mine
-                    TileModel newTile = _tileModels.keySet().stream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
-                    setMine(newTile);
+                    // If there is a mine on the selected tile then have it removed
+                    if(tileModel.getTileStateEntity().hasMine()) {
+                        // Toggle off the mine
+                        setMine(listener);
+                        
+                        // Pick a new tile to have set as the mine
+                        TileModel newTile = _tileModels.keySet().stream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
+                        setMine(newTile);
+                    }
                 }
             }
         }

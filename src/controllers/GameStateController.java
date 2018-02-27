@@ -54,19 +54,19 @@ public final class GameStateController extends BaseController {
     }
     
     public void setGameWon() {
-        _gameStateModel.getGameState().setGameState(GAME_STATE.GAME_WON);
+        _gameStateModel.setGameState(GAME_STATE.GAME_WON);
     }
     
     public void setGameLost() {
-        _gameStateModel.getGameState().setGameState(GAME_STATE.GAME_LOST);
+        _gameStateModel.setGameState(GAME_STATE.GAME_LOST);
     }
     
     public void setGameRunning() {
-        _gameStateModel.getGameState().setGameState(GAME_STATE.GAME_RUNNING);
+        _gameStateModel.setGameState(GAME_STATE.GAME_RUNNING);
     }
     
     public void setMakingMove() {
-        _gameStateModel.getGameState().setGameState(GAME_STATE.GAME_MOVING);
+        _gameStateModel.setGameState(GAME_STATE.GAME_MOVING);
     }
 
     /**

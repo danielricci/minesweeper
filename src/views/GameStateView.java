@@ -83,7 +83,9 @@ public class GameStateView extends PanelView {
         if(event.getSource() instanceof GameStateModel) {
             // Get the model associated to the event received
             GameStateModel gameStateModel = (GameStateModel) event.getSource();
-            _gameStateButton.setIcon(new ImageIcon(gameStateModel.getEntity().getRenderableContent()));    
+            _gameStateButton.setIcon(new ImageIcon(gameStateModel.getEntity().getRenderableContent()));
+            
+            repaint();
         }
     }
 }
