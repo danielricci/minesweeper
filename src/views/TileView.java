@@ -150,23 +150,24 @@ public class TileView extends PanelView {
      
         // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
+            @Override public void mousePressed(MouseEvent mouseEvent) {
+                if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+                    getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this, false);
+                }
+            }
             @Override public void mouseReleased(MouseEvent mouseEvent) {
-
-                // Only perform operations on the button itself if the button is actually visible
-                if(_tileButton.isVisible()) {
-                    if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+                if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+                
+                    // Set the border and the background color for this tile
+                    setBorder(DEFAULT_BORDER);
+                    setBackground(DEFAULT_BACKGROUND_COLOR);
                     
-                        // Set the border and the background color for this tile
-                        setBorder(DEFAULT_BORDER);
-                        setBackground(DEFAULT_BACKGROUND_COLOR);
-                        
-                        // Call the controller to notify that the button has been hidden
-                        getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
-                    }
-                    else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
-                        // Call the controller to notify that the button has been hidden
-                        getViewProperties().getEntity(BoardController.class).buttonStateChangeEvent(TileView.this);
-                    }
+                    // Call the controller to notify that the button has been hidden
+                    getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this, true);
+                }
+                else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    // Call the controller to notify that the button has been hidden
+                    getViewProperties().getEntity(BoardController.class).buttonStateChangeEvent(TileView.this);
                 }
             }
         });
@@ -201,9 +202,13 @@ public class TileView extends PanelView {
                 setBackground(DEFAULT_BACKGROUND_COLOR);
                 
                 // Call the controller to notify that the button has been hidden
-                getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this);
+                getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this, false);
             }
         });        
+    }
+    
+    @Override protected RenderMethod getRenderMethod() {
+        return RenderMethod.PARENT;
     }
     
     @Override public void update(AbstractEventArgs event) {

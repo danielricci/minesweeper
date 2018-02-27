@@ -57,7 +57,7 @@ public class BoardController extends BaseController {
     /**
      * The default game settings
      */
-    private static GameSettings GAME_SETTINGS = GameSettings.BEGINNER;
+    private static GameSettings GAME_SETTINGS = GameSettings.INTERMEDITE;
     
     /**
      * The list of neighbors logically associated to a specified controller
@@ -289,8 +289,9 @@ public class BoardController extends BaseController {
      * Handles the event when a button on the specified listener has been selected
      * 
      * @param listener The listener from where the event took place
+     * @param performingMove TRUE if the move is being performed, false otherwise
      */
-    public void buttonSelectedEvent(ISignalListener listener) {
+    public void buttonSelectedEvent(ISignalListener listener, boolean performingMove) {
 
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
@@ -319,19 +320,31 @@ public class BoardController extends BaseController {
         // and update the tile with the surrounding neighbor tiles
         if(tileModel.getButtonStateEntity().isEnabled() && tileModel.getButtonStateEntity().isEmpty()) {
 
-            // Remove the button
-            tileModel.getButtonStateEntity().setIsButtonEnabled(false);
+            GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
             
-            // Indicate that the model update has been finished
-            tileModel.doneUpdating();
+            if(performingMove) {
+                
+                // Set the game state as running
+                gameStateController.setGameRunning();
+                
+                // Remove the button
+                tileModel.getButtonStateEntity().setIsButtonEnabled(false);
+                
+                // Indicate that the model update has been finished
+                tileModel.doneUpdating();
 
-            // If the model selected is considered empty then get the floodfill
-            // of adjacent cells and have them discovered
-            if(tileModel.getTileStateEntity().isEmpty()) {
-                for(TileModel adjacentTile : getAdjacentTilesFloodFill(tileModel)) {
-                    adjacentTile.getButtonStateEntity().setIsButtonEnabled(false);
-                    adjacentTile.doneUpdating();
-                }
+                // If the model selected is considered empty then get the floodfill
+                // of adjacent cells and have them discovered
+                if(tileModel.getTileStateEntity().isEmpty()) {
+                    for(TileModel adjacentTile : getAdjacentTilesFloodFill(tileModel)) {
+                        adjacentTile.getButtonStateEntity().setIsButtonEnabled(false);
+                        adjacentTile.doneUpdating();
+                    }
+                }                
+            }
+            else {
+                // Set the game state as running
+                gameStateController.setMakingMove();                
             }
         }
     }

@@ -31,9 +31,22 @@ public class GameStateEntity extends AbstractGameEntity {
     /**
      * The current game state of the game
      */
-    public GAME_STATE _currentGameState = GAME_STATE.GAME_RUNNING;
+    private GAME_STATE _currentGameState = GAME_STATE.GAME_RUNNING;
     
+    /**
+     * Constructs a new instance of this class type
+     */
     public GameStateEntity() {
         setActiveData(_currentGameState);
+    }
+    
+    /**
+     * Sets the game state
+     *  
+     * @param gameState The game state
+     */
+    public void setGameState(GAME_STATE gameState) {
+        _currentGameState = gameState;
+        setActiveData(gameState);
     }
 }

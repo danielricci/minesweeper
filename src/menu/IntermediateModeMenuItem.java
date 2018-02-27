@@ -53,7 +53,7 @@ public class IntermediateModeMenuItem extends AbstractMenuItem {
      * @param parent The parent associated to this menu item
      */
     public IntermediateModeMenuItem(JComponent parent) {
-        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.IntermediateMode)), parent);
+        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.IntermediateMode), true), parent);
     }
 
     @Override protected String getGroupName() {

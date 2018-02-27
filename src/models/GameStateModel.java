@@ -27,12 +27,17 @@ package models;
 import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
 import entities.GameStateEntity;
+import generated.DataLookup.GAME_STATE;
 
 public final class GameStateModel extends BaseModel {
 
     private GameStateEntity _gameStateEntity = new GameStateEntity();
 
     public IRenderable getEntity() {
+        return _gameStateEntity;
+    }
+    
+    public GameStateEntity getGameState() {
         return _gameStateEntity;
     }
 }
