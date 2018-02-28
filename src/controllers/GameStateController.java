@@ -68,11 +68,18 @@ public final class GameStateController extends BaseController {
     public void setMakingMove() {
         _gameStateModel.setGameState(GAME_STATE.GAME_MOVING);
     }
+    
+    public boolean isGameOver() {
+        return _gameStateModel.isGameOver();
+    }
 
     /**
      * Generates new entries onto the board
      */
     public void generateBoardEntries() {
+        
+        // Set the game state as running
+        setGameRunning();
         
         // Reset the flags counter 
         AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).resetCounter();

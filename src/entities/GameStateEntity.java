@@ -40,6 +40,10 @@ public class GameStateEntity extends AbstractGameEntity {
         setActiveData(_currentGameState);
     }
     
+    public GAME_STATE getGameState() {
+        return _currentGameState;
+    }
+    
     /**
      * Sets the game state
      *  

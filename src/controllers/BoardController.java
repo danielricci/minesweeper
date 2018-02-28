@@ -293,6 +293,13 @@ public class BoardController extends BaseController {
      */
     public void buttonSelectedEvent(ISignalListener listener, boolean performingMove) {
 
+        // If the game is over then do not proceed any further
+        GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
+        if(gameStateController.isGameOver()) {
+            return;
+        }
+
+        
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         
@@ -323,13 +330,8 @@ public class BoardController extends BaseController {
         // If the tile has a valid button state and it is empty (no flag, etc) then remove the button state
         // and update the tile with the surrounding neighbor tiles
         if(tileModel.getButtonStateEntity().isEnabled() && tileModel.getButtonStateEntity().isEmpty()) {
-
-            GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
             
             if(performingMove) {
-                
-                // Set the game state as running
-                gameStateController.setGameRunning();
                 
                 // Remove the button
                 tileModel.getButtonStateEntity().setIsButtonEnabled(false);
@@ -337,17 +339,60 @@ public class BoardController extends BaseController {
                 // Indicate that the model update has been finished
                 tileModel.doneUpdating();
 
-                // If the model selected is considered empty then get the floodfill
+                // Set the game state as running
+                gameStateController.setGameRunning();
+                
+                // If the tile selected is considered empty then get the floodfill
                 // of adjacent cells and have them discovered
                 if(tileModel.getTileStateEntity().isEmpty()) {
+                         
+                    // Go through the list of adjacent tiles in a flood-fill fashion and 
+                    // provided that the tiles are empty, uncover the tile
                     for(TileModel adjacentTile : getAdjacentTilesFloodFill(tileModel)) {
-                        adjacentTile.getButtonStateEntity().setIsButtonEnabled(false);
-                        adjacentTile.doneUpdating();
+                        if(adjacentTile.getButtonStateEntity().isEmpty()) {
+                            adjacentTile.getButtonStateEntity().setIsButtonEnabled(false);
+                            adjacentTile.doneUpdating();
+                        }
                     }
-                }                
+                }
+                // If the tile selected has a mine, then display it 
+                else if(tileModel.getTileStateEntity().hasMine()) {
+                    
+                    // Set the tile selected as the mine clicked
+                    tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_CLICKED);
+                    
+                    // Get all the mines that are on the board and reveal them
+                    List<TileModel> tilesWithMine = _tileModels.keySet().stream().filter(z -> z.getTileStateEntity().hasMine() && !z.equals(tileModel)).collect(Collectors.toList());
+                    for(TileModel tileWithMine : tilesWithMine) {
+                        
+                        // If the tile is set as flagged then leave it as flagged. We do not reveal bombs that
+                        // have already been flagged
+                        if(tileWithMine.getButtonStateEntity().isFlagged()) {
+                            continue;
+                            //tileWithMine.getTileStateEntity().setTileState(TILE_STATE.BOMB_MISFLAGGED);
+                        }
+                        
+                        tileWithMine.getButtonStateEntity().setIsButtonEnabled(false);
+                        tileWithMine.doneUpdating();
+                    }
+                    
+                    // Get all the tiles that have flags that do not have mines, they should be marked as 'misflagged'
+                    List<TileModel> misflaggedTiles = _tileModels.keySet().stream().filter(z -> !z.getTileStateEntity().hasMine() && z.getButtonStateEntity().isFlagged()).collect(Collectors.toList());
+                    for(TileModel misFlaggedTile : misflaggedTiles) {
+                        misFlaggedTile.getButtonStateEntity().setIsButtonEnabled(false);
+                        misFlaggedTile.getTileStateEntity().setTileState(TILE_STATE.BOMB_MISFLAGGED);
+                        misFlaggedTile.doneUpdating();
+                    }
+                    
+                    // Set the game state as running
+                    gameStateController.setGameLost();
+                    
+                    
+                    AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
+                }
             }
             else {
-                // Set the game state as running
+                // Set the game state as running, this will show the :O face
                 gameStateController.setMakingMove();                
             }
         }
@@ -359,6 +404,14 @@ public class BoardController extends BaseController {
      * @param listener The listener from where the event took place
      */
     public void buttonStateChangeEvent(ISignalListener listener) {
+        
+        GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
+        if(gameStateController.isGameOver()) {
+            return;
+        }
+        
+        AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).startGameTimer();
+        
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
         tileModel.getButtonStateEntity().changeState();

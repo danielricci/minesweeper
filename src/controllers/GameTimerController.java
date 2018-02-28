@@ -50,6 +50,11 @@ public final class GameTimerController extends BaseController {
     private final GameTimerModel _gameTimerModel;
  
     /**
+     * Flag indicating if the timer is running
+     */
+    private boolean _isTimerRunning = false;
+    
+    /**
      * The timer associated to updating values it the timer model
      */
     private Timer _timer;
@@ -86,6 +91,11 @@ public final class GameTimerController extends BaseController {
      */
     public void startGameTimer() {
         
+        // Ensure that the timer is not already running before proceeding
+        if(_isTimerRunning) {
+            return;
+        }
+        
         // Create a timer task for running the timer. This task will
         // increment the value in the model by one every second
         TimerTask timerTask = new TimerTask() {
@@ -104,8 +114,10 @@ public final class GameTimerController extends BaseController {
             }
         };
         
+        _isTimerRunning = true;
+        
         _timer = new Timer(true);
-        _timer.schedule(timerTask,  0, 1000);
+        _timer.schedule(timerTask, 0, 1000);
     }
     
     /**
@@ -113,13 +125,8 @@ public final class GameTimerController extends BaseController {
      */
     public void stopGameTimer() {
         if(_timer != null) {
+            _isTimerRunning = false;
             _timer.cancel();
         }
-    }
-    
-    @Override public boolean clear() {
-        boolean result = super.clear();
-        stopGameTimer();
-        return result;
     }
 }
