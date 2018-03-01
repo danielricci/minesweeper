@@ -298,7 +298,6 @@ public class BoardController extends BaseController {
         if(gameStateController.isGameOver()) {
             return;
         }
-
         
         // Get the tile model of the listener specified
         TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
@@ -389,6 +388,13 @@ public class BoardController extends BaseController {
                     
                     
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
+                }
+                else {
+                    // Check against a win condition. The number of mines on the board should be equal to the number of tiles left to uncover
+                    if(_tileModels.keySet().stream().filter(z -> z.getButtonStateEntity().isEnabled()).count() == GAME_SETTINGS.MINES) {
+                        gameStateController.setGameWon();
+                        AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();                        
+                    }
                 }
             }
             else {

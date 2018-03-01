@@ -44,7 +44,7 @@ public final class GameStateModel extends BaseModel {
     }
     
     public boolean isGameOver() {
-        return _gameStateEntity.getGameState() == GAME_STATE.GAME_LOST; 
+        return _gameStateEntity.getGameState() == GAME_STATE.GAME_LOST || _gameStateEntity.getGameState() == GAME_STATE.GAME_WON; 
     }
 
     public IRenderable getEntity() {

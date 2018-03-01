@@ -172,6 +172,6 @@ public class CustomGameDialogView extends DialogView {
     }
     
     public int getMinesCount() {
-        return Math.max(GameSettings.BEGINNER.MINES, Integer.parseInt(_minesTextField.getText()));
+        return Math.max(1, Integer.parseInt(_minesTextField.getText()));
     }
 }
