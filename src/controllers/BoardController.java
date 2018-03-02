@@ -43,6 +43,7 @@ import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
 import engine.utils.logging.Tracelog;
 import game.core.factories.ControllerFactory;
+import generated.DataLookup.BUTTON_STATE;
 import generated.DataLookup.TILE_STATE;
 import models.TileModel;
 
@@ -385,16 +386,17 @@ public class BoardController extends BaseController {
                     
                     // Set the game state as running
                     gameStateController.setGameLost();
-                    
-                    
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
                 }
-                else {
-                    // Check against a win condition. The number of mines on the board should be equal to the number of tiles left to uncover
-                    if(_tileModels.keySet().stream().filter(z -> z.getButtonStateEntity().isEnabled()).count() == GAME_SETTINGS.MINES) {
-                        gameStateController.setGameWon();
-                        AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();                        
+                else if(_tileModels.keySet().stream().filter(z -> z.getButtonStateEntity().isEnabled()).count() == GAME_SETTINGS.MINES) {
+                    AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
+                    
+                    List<TileModel> mineTiles = _tileModels.keySet().stream().filter(z -> z.getTileStateEntity().hasMine()).collect(Collectors.toList());
+                    for(TileModel mineTile : mineTiles) {
+                        mineTile.getButtonStateEntity().changeState(BUTTON_STATE.BUTTON_FLAG);
+                        mineTile.doneUpdating();
                     }
+                    gameStateController.setGameWon();
                 }
             }
             else {

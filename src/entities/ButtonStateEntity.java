@@ -107,6 +107,11 @@ public final class ButtonStateEntity extends AbstractGameEntity {
         setActiveData(_currentButtonState);
     }
     
+    public void changeState(BUTTON_STATE buttonState) {
+        _currentButtonState = buttonState;
+        setActiveData(_currentButtonState);
+    }
+    
     @Override public void reset() {
         setIsButtonEnabled(true);
         _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
