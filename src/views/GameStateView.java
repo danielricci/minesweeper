@@ -72,7 +72,7 @@ public class GameStateView extends PanelView {
     @Override public void initializeComponentBindings() {
         _gameStateButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
-                getViewProperties().getEntity(GameStateController.class).generateBoardEntries();
+                getViewProperties().getEntity(GameStateController.class).resetGame();
             }
         });
     }

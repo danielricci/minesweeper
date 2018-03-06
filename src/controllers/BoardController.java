@@ -355,8 +355,9 @@ public class BoardController extends BaseController {
                         }
                     }
                 }
+                
                 // If the tile selected has a mine, then display it 
-                else if(tileModel.getTileStateEntity().hasMine()) {
+                if(tileModel.getTileStateEntity().hasMine()) {
                     
                     // Set the tile selected as the mine clicked
                     tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_CLICKED);

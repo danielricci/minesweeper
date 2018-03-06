@@ -72,11 +72,11 @@ public final class GameStateController extends BaseController {
     public boolean isGameOver() {
         return _gameStateModel.isGameOver();
     }
-
+    
     /**
      * Generates new entries onto the board
      */
-    public void generateBoardEntries() {
+    public void resetGame() {
         
         // Set the game state as running
         setGameRunning();

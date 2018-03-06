@@ -58,12 +58,12 @@ public class NewGameMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-
+        
         // Flush the application before continuing
         if(!MainApplication.instance().clear()) {
             return;
         }
-
+        
         // Create the board view
         MainView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new MainView(), true);
 
