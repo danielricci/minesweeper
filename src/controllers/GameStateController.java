@@ -75,8 +75,10 @@ public final class GameStateController extends BaseController {
     
     /**
      * Generates new entries onto the board
+     * 
+     * @param generateTiles TRUE if the tiles should be generated, FALSE otherwise
      */
-    public void resetGame() {
+    public void resetGame(boolean generateTiles) {
         
         // Set the game state as running
         setGameRunning();
@@ -87,7 +89,9 @@ public final class GameStateController extends BaseController {
         // Reset the game timer
         AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).resetGameTimer();
         
-        // Generate the board entities
-        AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoardEntries();
+        if(generateTiles) {
+            // Generate the board entities
+            AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class).generateBoardEntries();
+        }
     }
 }

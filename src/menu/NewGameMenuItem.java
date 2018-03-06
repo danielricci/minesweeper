@@ -32,9 +32,12 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import application.MainApplication;
+import controllers.GameStateController;
+import engine.core.factories.AbstractFactory;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
+import game.core.factories.ControllerFactory;
 import game.core.factories.ViewFactory;
 import resources.LocalizedStrings;
 import views.MainView;
@@ -58,6 +61,12 @@ public class NewGameMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
+        
+        // Reset the game contents before continuing
+        GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
+        if(gameStateController != null) {
+            gameStateController.resetGame(false);
+        }
         
         // Flush the application before continuing
         if(!MainApplication.instance().clear()) {
