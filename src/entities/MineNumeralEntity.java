@@ -35,6 +35,11 @@ import generated.DataLookup.MINE_NUMBER;
 public final class MineNumeralEntity extends AbstractGameEntity {
     
     /**
+     * The numeral of this entity
+     */
+    private int _numeral;
+    
+    /**
      * The constant field associated to the mine numeral
      */
     private static final String BOMB = "BOMB_";
@@ -44,13 +49,18 @@ public final class MineNumeralEntity extends AbstractGameEntity {
      * 
      * @param numeral The numeral of the mine
      */
-    public void setNumeral(long numeral) {
+    public void setNumeral(int numeral) {
+        _numeral = numeral;
         if(numeral <= 0) {
             setActiveData(null);
         }
         else {
             setActiveData(MINE_NUMBER.valueOf(BOMB + numeral));    
         }
+    }
+    
+    public int getNumeral() {
+        return _numeral;
     }
     
     @Override public void reset() {

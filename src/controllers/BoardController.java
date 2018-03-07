@@ -276,7 +276,7 @@ public class BoardController extends BaseController {
      * @param tileModel The tile model to generate the numeral on
      */
     private void generateTileNumeral(TileModel tileModel) {
-        long count = getAllNeighbors(tileModel).stream().filter(z -> z.getTileStateEntity().hasMine()).count();
+        int count = (int)getAllNeighbors(tileModel).stream().filter(z -> z.getTileStateEntity().hasMine()).count();
         if(count > 0) {
             tileModel.getTileStateEntity().getMineNumeralEntity().setNumeral(count);
         }
@@ -301,7 +301,16 @@ public class BoardController extends BaseController {
         }
         
         // Get the tile model of the listener specified
-        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        TileModel tileModel = listener instanceof TileModel 
+                ? (TileModel)listener
+                : _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+                
+        performMove(tileModel, performingMove);
+    }
+    
+    private void performMove(TileModel tileModel, boolean performingMove) {
+        
+        GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
         
         // If the move is actually being perform, then and only then should we start the actual game timer and make
         // sure that the tile does not have a mine for the first move.
@@ -317,7 +326,7 @@ public class BoardController extends BaseController {
                     // If there is a mine on the selected tile then have it removed
                     if(tileModel.getTileStateEntity().hasMine()) {
                         // Toggle off the mine
-                        setMine(listener);
+                        setMine(tileModel);
                         
                         // Pick a new tile to have set as the mine
                         TileModel newTile = _tileModels.keySet().stream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
@@ -340,7 +349,9 @@ public class BoardController extends BaseController {
                 tileModel.doneUpdating();
 
                 // Set the game state as running
-                gameStateController.setGameRunning();
+                if(!gameStateController.isGameOver()) {
+                    gameStateController.setGameRunning();
+                }
                 
                 // If the tile selected is considered empty then get the floodfill
                 // of adjacent cells and have them discovered
@@ -385,7 +396,7 @@ public class BoardController extends BaseController {
                         misFlaggedTile.doneUpdating();
                     }
                     
-                    // Set the game state as running
+                    // Set the game state as lost and stop the timer
                     gameStateController.setGameLost();
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
                 }
@@ -399,6 +410,8 @@ public class BoardController extends BaseController {
                     }
                     gameStateController.setGameWon();
                 }
+                
+                
             }
             else {
                 // Set the game state as running, this will show the :O face
@@ -431,6 +444,27 @@ public class BoardController extends BaseController {
         }
         else {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).incrementCounter();
+        }
+    }
+    
+    public void performChord(ISignalListener listener) {
+        GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
+        if(gameStateController.isGameOver()) {
+            return;
+        }
+        
+        // Get the tile model of the listener specified
+        TileModel tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();
+        
+        // Proceed if the button has been uncovered
+        if(!tileModel.getButtonStateEntity().isEnabled()) {
+            
+            // Get the numeral, and if it is greater than 0 and it has matching flags then proceed
+            int numeral = tileModel.getTileStateEntity().getMineNumeralEntity().getNumeral();
+            List<TileModel> chordNeighbors = getAllNeighbors(tileModel);
+            if(numeral > 0 && chordNeighbors.stream().filter(z -> z.getButtonStateEntity().isFlagged()).count() == numeral) {
+                chordNeighbors.forEach(z -> performMove(z, true));
+            }
         }
     }
     

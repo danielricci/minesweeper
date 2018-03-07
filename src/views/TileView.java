@@ -147,6 +147,15 @@ public class TileView extends PanelView {
                 }
             }
         });
+        
+        addMouseListener(new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent mouseEvent) {
+                if(SwingUtilities.isMiddleMouseButton(mouseEvent)) {
+                    // Attempt to perform a chord on this tile 
+                    getViewProperties().getEntity(BoardController.class).performChord(TileView.this);
+                }
+            }
+        });
      
         // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
