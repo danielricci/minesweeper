@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComponent;
 
+import core.GameSettings;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
 import resources.LocalizedStrings;
@@ -51,5 +52,6 @@ public class MarksMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
+        GameSettings.MARKS_ENABLED = get(JCheckBoxMenuItem.class).isSelected();
     }
 }

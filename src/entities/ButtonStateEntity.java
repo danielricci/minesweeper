@@ -24,6 +24,7 @@
 
 package entities;
 
+import core.GameSettings;
 import generated.DataLookup.BUTTON_STATE;
 
 /**
@@ -59,7 +60,7 @@ public final class ButtonStateEntity extends AbstractGameEntity {
      * @return TRUE if this entity is empty, FALSE otherwise
      */
     public boolean isEmpty() {
-        return _currentButtonState == BUTTON_STATE.BUTTON_BLANK;
+        return _currentButtonState == BUTTON_STATE.BUTTON_BLANK || _currentButtonState == BUTTON_STATE.BUTTON_MARK;
     }
     
     /**
@@ -69,6 +70,15 @@ public final class ButtonStateEntity extends AbstractGameEntity {
      */
     public boolean isFlagged() {
         return _currentButtonState == BUTTON_STATE.BUTTON_FLAG;
+    }
+    
+    /**
+     * Gets if this entity is considered to be marked
+     * 
+     * @return TRUE if this button is in a marked state, FALSE otherwise
+     */
+    public boolean isMark() {
+        return _currentButtonState == BUTTON_STATE.BUTTON_MARK;
     }
     
     /**
@@ -98,8 +108,10 @@ public final class ButtonStateEntity extends AbstractGameEntity {
             _currentButtonState = BUTTON_STATE.BUTTON_FLAG;
             break;
         case BUTTON_FLAG:
-            _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
+            _currentButtonState = GameSettings.MARKS_ENABLED ? BUTTON_STATE.BUTTON_MARK : BUTTON_STATE.BUTTON_BLANK;
             break;
+        case BUTTON_MARK:
+            _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
         default:
             return;
         }

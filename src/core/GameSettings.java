@@ -14,6 +14,8 @@ public enum GameSettings {
     EXPERT(16, 30, 99),
     CUSTOM(0, 0, 0);
     
+    public static boolean MARKS_ENABLED = false;
+    
     public int ROWS;
     public int COLUMNS;
     public int MINES;
