@@ -24,13 +24,14 @@
 
 package views;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
 import controllers.GameStateController;
 import engine.communication.internal.signal.arguments.AbstractEventArgs;
@@ -51,9 +52,11 @@ public class GameStateView extends PanelView {
         GameStateController controller = AbstractFactory.getFactory(ControllerFactory.class).add(new GameStateController(), true);
         getViewProperties().setEntity(controller);
         controller.addListener(this);
-        setLayout(new BorderLayout());
+        
+        // Fixes an alignment issue
+        setBorder(new EmptyBorder(-6, 0, 0, 0));
     }
-    
+        
     @Override public Dimension getPreferredSize() {
         return new Dimension(24, 24);
     }
@@ -65,8 +68,8 @@ public class GameStateView extends PanelView {
         // Hide everything about the button, except for the icon that will be draw later
         _gameStateButton.setContentAreaFilled(false);
         
-        // Add the tile to the middle of the panel
-        add(_gameStateButton, BorderLayout.CENTER);
+        // Add the game button
+        add(_gameStateButton);
     }
 
     @Override public void initializeComponentBindings() {
