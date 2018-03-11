@@ -49,6 +49,7 @@ public enum LocalizedStrings {
     GitHub,
     Help,
     HideButtons,
+    HighScores,
     IntermediateMode,
     Marks,
     Mines,

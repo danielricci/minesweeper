@@ -29,9 +29,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 
+import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.utils.globalisation.Localization;
+import game.core.factories.ViewFactory;
 import resources.LocalizedStrings;
+import views.HighScoresDialog;
 
 /**
  * Starts a new game
@@ -39,17 +42,20 @@ import resources.LocalizedStrings;
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public class BestTimesMenuItem extends AbstractMenuItem {
+public class HighScoresMenuItem extends AbstractMenuItem {
 
     /**
      * Constructs a new instance of this class type
      *
      * @param parent The parent associated to this menu item
      */
-    public BestTimesMenuItem(JComponent parent) {
-        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.BestTimes)), parent);
+    public HighScoresMenuItem(JComponent parent) {
+        super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.HighScores)), parent);
     }
-
+    
     @Override public void onExecute(ActionEvent actionEvent) {
+        HighScoresDialog dialog = AbstractSignalFactory.getFactory(ViewFactory.class).add(new HighScoresDialog(), false);
+        dialog.render();
+        dialog.remove();
     }
 }

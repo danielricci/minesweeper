@@ -34,7 +34,7 @@ import engine.core.system.EngineProperties.Property;
 import engine.utils.globalisation.Localization;
 import menu.AboutMenuItem;
 import menu.BeginnerModeMenuItem;
-import menu.BestTimesMenuItem;
+import menu.HighScoresMenuItem;
 import menu.CustomModeMenuItem;
 import menu.DebugEmptyTilesMenuItem;
 import menu.DebugGameMenuItem;
@@ -99,7 +99,7 @@ public final class MainApplication extends AbstractApplication {
         .addSeparator()
         .addMenuItem(MarksMenuItem.class)
         .addSeparator()
-        .addMenuItem(BestTimesMenuItem.class)
+        .addMenuItem(HighScoresMenuItem.class)
         .addSeparator()
         .addMenuItem(ExitMenuItem.class);
     }
