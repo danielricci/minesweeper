@@ -328,7 +328,7 @@ public class BoardController extends BaseController {
         
         GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
         
-        // If the move is actually being perform, then and only then should we start the actual game timer and make
+        // If the move is actually being performed, then and only then should we start the actual game timer and make
         // sure that the tile does not have a mine for the first move.
         if(performingMove) {
             // Check to see if there are any buttons that have already been revealed, if not then this is considered
@@ -397,7 +397,6 @@ public class BoardController extends BaseController {
                         // have already been flagged
                         if(tileWithMine.getButtonStateEntity().isFlagged()) {
                             continue;
-                            //tileWithMine.getTileStateEntity().setTileState(TILE_STATE.BOMB_MISFLAGGED);
                         }
                         
                         tileWithMine.getButtonStateEntity().setIsButtonEnabled(false);
