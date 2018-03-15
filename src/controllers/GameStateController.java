@@ -92,7 +92,8 @@ public final class GameStateController extends BaseController {
     
     /**
      * Sets the game as game over
-     * @return
+     * 
+     * @return TRUE if the game is over, FALSE otherwise
      */
     public boolean isGameOver() {
         return _gameStateModel.isGameOver();

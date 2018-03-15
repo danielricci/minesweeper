@@ -63,7 +63,8 @@ public final class GameStateModel extends BaseModel {
 
     /**
      * Gets the renderable entity associated to this model
-     * @return
+     * 
+     * @return The renderable entity associatd to this model
      */
     public IRenderable getEntity() {
         return _gameStateEntity;
