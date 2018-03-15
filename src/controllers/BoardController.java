@@ -414,26 +414,30 @@ public class BoardController extends BaseController {
                     // Set the game as won
                     gameStateController.setGameWon();
                     
-                    // Prompt the user to enter their name
-                    String name = JOptionPane.showInputDialog(
-                        AbstractApplication.instance(), 
-                        "Congratulations, you have achieved a new highscore. Please enter your name", 
-                        "Highscore",
-                        JOptionPane.WARNING_MESSAGE
-                    );
+                    // Get the timer result of the current game
+                    int timerResult = AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime();
+                    if(GAME_SETTINGS.getTime() > timerResult) {
                     
-                    // Validate the name that was entered
-                    if(name == null || name.trim().isEmpty()) {
-                        name = "Anonymous";
+                        // Prompt the user to enter their name
+                        String name = JOptionPane.showInputDialog(
+                            AbstractApplication.instance(), 
+                            "Congratulations, you have achieved a new highscore. Please enter your name", 
+                            "Highscore",
+                            JOptionPane.WARNING_MESSAGE
+                        );
+                        
+                        // Validate the name that was entered
+                        if(name == null || name.trim().isEmpty()) {
+                            name = "Anonymous";
+                        }
+                        else {
+                            name = name.trim();
+                        }
+                        
+                        // Set the highscore with the name provided and the new timer
+                        GAME_SETTINGS.setHighScore(name, timerResult);
                     }
-                    else {
-                        name = name.trim();
-                    }
-                    
-                    // Set the highscore
-                    BoardController.GAME_SETTINGS.setHighScore(name, AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime());
                 }
-                
             }
             else {
                 // Set the game state as running, this will show the :O face
