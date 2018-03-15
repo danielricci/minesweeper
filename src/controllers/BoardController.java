@@ -176,14 +176,28 @@ public class BoardController extends BaseController {
      * @return The list of tile models included in the flood fill
      */
     private List<TileModel> getAdjacentTilesFloodFill(TileModel initialTileModel) {
-        List<TileModel> tiles = new ArrayList();
-        tiles.add(initialTileModel);
+        
+        List<TileModel> completedTiles = new ArrayList();
+        List<TileModel> emptyTiles = new ArrayList();
+        emptyTiles.add(initialTileModel);
 
-        for(int i = 0;  i < tiles.size(); ++i) {
-            tiles.addAll(getAllNeighbors(tiles.get(i)).stream().filter(z -> z.getTileStateEntity().isEmpty() && !tiles.contains(z)).collect(Collectors.toList()));
+        for(int i = 0;  i < emptyTiles.size(); ++i) {
+            TileModel candidateTile = emptyTiles.get(i);
+            if(candidateTile.getTileStateEntity().isEmpty()) {
+                List<TileModel> neighbours = getAllNeighbors(candidateTile).stream().filter(z -> !emptyTiles.contains(z) && !completedTiles.contains(z)).collect(Collectors.toList());
+                for(TileModel neighbour : neighbours) {
+                    if(neighbour.getTileStateEntity().isEmpty()) {
+                        emptyTiles.add(neighbour);
+                    }
+                    else if(neighbour.getTileStateEntity().getMineNumeralEntity().hasActiveData()) {
+                        completedTiles.add(neighbour);
+                    }
+                }
+            }
+            
         }
-
-        return tiles;
+        completedTiles.addAll(emptyTiles);
+        return completedTiles;
     }
 
     /**
@@ -416,7 +430,7 @@ public class BoardController extends BaseController {
                     
                     // Get the timer result of the current game
                     int timerResult = AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime();
-                    if(GAME_SETTINGS.getTime() > timerResult) {
+                    if(GAME_SETTINGS != GameSettings.CUSTOM && GAME_SETTINGS.getTime() > timerResult) {
                     
                         // Prompt the user to enter their name
                         String name = JOptionPane.showInputDialog(
