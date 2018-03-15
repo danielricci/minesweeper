@@ -24,7 +24,6 @@
 
 package controllers;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,7 +57,7 @@ public class BoardController extends BaseController {
     /**
      * The default game settings
      */
-    private static GameSettings GAME_SETTINGS = GameSettings.INTERMEDITE;
+    public static GameSettings GAME_SETTINGS = GameSettings.INTERMEDITE;
     
     /**
      * The list of neighbors logically associated to a specified controller
@@ -409,6 +408,8 @@ public class BoardController extends BaseController {
                         mineTile.doneUpdating();
                     }
                     gameStateController.setGameWon();
+                    
+                    BoardController.GAME_SETTINGS.setHighScore("Daniel", AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime());
                 }
                 
                 
@@ -466,24 +467,6 @@ public class BoardController extends BaseController {
                 chordNeighbors.forEach(z -> performMove(z, true));
             }
         }
-    }
-    
-    /**
-     * Sets the game settings state
-     * 
-     * @param gameSettings The game settings to set
-     */
-    public void setGameSettings(GameSettings gameSettings) {
-        GAME_SETTINGS = gameSettings;
-    }
-
-    /**
-     * Gets the dimensions of the game settings
-     * 
-     * @return The dimensions associated to the game settings
-     */
-    public Dimension getDimensions() {
-        return GAME_SETTINGS.getDimensions();
     }
     
     /**

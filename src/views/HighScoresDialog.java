@@ -24,11 +24,14 @@
 
 package views;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
@@ -55,15 +58,15 @@ public class HighScoresDialog extends DialogView {
     private JButton _resetScoresButton = new JButton("Reset Scores");
     private JButton _okButton = new JButton("OK");
     
-    private JLabel _beginnerLabel = new JLabel("Beginner:");
+    private JLabel _beginnerLabel = new JLabel("Beginner");
     private JLabel _beginnerSecondsLabel = new JLabel();
     private JLabel _beginnerNameLabel = new JLabel();
     
-    private JLabel _intermediateLabel = new JLabel("Intermediate:");
+    private JLabel _intermediateLabel = new JLabel("Intermediate");
     private JLabel _intermediateSecondsLabel = new JLabel();
     private JLabel _intermediateNameLabel = new JLabel();
     
-    private JLabel _expertLabel = new JLabel("Expert:");
+    private JLabel _expertLabel = new JLabel("Expert");
     private JLabel _expertSecondsLabel = new JLabel();
     private JLabel _expertNameLabel = new JLabel();
     
@@ -91,16 +94,16 @@ public class HighScoresDialog extends DialogView {
     private void updateHighScore(HighScoreModel score) {
         switch(score.SETTING) {
         case BEGINNER:
-            _beginnerSecondsLabel.setText(score.SECONDS + " seconds");
-            _beginnerNameLabel.setText(score.NAME);
+            _beginnerSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _beginnerNameLabel.setText(score.SETTING.getName());
             break;
         case INTERMEDITE:
-            _intermediateSecondsLabel.setText(score.SECONDS + " seconds");
-            _intermediateNameLabel.setText(score.NAME);
+            _intermediateSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _intermediateNameLabel.setText(score.SETTING.getName());
             break;
         case EXPERT:
-            _expertSecondsLabel.setText(score.SECONDS + " seconds");
-            _expertNameLabel.setText(score.NAME);
+            _expertSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _expertNameLabel.setText(score.SETTING.getName());
             break;
         case CUSTOM:
         default:
@@ -138,6 +141,17 @@ public class HighScoresDialog extends DialogView {
     }
 
     @Override public void initializeComponentBindings() {
+        _okButton.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent actionEvent) {
+                setDialogResult(JOptionPane.OK_OPTION);
+                setVisible(false);
+            }
+        });
+        _resetScoresButton.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent actionEvent) {
+                AbstractFactory.getFactory(ControllerFactory.class).get(HighScoreController.class).reset();
+            }
+        });
     }
 
     @Override public void render() {

@@ -28,25 +28,9 @@ import engine.core.mvc.model.BaseModel;
 
 public class HighScoreModel extends BaseModel {
     
-    public String NAME = "Anonymous";
-    
-    public int SECONDS = 999;
-    
     public final GameSettings SETTING;
     
     public HighScoreModel(GameSettings settings) {
         this.SETTING = settings;
-    }
-    
-    public void reset() {
-        NAME = "Anonymous";
-        SECONDS = 999;
-        doneUpdating();
-    }
-
-    public void updateData(String name, int seconds) {
-        NAME = name;
-        SECONDS = seconds;
-        doneUpdating();
     }
 }

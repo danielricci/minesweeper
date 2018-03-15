@@ -33,12 +33,11 @@ import javax.swing.JOptionPane;
 import application.MainApplication;
 import controllers.BoardController;
 import core.GameSettings;
-import engine.core.factories.AbstractFactory;
+import core.PreferencesManager;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.AbstractMenuItem;
 import engine.core.navigation.MenuBuilder;
 import engine.utils.globalisation.Localization;
-import game.core.factories.ControllerFactory;
 import game.core.factories.ViewFactory;
 import resources.LocalizedStrings;
 import views.CustomGameDialogView;
@@ -65,21 +64,31 @@ public class CustomModeMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-
-        // Create and show the dialog related to the custom game
-        CustomGameDialogView dialog = AbstractSignalFactory.getFactory(ViewFactory.class).add(new CustomGameDialogView(), false);
-        dialog.render();
+        super.get(JCheckBoxMenuItem.class).setSelected(true);
         
-        // If the user did not select the OK button then remove the contents of the dialog
-        if(dialog.getDialogResult() != JOptionPane.OK_OPTION) {
-            dialog.remove();
-            return;
+        if(actionEvent != null) {
+            // Create and show the dialog related to the custom game
+            CustomGameDialogView dialog = AbstractSignalFactory.getFactory(ViewFactory.class).add(new CustomGameDialogView(), false);
+            dialog.render();
+            
+            // If the user did not select the OK button then remove the contents of the dialog
+            if(dialog.getDialogResult() != JOptionPane.OK_OPTION) {
+                dialog.remove();
+                return;
+            }
+            
+            // Get a reference to the board conntroller and set the game settings to the values
+            // entered within the dialog previously
+            BoardController.GAME_SETTINGS = GameSettings.getCustomGameSetting(dialog.getRowsCount(), dialog.getColumnsCount(), dialog.getMinesCount());
+        }
+        else {
+            BoardController.GAME_SETTINGS = GameSettings.getCustomGameSetting(
+                PreferencesManager.instance().getGameRows(),
+                PreferencesManager.instance().getGameColumns(),
+                PreferencesManager.instance().getGameMines()
+            );
         }
         
-        // Get a reference to the board conntroller and set the game settings to the values
-        // entered within the dialog previously
-        BoardController controller = AbstractFactory.getFactory(ControllerFactory.class).get(BoardController.class);
-        controller.setGameSettings(GameSettings.getCustomGameSetting(dialog.getRowsCount(), dialog.getColumnsCount(), dialog.getMinesCount()));
         MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(actionEvent);
     }
 }

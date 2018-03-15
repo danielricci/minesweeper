@@ -25,16 +25,22 @@
 package application;
 
 import java.awt.EventQueue;
+import java.io.File;
+import java.util.logging.Level;
 
+import javax.swing.JCheckBoxMenuItem;
+
+import controllers.BoardController;
+import core.PreferencesManager;
 import engine.core.factories.AbstractSignalFactory;
 import engine.core.navigation.MenuBuilder;
 import engine.core.system.AbstractApplication;
 import engine.core.system.EngineProperties;
 import engine.core.system.EngineProperties.Property;
 import engine.utils.globalisation.Localization;
+import engine.utils.logging.Tracelog;
 import menu.AboutMenuItem;
 import menu.BeginnerModeMenuItem;
-import menu.HighScoresMenuItem;
 import menu.CustomModeMenuItem;
 import menu.DebugEmptyTilesMenuItem;
 import menu.DebugGameMenuItem;
@@ -42,6 +48,7 @@ import menu.DebugNeighboursMenuItem;
 import menu.DebuggerWindowMenuItem;
 import menu.ExitMenuItem;
 import menu.ExpertModeMenuItem;
+import menu.HighScoresMenuItem;
 import menu.IntermediateModeMenuItem;
 import menu.MarksMenuItem;
 import menu.NewGameMenuItem;
@@ -149,7 +156,6 @@ public final class MainApplication extends AbstractApplication {
         setTitle(Localization.instance().getLocalizedString(LocalizedStrings.Title));
         setIconImage(Localization.instance().getLocalizedData(LocalizedStrings.GameIcon));
         
-        
         // Populate the game menu
         populateGameMenu();
 
@@ -166,7 +172,32 @@ public final class MainApplication extends AbstractApplication {
             MenuBuilder.search(MainApplication.instance().getJMenuBar(), DebugGameMenuItem.class).onExecute(null);
         }
         else {
-            MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+            switch(PreferencesManager.instance().getGameDifficulty())
+            {
+            case 0:
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), BeginnerModeMenuItem.class).onExecute(null);
+                break;
+            case 1:
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), IntermediateModeMenuItem.class).onExecute(null);
+                break;
+            case 2:
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), ExpertModeMenuItem.class).onExecute(null);
+                break;
+            case 3:
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), CustomModeMenuItem.class).onExecute(null);
+                break;
+            default:
+                Tracelog.log(Level.SEVERE, true, "Unexpected difficulty given, defaulting back to beginner");
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+            }
+            
+        }
+        
+        // Get the location that was last saved and position the window there
+        setLocation(PreferencesManager.instance().getWindowPositionX());
+        if(PreferencesManager.instance().getMarksEnabled()) {
+            MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).onExecute(null);
+            ((JCheckBoxMenuItem)MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).getComponent()).setSelected(true);
         }
     }
 
@@ -175,8 +206,17 @@ public final class MainApplication extends AbstractApplication {
         EngineProperties.instance().setProperty(Property.DATA_PATH_SHEET, "/generated/tilemap.png");
         EngineProperties.instance().setProperty(Property.LOCALIZATION_PATH_CVS, "resources/LocalizedStrings.csv");
         EngineProperties.instance().setProperty(Property.ENGINE_OUTPUT, "true");
-        //EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
-        //EngineProperties.instance().setProperty(Property.DATA_PATH_XML, "/generated/tilemap.xml");
-        //EngineProperties.instance().setProperty(Property.DATA_PATH_SHEET, "/generated/tilemap.png");
+        EngineProperties.instance().setProperty(Property.LOG_DIRECTORY,  System.getProperty("user.home") + File.separator + "desktop" + File.separator);
+    }
+    
+    @Override public void dispose() {
+        PreferencesManager.instance().setGameColumns(BoardController.GAME_SETTINGS.COLUMNS);
+        PreferencesManager.instance().setGameRows(BoardController.GAME_SETTINGS.ROWS);
+        PreferencesManager.instance().setGameMines(BoardController.GAME_SETTINGS.MINES);
+        PreferencesManager.instance().setGameDifficulty(BoardController.GAME_SETTINGS.IDENTIFIER);
+        PreferencesManager.instance().setWindowPositionX(getLocation());
+        PreferencesManager.instance().save();
+        
+        super.dispose();
     }
 }

@@ -14,6 +14,12 @@ public enum GameSettings {
     EXPERT(16, 30, 99),
     CUSTOM(0, 0, 0);
     
+    private int _time = 999;
+    private String _name = "Anonymous";
+    
+    private static int _counter;
+    public int IDENTIFIER;
+    
     public static boolean MARKS_ENABLED = false;
     
     public int ROWS;
@@ -24,10 +30,34 @@ public enum GameSettings {
         ROWS = rows;
         COLUMNS = columns;
         MINES = mines;
+        
+        setIdentifier();
+    }
+    
+    private void setIdentifier() {
+        IDENTIFIER = _counter++;
     }
     
     public Dimension getDimensions() {
         return new Dimension(COLUMNS, ROWS);
+    }
+    
+    public int getTime() {
+        return _time;
+    }
+    
+    public String getName() {
+        return _name;
+    }
+    
+    public void setHighScore(String name, int time) {
+        _name = name;
+        _time = time;
+    }
+    
+    public void reset() {
+        _name = "Anonymous";
+        _time = 999;
     }
     
     public static GameSettings getCustomGameSetting(int rows, int columns, int mines) {

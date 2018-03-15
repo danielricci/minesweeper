@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.GameSettings;
+import core.PreferencesManager;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import models.HighScoreModel;
@@ -40,13 +41,21 @@ public final class HighScoreController extends BaseController {
      * Constructs a new instance of this class type
      */
     public HighScoreController() {
-        _highScores.add(new HighScoreModel(GameSettings.BEGINNER));
-        _highScores.add(new HighScoreModel(GameSettings.INTERMEDITE));
-        _highScores.add(new HighScoreModel(GameSettings.EXPERT));
+        _highScores.add(new HighScoreModel(PreferencesManager.instance().getGameSettings(GameSettings.BEGINNER)));
+        _highScores.add(new HighScoreModel(PreferencesManager.instance().getGameSettings(GameSettings.INTERMEDITE)));
+        _highScores.add(new HighScoreModel(PreferencesManager.instance().getGameSettings(GameSettings.EXPERT)));
     }
     
     public void addListener(ISignalListener listener) {
         _highScores.stream().forEach(z -> z.addListener(listener));
         _highScores.stream().forEach(z -> z.refresh());
+    }
+
+    public void reset() {
+        PreferencesManager.instance().reset();
+        for(HighScoreModel model : _highScores) {
+            model.SETTING.reset();
+            model.doneUpdating();
+        }
     }
 }

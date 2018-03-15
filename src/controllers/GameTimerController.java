@@ -129,4 +129,8 @@ public final class GameTimerController extends BaseController {
             _timer.cancel();
         }
     }
+    
+    public int getTime() {
+        return _gameTimerModel.getTimerValue();
+    }
 }
