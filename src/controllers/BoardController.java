@@ -35,11 +35,14 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
 import core.EntityMovement;
 import core.GameSettings;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
 import engine.core.mvc.controller.BaseController;
+import engine.core.system.AbstractApplication;
 import engine.utils.logging.Tracelog;
 import game.core.factories.ControllerFactory;
 import generated.DataLookup.BUTTON_STATE;
@@ -407,11 +410,29 @@ public class BoardController extends BaseController {
                         mineTile.getButtonStateEntity().changeState(BUTTON_STATE.BUTTON_FLAG);
                         mineTile.doneUpdating();
                     }
+                    
+                    // Set the game as won
                     gameStateController.setGameWon();
                     
-                    BoardController.GAME_SETTINGS.setHighScore("Daniel", AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime());
+                    // Prompt the user to enter their name
+                    String name = JOptionPane.showInputDialog(
+                        AbstractApplication.instance(), 
+                        "Congratulations, you have achieved a new highscore. Please enter your name", 
+                        "Highscore",
+                        JOptionPane.WARNING_MESSAGE
+                    );
+                    
+                    // Validate the name that was entered
+                    if(name == null || name.trim().isEmpty()) {
+                        name = "Anonymous";
+                    }
+                    else {
+                        name = name.trim();
+                    }
+                    
+                    // Set the highscore
+                    BoardController.GAME_SETTINGS.setHighScore(name, AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime());
                 }
-                
                 
             }
             else {
