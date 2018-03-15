@@ -33,6 +33,12 @@ import engine.core.mvc.view.PanelView;
 import game.core.factories.ControllerFactory;
 import models.BombsCounterModel;
 
+/**
+ * The view associated to the bomb counter
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class BombsCounterView extends PanelView {
     
     /**

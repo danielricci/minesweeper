@@ -34,30 +34,63 @@ import engine.core.graphics.RawData;
 import engine.utils.logging.Tracelog;
 import generated.DataLookup;
 
+/**
+ * The game timer entity
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class GameTimerEntity extends AbstractGameEntity {
     
+    /**
+     * The bomb timer constant data value
+     */
     private static final String BOMB_CONSTANT = "TIMER_";
  
+    /**
+     * The numeral representation of the data of this entity
+     */
     private int _numeral;
     
+    /**
+     * Constructs a new instance of this class type
+     */
     public GameTimerEntity() {
         setNumeralImpl();
     }
-    
+
+    /**
+     * Constructs a new instance of this class type
+     *
+     * @param numeral The explicit numeral to set
+     */
     public GameTimerEntity(int numeral) {
         _numeral = numeral;
         setNumeralImpl();
     }   
-    
+
+    /**
+     * Gets the numeral value of this entity
+     * 
+     * @return The numeral value of this entity
+     */
     public int getNumeral() {
         return _numeral;
     }
     
+    /**
+     * Sets the numeral to an empty value, effectively clearning it
+     */
     public void setNumeralEmpty() {
         _numeral = Integer.MIN_VALUE;
         setNumeralImpl();
     }
     
+    /**
+     * Sets the numeral to an explicit value
+     * 
+     * @param numeral The numeral to set
+     */
     public void setNumeral(int numeral) {
         
         if(numeral == _numeral) {
@@ -74,6 +107,13 @@ public class GameTimerEntity extends AbstractGameEntity {
         setNumeralImpl();            
     }
     
+    /**
+     * Flattens the specified entities into a singular piece of data
+     * 
+     * @param entities The entities to flatten
+     * 
+     * @return The raw data representation of the entities specified
+     */
     public static RawData flattenData(List<GameTimerEntity> entities) {
         
         int width = entities.parallelStream().map(z -> z.getRenderableContent()).mapToInt(z -> z.getWidth(null)).sum();
@@ -91,6 +131,9 @@ public class GameTimerEntity extends AbstractGameEntity {
         return new RawData(img);
     }
 
+    /**
+     * The set numeral implementation
+     */
     private void setNumeralImpl() {
         if(MainApplication.instance().isDebug()) {
             setActiveData(_numeral < 0 ? DataLookup.NUMERAL_DEBUG.TIMER_EMPTY : DataLookup.NUMERAL_DEBUG.valueOf(BOMB_CONSTANT + _numeral));

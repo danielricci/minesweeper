@@ -59,6 +59,11 @@ public final class MineNumeralEntity extends AbstractGameEntity {
         }
     }
     
+    /**
+     * Gets the numeral representation of this entity
+     * 
+     * @return The numeral representation of thi entity
+     */
     public int getNumeral() {
         return _numeral;
     }

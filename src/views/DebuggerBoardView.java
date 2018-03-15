@@ -42,12 +42,6 @@ import game.core.factories.ControllerFactory;
  */
 public class DebuggerBoardView extends BoardView {
 
-    /**
-     * Constructs a new instance of this class type
-     */
-    public DebuggerBoardView() {
-    }
-
     @Override public void initializeComponentBindings() {
         super.initializeComponentBindings();
 

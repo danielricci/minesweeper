@@ -31,6 +31,12 @@ import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
 import entities.GameTimerEntity;
 
+/**
+ * The model associated to the bombs counter
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class BombsCounterModel extends BaseModel {
 
     /**
@@ -96,14 +102,27 @@ public final class BombsCounterModel extends BaseModel {
         doneUpdating();
     }
     
+    /**
+     * Resets the timer of this model
+     */
     public void resetTimer() {
         setTimer(_initialTimerValue);
     }
     
+    /**
+     * Gets the timer of this model
+     * 
+     * @return The timer of this model
+     */
     public int getTimerValue() {
         return _timerValue;
     }
     
+    /**
+     * Gets the renderable entity of this model
+     * 
+     * @return The renderable entity of this model
+     */
     public IRenderable getEntity() {
         return GameTimerEntity.flattenData(_timerEntities);
     }

@@ -68,7 +68,6 @@ public final class GameTimerController extends BaseController {
         _gameTimerModel = AbstractFactory.getFactory(ModelFactory.class).add(new GameTimerModel(),  false);
     }
     
-    
     /**
      * Adds a listener to the underlying model of this controller
      * 
@@ -130,7 +129,12 @@ public final class GameTimerController extends BaseController {
         }
     }
     
-    public int getTime() {
+    /**
+     * Gets the game timer
+     * 
+     * @return The game timer value
+     */
+    public int getGameTimer() {
         return _gameTimerModel.getTimerValue();
     }
 }

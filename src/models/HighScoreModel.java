@@ -26,10 +26,24 @@ package models;
 import core.GameSettings;
 import engine.core.mvc.model.BaseModel;
 
+/**
+ * The model associated to the high score
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class HighScoreModel extends BaseModel {
-    
+   
+    /**
+     * The game settings of this model
+     */
     public final GameSettings SETTING;
     
+    /**
+     * Constructs a new instance of this class type
+     *
+     * @param settings The game settings to set for this model
+     */
     public HighScoreModel(GameSettings settings) {
         this.SETTING = settings;
     }

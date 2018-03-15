@@ -31,6 +31,12 @@ import engine.core.graphics.IRenderable;
 import engine.core.mvc.model.BaseModel;
 import entities.GameTimerEntity;
 
+/**
+ * The model associated to the game timer 
+ *
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class GameTimerModel extends BaseModel {
 
     /**
@@ -84,6 +90,11 @@ public final class GameTimerModel extends BaseModel {
         setTimer(0);
     }
 
+    /**
+     * Gets the renderable entity associated to this model
+     * 
+     * @return The renderable entity associated to this model
+     */
     public IRenderable getEntity() {
         return GameTimerEntity.flattenData(_timerEntities);
     }

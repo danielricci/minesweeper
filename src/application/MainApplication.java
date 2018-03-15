@@ -190,7 +190,6 @@ public final class MainApplication extends AbstractApplication {
                 Tracelog.log(Level.SEVERE, true, "Unexpected difficulty given, defaulting back to beginner");
                 MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
             }
-            
         }
         
         // Get the location that was last saved and position the window there

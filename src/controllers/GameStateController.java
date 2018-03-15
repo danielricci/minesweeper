@@ -32,8 +32,17 @@ import game.core.factories.ModelFactory;
 import generated.DataLookup.GAME_STATE;
 import models.GameStateModel;
 
+/**
+ * The controller associated to the game state of the application
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class GameStateController extends BaseController {
 
+    /**
+     * The game state model
+     */
     private final GameStateModel _gameStateModel;
  
     /**
@@ -53,22 +62,38 @@ public final class GameStateController extends BaseController {
         _gameStateModel.addListener(listener);
     }
     
+    /**
+     * Sets the game as won
+     */
     public void setGameWon() {
         _gameStateModel.setGameState(GAME_STATE.GAME_WON);
     }
     
+    /**
+     * Sets the game as lost
+     */
     public void setGameLost() {
         _gameStateModel.setGameState(GAME_STATE.GAME_LOST);
     }
     
+    /**
+     * Sets the game as running
+     */
     public void setGameRunning() {
         _gameStateModel.setGameState(GAME_STATE.GAME_RUNNING);
     }
     
+    /**
+     * Sets the game as making a move
+     */
     public void setMakingMove() {
         _gameStateModel.setGameState(GAME_STATE.GAME_MOVING);
     }
     
+    /**
+     * Sets the game as game over
+     * @return
+     */
     public boolean isGameOver() {
         return _gameStateModel.isGameOver();
     }

@@ -33,6 +33,12 @@ import engine.core.mvc.view.PanelView;
 import game.core.factories.ControllerFactory;
 import models.GameTimerModel;
 
+/**
+ * The view associated to the game timer
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class GameTimerView extends PanelView {
     
     /**

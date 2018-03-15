@@ -26,6 +26,12 @@ package entities;
 
 import generated.DataLookup.GAME_STATE;
 
+/**
+ * The game state entity
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class GameStateEntity extends AbstractGameEntity {
 
     /**
@@ -39,7 +45,12 @@ public class GameStateEntity extends AbstractGameEntity {
     public GameStateEntity() {
         setActiveData(_currentGameState);
     }
-    
+   
+    /**
+     * Gets the game state entity value
+     * 
+     * @return The game state entity value
+     */
     public GAME_STATE getGameState() {
         return _currentGameState;
     }

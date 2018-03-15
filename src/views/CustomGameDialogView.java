@@ -51,14 +51,29 @@ import engine.utils.globalisation.Localization;
  */
 public class CustomGameDialogView extends DialogView {
 
+    /**
+     * The okay button
+     */
     private JButton _okayButton = new JButton("OK");
     
+    /**
+     * The cancel button
+     */
     private JButton _cancelButton = new JButton("Cancel");
     
+    /**
+     * The height text field
+     */
     private JTextField _heightTextField = new JTextField(3);
     
+    /**
+     * The width text field
+     */
     private JTextField _widthTextField = new JTextField(3);
     
+    /**
+     * The mines text field
+     */
     private JTextField _minesTextField = new JTextField(3);
     
     /**
@@ -79,6 +94,32 @@ public class CustomGameDialogView extends DialogView {
         setResizable(false);
     }
 
+    /**
+     * Gets the rows count of this dialog
+     * 
+     * @return The rows count of this dialog
+     */
+    public int getRowsCount() {
+        return Math.max(GameSettings.BEGINNER.ROWS, Integer.parseInt(_heightTextField.getText()));
+    }
+    
+    /**
+     * Gets the columns count of this dialog
+     * 
+     * @return The columns count of this dialog
+     */
+    public int getColumnsCount() {
+        return Math.max(GameSettings.BEGINNER.COLUMNS, Integer.parseInt(_widthTextField.getText()));
+    }
+    
+    /**
+     * Gets the mines count of this dialog
+     * 
+     * @return The mines count of this dialog
+     */
+    public int getMinesCount() {
+        return Math.max(1, Integer.parseInt(_minesTextField.getText()));
+    }
 
     @Override public void initializeComponents() {
         
@@ -161,17 +202,5 @@ public class CustomGameDialogView extends DialogView {
             // are not worth checking
             return false;
         }
-    }
-
-    public int getRowsCount() {
-        return Math.max(GameSettings.BEGINNER.ROWS, Integer.parseInt(_heightTextField.getText()));
-    }
-    
-    public int getColumnsCount() {
-        return Math.max(GameSettings.BEGINNER.COLUMNS, Integer.parseInt(_widthTextField.getText()));
-    }
-    
-    public int getMinesCount() {
-        return Math.max(1, Integer.parseInt(_minesTextField.getText()));
     }
 }

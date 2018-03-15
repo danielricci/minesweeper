@@ -55,19 +55,59 @@ import resources.LocalizedStrings;
  */
 public class HighScoresDialog extends DialogView {
 
+    /**
+     * The reset scores button
+     */
     private JButton _resetScoresButton = new JButton("Reset Scores");
+    
+    /**
+     * The okay button
+     */
     private JButton _okButton = new JButton("OK");
     
+    /**
+     * The beginner label
+     */
     private JLabel _beginnerLabel = new JLabel("Beginner");
+    
+    /**
+     * The beginners seconds label
+     */
     private JLabel _beginnerSecondsLabel = new JLabel();
+    
+    /**
+     * The beginners name label
+     */
     private JLabel _beginnerNameLabel = new JLabel();
     
+    /**
+     * The intermediate label
+     */
     private JLabel _intermediateLabel = new JLabel("Intermediate");
+    
+    /**
+     * The intermediate seconds label
+     */
     private JLabel _intermediateSecondsLabel = new JLabel();
+    
+    /**
+     * The intermediate name label
+     */
     private JLabel _intermediateNameLabel = new JLabel();
     
+    /**
+     * The expert label
+     */
     private JLabel _expertLabel = new JLabel("Expert");
+    
+    /**
+     * The expert seconds label
+     */
     private JLabel _expertSecondsLabel = new JLabel();
+    
+    /**
+     * The expert name label
+     */
     private JLabel _expertNameLabel = new JLabel();
     
     /**
@@ -171,5 +211,4 @@ public class HighScoresDialog extends DialogView {
             repaint();
         }
     }
-    
 }

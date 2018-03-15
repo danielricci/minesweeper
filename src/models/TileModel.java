@@ -92,7 +92,6 @@ public class TileModel extends BaseModel {
     // TODO - delete - should not be couple with real game logic
     public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
     
-    
     /**
      * Property indicating this tile is highlighted
      */

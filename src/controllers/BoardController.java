@@ -138,6 +138,7 @@ public class BoardController extends BaseController {
     /**
      * Sets the tile neighbors to a highlighted state, this is used for debugging purposes
      * 
+     * @param listener The listener
      * @param highlighted If the neighbors should be in a highlighted state or not
      */
     public void showTileNeighborsDebug(ISignalListener listener, boolean highlighted) {
@@ -260,7 +261,7 @@ public class BoardController extends BaseController {
     /**
      * Sets a mine onto the specified listeners model
      * 
-     * @param listener The listener to set the mine
+     * @param listener The listener from where the event took place
      */
     public void setMine(ISignalListener listener) {
 
@@ -324,6 +325,12 @@ public class BoardController extends BaseController {
         performMove(tileModel, performingMove);
     }
     
+    /**
+     * Performs a move of the specified tile
+     * 
+     * @param tileModel The tile associated to the move being performed
+     * @param performingMove TRUE if the move is being finalized, FALSE if the move is in between
+     */
     private void performMove(TileModel tileModel, boolean performingMove) {
         
         GameStateController gameStateController = AbstractFactory.getFactory(ControllerFactory.class).get(GameStateController.class);
@@ -428,7 +435,7 @@ public class BoardController extends BaseController {
                     gameStateController.setGameWon();
                     
                     // Get the timer result of the current game
-                    int timerResult = AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getTime();
+                    int timerResult = AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).getGameTimer();
                     if(GAME_SETTINGS != GameSettings.CUSTOM && GAME_SETTINGS.getTime() > timerResult) {
                     
                         // Prompt the user to enter their name

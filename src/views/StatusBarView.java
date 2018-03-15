@@ -42,10 +42,19 @@ import game.core.factories.ViewFactory;
  */
 public class StatusBarView extends PanelView {
 
+    /**
+     * The bombs panel
+     */
     private JPanel _bombsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     
+    /**
+     * The game state panel
+     */
     private JPanel _gameStatePanel = new JPanel();
     
+    /**
+     * The game timer panel
+     */
     private JPanel _gameTimerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     
     /**

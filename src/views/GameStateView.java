@@ -39,8 +39,17 @@ import engine.core.mvc.view.PanelView;
 import game.core.factories.ControllerFactory;
 import models.GameStateModel;
 
+/**
+ * The view associated to the game state
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public class GameStateView extends PanelView {
-    
+   
+    /**
+     * The game state button
+     */
     private JButton _gameStateButton = new JButton();
     
     /**

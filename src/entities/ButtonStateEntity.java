@@ -119,6 +119,11 @@ public final class ButtonStateEntity extends AbstractGameEntity {
         setActiveData(_currentButtonState);
     }
     
+    /**
+     * Changes the button state to the specified state
+     * 
+     * @param buttonState The button state to set to
+     */
     public void changeState(BUTTON_STATE buttonState) {
         _currentButtonState = buttonState;
         setActiveData(_currentButtonState);

@@ -30,8 +30,17 @@ import engine.core.mvc.controller.BaseController;
 import game.core.factories.ModelFactory;
 import models.BombsCounterModel;
 
+/**
+ * The controller associated to the bombs counter
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class BombsCounterController extends BaseController {
 
+    /**
+     * The bombs counter model
+     */
     private final BombsCounterModel _bombsCounterModel;
  
     /**
@@ -45,24 +54,38 @@ public final class BombsCounterController extends BaseController {
     /**
      * Adds a listener to the underlying model of this controller
      * 
-     * @param listener The listener to associated to the underlying model of this controller
+     * @param listener The listener from where the event took place
      */
     public void addListener(ISignalListener listener) {
         _bombsCounterModel.addListener(listener);
     }
 
+    /**
+     * Increments the bomb counter
+     */
     public void incrementCounter() {
         _bombsCounterModel.setTimer(_bombsCounterModel.getTimerValue() + 1);
     }
     
+    /**
+     * Decrements the bomb counter
+     */
     public void decrementCounter() {
         _bombsCounterModel.setTimer(_bombsCounterModel.getTimerValue() - 1);
     }
     
+    /**
+     * Resets the bomb counter
+     */
     public void resetCounter() {
         _bombsCounterModel.resetTimer();
     }
     
+    /**
+     * Sets explicitly the bomb counter
+     * 
+     * @param count The count
+     */
     public void setCounter(int count) {
         _bombsCounterModel.setInitialTimer(count);
     }

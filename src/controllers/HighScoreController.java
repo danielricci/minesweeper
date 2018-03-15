@@ -33,8 +33,17 @@ import engine.communication.internal.signal.ISignalListener;
 import engine.core.mvc.controller.BaseController;
 import models.HighScoreModel;
 
+/**
+ * The controller associated to the high scores of the application
+ * 
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class HighScoreController extends BaseController {
 
+    /**
+     * The list of high score models
+     */
     private List<HighScoreModel> _highScores = new ArrayList();
     
     /**
@@ -45,16 +54,24 @@ public final class HighScoreController extends BaseController {
         _highScores.add(new HighScoreModel(PreferencesManager.instance().getGameSettings(GameSettings.INTERMEDITE)));
         _highScores.add(new HighScoreModel(PreferencesManager.instance().getGameSettings(GameSettings.EXPERT)));
     }
-    
+   
+    /**
+     * Adds the specified listener to the models within this controller
+     * 
+     * @param listener The listener associated to the event taking place
+     */
     public void addListener(ISignalListener listener) {
         _highScores.stream().forEach(z -> z.addListener(listener));
         _highScores.stream().forEach(z -> z.refresh());
     }
 
+    /**
+     * Resets the high scores associated to the application
+     */
     public void reset() {
         PreferencesManager.instance().reset();
         for(HighScoreModel model : _highScores) {
-            model.SETTING.reset();
+            model.SETTING.resetHighscore();
             model.doneUpdating();
         }
     }

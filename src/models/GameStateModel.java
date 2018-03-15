@@ -29,8 +29,17 @@ import engine.core.mvc.model.BaseModel;
 import entities.GameStateEntity;
 import generated.DataLookup.GAME_STATE;
 
+/**
+ * The model associated to the game state
+ *  
+ * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
+ *
+ */
 public final class GameStateModel extends BaseModel {
 
+    /**
+     * The game state entity of this model
+     */
     private GameStateEntity _gameStateEntity = new GameStateEntity();
  
     /**
@@ -43,10 +52,19 @@ public final class GameStateModel extends BaseModel {
         doneUpdating();
     }
     
+    /**
+     * Indicates if this model is in a game over state
+     * 
+     * @return TRUE if this model is in game over, FALSE otherwise
+     */
     public boolean isGameOver() {
         return _gameStateEntity.getGameState() == GAME_STATE.GAME_LOST || _gameStateEntity.getGameState() == GAME_STATE.GAME_WON; 
     }
 
+    /**
+     * Gets the renderable entity associated to this model
+     * @return
+     */
     public IRenderable getEntity() {
         return _gameStateEntity;
     }

@@ -78,8 +78,17 @@ public final class TileStateEntity extends AbstractGameEntity {
         _tileState = tileState;
     }
 
+    /**
+     * Gets if this entity is empty
+     * 
+     * @return TRUE if this entity and all of its associated entities are empty, FALSE otherwise
+     */
+    public boolean isEmpty() {
+        return !(hasActiveData() || _tileNumeralEntity.hasActiveData());
+    }
+    
     @Override public Image getRenderableContent() {
-      
+        
         if(hasActiveData()) {
             return super.getRenderableContent();
         }
@@ -88,15 +97,6 @@ public final class TileStateEntity extends AbstractGameEntity {
         }
         
         return null;
-    }
-
-    /**
-     * Gets if this entity is empty
-     * 
-     * @return TRUE if this entity and all of its associated entities are empty, FALSE otherwise
-     */
-    public boolean isEmpty() {
-        return !(hasActiveData() || _tileNumeralEntity.hasActiveData());
     }
     
     @Override public void reset() {

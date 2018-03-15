@@ -43,9 +43,14 @@ import game.core.factories.ViewFactory;
  */
 public class MainView extends PanelView {
 
+    /**
+     * The background color of this view
+     */
     private static final Color BACKGROUND_COLOR = new Color(192, 192, 192);
 
-    
+    /**
+     * Constructs a new instance of this class type
+     */
     public MainView() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(5, 5, 5, 5));
