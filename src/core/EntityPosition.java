@@ -24,26 +24,9 @@
 package core;
 
 /**
- * The movements associated to the board tiles
+ * The positions associated to the board tiles
  * 
  * @author Daniel Ricci {@literal <thedanny09@gmail.com>}
  *
  */
-public enum EntityMovement {
-    /**
-     * Movement is done towards the left
-     */
-    LEFT,
-    /**
-     * Movement is done towards the right
-     */
-    RIGHT,
-    /**
-     * Movement is done towards the top
-     */
-    UP,
-    /**
-     * Movement is done towards the bottom
-     */
-    DOWN,
-}
+public enum EntityPosition { LEFT, RIGHT, UP, DOWN }

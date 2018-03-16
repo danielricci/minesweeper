@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
-import core.EntityMovement;
+import core.EntityPosition;
 import core.GameSettings;
 import engine.communication.internal.signal.ISignalListener;
 import engine.core.factories.AbstractFactory;
@@ -65,7 +65,7 @@ public class BoardController extends BaseController {
     /**
      * The list of neighbors logically associated to a specified controller
      */
-    private final Map<TileModel, Map<EntityMovement, TileModel>> _tileModels = new LinkedHashMap();
+    private final Map<TileModel, Map<EntityPosition, TileModel>> _tileModels = new LinkedHashMap();
 
     /**
      * Adds the specified tile model to the list of available tiles
@@ -121,14 +121,14 @@ public class BoardController extends BaseController {
         for(int i = 0, columns = GAME_SETTINGS.getDimensions().width; i < columns; ++i) {
 
             // Represents the structural view of a particular tile
-            Map<EntityMovement, TileModel> neighbors = new HashMap<EntityMovement, TileModel>();
+            Map<EntityPosition, TileModel> neighbors = new HashMap<EntityPosition, TileModel>();
 
             // Populate the neighbors structure with the movement elements
             // Note: Diagonals can be fetched using these primitives
-            neighbors.put(EntityMovement.UP, topRow == null ? null : topRow[i]);
-            neighbors.put(EntityMovement.LEFT, i - 1 < 0 ? null : neutralRow[i - 1]);
-            neighbors.put(EntityMovement.RIGHT, i + 1 >= columns ? null : neutralRow[i + 1]);
-            neighbors.put(EntityMovement.DOWN, bottomRow == null ? null : bottomRow[i]);
+            neighbors.put(EntityPosition.UP, topRow == null ? null : topRow[i]);
+            neighbors.put(EntityPosition.LEFT, i - 1 < 0 ? null : neutralRow[i - 1]);
+            neighbors.put(EntityPosition.RIGHT, i + 1 >= columns ? null : neutralRow[i + 1]);
+            neighbors.put(EntityPosition.DOWN, bottomRow == null ? null : bottomRow[i]);
 
             // Assign the mappings where we reference the neutral-neutral tile as the key
             _tileModels.put(neutralRow[i], neighbors);
@@ -211,13 +211,13 @@ public class BoardController extends BaseController {
     private List<TileModel> getAllNeighbors(TileModel tileModel) {
 
         // Get the list of neighbors associated to our tile model
-        Map<EntityMovement, TileModel> tileModelNeighbors = _tileModels.get(tileModel);
+        Map<EntityPosition, TileModel> tileModelNeighbors = _tileModels.get(tileModel);
 
         // This collection holds the list of all the neighbors
         List<TileModel> allNeighbors = new ArrayList();
 
         // Go through every entry set in our structure
-        for(Map.Entry<EntityMovement, TileModel> entry : tileModelNeighbors.entrySet()) {
+        for(Map.Entry<EntityPosition, TileModel> entry : tileModelNeighbors.entrySet()) {
 
             // Get the tile model
             TileModel tile = entry.getValue();
@@ -234,12 +234,12 @@ public class BoardController extends BaseController {
             switch(entry.getKey()) {
             case UP:
             case DOWN:
-                TileModel left = _tileModels.get(tile).get(EntityMovement.LEFT);
+                TileModel left = _tileModels.get(tile).get(EntityPosition.LEFT);
                 if(left != null) {
                     allNeighbors.add(left);
                 }
 
-                TileModel right = _tileModels.get(tile).get(EntityMovement.RIGHT);
+                TileModel right = _tileModels.get(tile).get(EntityPosition.RIGHT);
                 if(right != null) {
                     allNeighbors.add(right);
                 }

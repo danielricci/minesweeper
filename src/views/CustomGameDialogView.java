@@ -42,6 +42,7 @@ import engine.core.mvc.view.DialogView;
 import engine.core.mvc.view.layout.SpringLayoutHelper;
 import engine.utils.filters.DocumentIntegerFilter;
 import engine.utils.globalisation.Localization;
+import resources.LocalizedStrings;
 
 /**
  * This dialog view is associated with creating a new game with custom set entries (width, heigh, bombs, etc)
@@ -54,12 +55,12 @@ public class CustomGameDialogView extends DialogView {
     /**
      * The okay button
      */
-    private JButton _okayButton = new JButton("OK");
+    private JButton _okayButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.OK));
     
     /**
      * The cancel button
      */
-    private JButton _cancelButton = new JButton("Cancel");
+    private JButton _cancelButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.Cancel));
     
     /**
      * The height text field
@@ -80,7 +81,7 @@ public class CustomGameDialogView extends DialogView {
      * Constructs a new instance of this class type
      */
     public CustomGameDialogView() {
-        super(MainApplication.instance(), "Custom Game");
+        super(MainApplication.instance(), Localization.instance().getLocalizedString(LocalizedStrings.CustomMode));
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
         
@@ -168,8 +169,8 @@ public class CustomGameDialogView extends DialogView {
                 else {
                     JOptionPane.showMessageDialog(
                         CustomGameDialogView.this,
-                        Localization.instance().getLocalizedString("Invalid configuration"),
-                        Localization.instance().getLocalizedString("Error"),
+                        Localization.instance().getLocalizedString(LocalizedStrings.InvalidConfiguration),
+                        Localization.instance().getLocalizedString(LocalizedStrings.Error),
                         JOptionPane.ERROR_MESSAGE
                     );
                 }

@@ -41,6 +41,16 @@ import entities.TileStateEntity;
 public class TileModel extends BaseModel {
 
     /**
+     * Signal indicating that this model's highlight state has changed
+     */
+    public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
+    
+    /**
+     * Property indicating this tile is highlighted
+     */
+    private boolean _isHighlighted;
+    
+    /**
      * The button state entity of this tile model
      */
     private final ButtonStateEntity _buttonStateEntity = new ButtonStateEntity();
@@ -85,25 +95,11 @@ public class TileModel extends BaseModel {
         }};
     }
     
-    /** EVERYTHING BELOW THIS LINE HAS GOT TO GO...*/
-    /**
-     * Signal indicating that this model's highlight state has changed
-     */
-    // TODO - delete - should not be couple with real game logic
-    public static final String EVENT_HIGHLIGHT_CHANGED = "EVENT_HIGHLIGHT_CHANGED";
-    
-    /**
-     * Property indicating this tile is highlighted
-     */
-    // TODO - delete - should not be couple with real game logic
-    private boolean _isHighlighted;
-    
     /**
      * Sets the highlight state of this model
      * 
      * @param highlighted If the tile model should be highlighted
      */
-    // TODO - delete - should not be couple with real game logic
     public void setHighlighted(boolean highlighted) {
         _isHighlighted = highlighted;
         setOperation(EVENT_HIGHLIGHT_CHANGED);
@@ -115,7 +111,6 @@ public class TileModel extends BaseModel {
      * 
      * @return If the tile model is highlighted
      */
-    // TODO - delete - should not be couple with real game logic
     public boolean getIsHighlighted() {
         return _isHighlighted;
     }

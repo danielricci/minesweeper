@@ -49,6 +49,9 @@ public final class GameTimerModel extends BaseModel {
      */
     private int _timerValue;
     
+    /**
+     * The gamer time entities list associated to this model
+     */
     public List<GameTimerEntity> _timerEntities = new ArrayList();
     
     /**
@@ -79,6 +82,11 @@ public final class GameTimerModel extends BaseModel {
         doneUpdating();
     }
     
+    /**
+     * Gets the timer value representation of this model
+     * 
+     * @return The timer value representation of this model
+     */
     public int getTimerValue() {
         return _timerValue;
     }

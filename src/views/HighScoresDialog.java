@@ -58,17 +58,17 @@ public class HighScoresDialog extends DialogView {
     /**
      * The reset scores button
      */
-    private JButton _resetScoresButton = new JButton("Reset Scores");
+    private JButton _resetScoresButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.ResetScores));
     
     /**
      * The okay button
      */
-    private JButton _okButton = new JButton("OK");
+    private JButton _okButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.OK));
     
     /**
      * The beginner label
      */
-    private JLabel _beginnerLabel = new JLabel("Beginner");
+    private JLabel _beginnerLabel = new JLabel(Localization.instance().getLocalizedString(LocalizedStrings.BeginnerMode));
     
     /**
      * The beginners seconds label
@@ -83,7 +83,7 @@ public class HighScoresDialog extends DialogView {
     /**
      * The intermediate label
      */
-    private JLabel _intermediateLabel = new JLabel("Intermediate");
+    private JLabel _intermediateLabel = new JLabel(Localization.instance().getLocalizedString(LocalizedStrings.IntermediateMode));
     
     /**
      * The intermediate seconds label
@@ -98,7 +98,7 @@ public class HighScoresDialog extends DialogView {
     /**
      * The expert label
      */
-    private JLabel _expertLabel = new JLabel("Expert");
+    private JLabel _expertLabel = new JLabel(Localization.instance().getLocalizedString(LocalizedStrings.ExpertMode));
     
     /**
      * The expert seconds label
@@ -134,15 +134,15 @@ public class HighScoresDialog extends DialogView {
     private void updateHighScore(HighScoreModel score) {
         switch(score.SETTING) {
         case BEGINNER:
-            _beginnerSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _beginnerSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _beginnerNameLabel.setText(score.SETTING.getName());
             break;
         case INTERMEDITE:
-            _intermediateSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _intermediateSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _intermediateNameLabel.setText(score.SETTING.getName());
             break;
         case EXPERT:
-            _expertSecondsLabel.setText(score.SETTING.getTime() + " seconds");
+            _expertSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _expertNameLabel.setText(score.SETTING.getName());
             break;
         case CUSTOM:
