@@ -149,7 +149,33 @@ public class TileView extends PanelView {
         });
         
         addMouseListener(new MouseAdapter() {
+
+            /**
+             * Flag indicating left mouse button is held down
+             */
+            boolean isLeftButtonHeld = false;
+            
+            /**
+             * Flag indicating right mouse button is held down
+             */
+            boolean isRightButtonHeld = false;
+            
+            @Override public void mousePressed(MouseEvent mouseEvent) {
+                if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
+                    isLeftButtonHeld = true;
+                }
+                if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    isRightButtonHeld = true;
+                }
+            }
+            
             @Override public void mouseReleased(MouseEvent mouseEvent) {
+                if(isLeftButtonHeld && isRightButtonHeld) {
+                    getViewProperties().getEntity(BoardController.class).performChord(TileView.this);
+                    isLeftButtonHeld = false;
+                    isRightButtonHeld = false;
+                }
+                
                 if(SwingUtilities.isMiddleMouseButton(mouseEvent)) {
                     // Attempt to perform a chord on this tile 
                     getViewProperties().getEntity(BoardController.class).performChord(TileView.this);
@@ -159,12 +185,17 @@ public class TileView extends PanelView {
      
         // Bind the mouse click events to the button component associated to this view
         _tileButton.addMouseListener(new MouseAdapter() {
+            
             @Override public void mousePressed(MouseEvent mouseEvent) {
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
                     getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this, false);
                 }
+                else if(SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    getViewProperties().getEntity(BoardController.class).buttonSelectedEvent(TileView.this, false);
+                }
             }
             @Override public void mouseReleased(MouseEvent mouseEvent) {
+                
                 if(SwingUtilities.isLeftMouseButton(mouseEvent)) {
                 
                     // Set the border and the background color for this tile
