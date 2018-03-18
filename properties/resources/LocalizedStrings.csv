@@ -2,6 +2,7 @@ key,en_ca
 About,About Minesweeper
 BeginnerMode,Beginner
 BestTimes,Best Times
+Cancel,Cancel
 Clear,Clear
 CustomMode,Custom
 Debug,Debug
@@ -9,16 +10,22 @@ DebugEmptyTiles,Toggle Empty Tiles
 DebugNeighbours,Toggle Neighbours
 DebugNew,New
 DebugWindow,Debugger Window
+Error,Error
 ExpertMode,Expert
 Exit,Exit
 Game,Game
+GameIcon,content/minesweeper-icon.png
 Generate,Generate
 GitHub,https://github.com/danielricci/minesweeper
 Help,Help
 HideButtons,Hide Buttons
+HighScores,High Scores
+InvalidConfiguration,Invalid Configuration
 IntermediateMode,Intermediate
 Marks,Marks [?]
 Mines,Mines
 New,New
-GameIcon,content/minesweeper-icon.png
+ResetScores,Reset Scores
+OK,OK
+Seconds,Seconds
 Title,Minesweeper
