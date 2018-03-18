@@ -485,6 +485,8 @@ public class BoardController extends BaseController {
         tileModel.getButtonStateEntity().changeState();
         tileModel.doneUpdating();
         
+        gameStateController.setGameRunning();
+        
         if(tileModel.getButtonStateEntity().isFlagged()) {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).decrementCounter();
         }
