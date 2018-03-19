@@ -112,6 +112,7 @@ public final class ButtonStateEntity extends AbstractGameEntity {
             break;
         case BUTTON_MARK:
             _currentButtonState = BUTTON_STATE.BUTTON_BLANK;
+            break;
         default:
             return;
         }
