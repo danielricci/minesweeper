@@ -175,28 +175,27 @@ public final class MainApplication extends AbstractApplication {
             switch(PreferencesManager.instance().getGameDifficulty())
             {
             case 0:
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), BeginnerModeMenuItem.class).onExecute(null);
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), BeginnerModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             case 1:
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), IntermediateModeMenuItem.class).onExecute(null);
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), IntermediateModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             case 2:
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), ExpertModeMenuItem.class).onExecute(null);
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), ExpertModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             case 3:
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), CustomModeMenuItem.class).onExecute(null);
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), CustomModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             default:
                 Tracelog.log(Level.SEVERE, true, "Unexpected difficulty given, defaulting back to beginner");
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(null);
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
             }
         }
         
         // Get the location that was last saved and position the window there
         setLocation(PreferencesManager.instance().getWindowPositionX());
         if(PreferencesManager.instance().getMarksEnabled()) {
-            MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).onExecute(null);
-            ((JCheckBoxMenuItem)MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).getComponent()).setSelected(true);
+            MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
         }
     }
 

@@ -59,7 +59,6 @@ public class BeginnerModeMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-        super.get(JCheckBoxMenuItem.class).setSelected(true);
         BoardController.GAME_SETTINGS = GameSettings.BEGINNER;
         MenuBuilder.search(MainApplication.instance().getJMenuBar(), NewGameMenuItem.class).onExecute(actionEvent);
     }

@@ -64,8 +64,6 @@ public class CustomModeMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-        super.get(JCheckBoxMenuItem.class).setSelected(true);
-        
         if(actionEvent != null) {
             // Create and show the dialog related to the custom game
             CustomGameDialogView dialog = AbstractSignalFactory.getFactory(ViewFactory.class).add(new CustomGameDialogView(), false);

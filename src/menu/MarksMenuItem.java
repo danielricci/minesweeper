@@ -53,7 +53,7 @@ public class MarksMenuItem extends AbstractMenuItem {
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
-        GameSettings.MARKS_ENABLED = get(JCheckBoxMenuItem.class).isSelected();
+        GameSettings.MARKS_ENABLED = getComponent(JCheckBoxMenuItem.class).isSelected();
         PreferencesManager.instance().setMarksEnabled(GameSettings.MARKS_ENABLED);
     }
 }

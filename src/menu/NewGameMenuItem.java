@@ -57,7 +57,7 @@ public class NewGameMenuItem extends AbstractMenuItem {
      */
     public NewGameMenuItem(JComponent parent) {
         super(new JMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.New)), parent);
-        super.get(JMenuItem.class).setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit ().getMenuShortcutKeyMask()));
+        super.getComponent(JMenuItem.class).setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit ().getMenuShortcutKeyMask()));
     }
 
     @Override public void onExecute(ActionEvent actionEvent) {
