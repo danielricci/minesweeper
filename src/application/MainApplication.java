@@ -184,7 +184,8 @@ public final class MainApplication extends AbstractApplication {
                 MenuBuilder.search(MainApplication.instance().getJMenuBar(), ExpertModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             case 3:
-                MenuBuilder.search(MainApplication.instance().getJMenuBar(), CustomModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
+                // Note: When we load custom mode up, we go to the default setting
+                MenuBuilder.search(MainApplication.instance().getJMenuBar(), BeginnerModeMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
                 break;
             default:
                 Tracelog.log(Level.SEVERE, true, "Unexpected difficulty given, defaulting back to beginner");

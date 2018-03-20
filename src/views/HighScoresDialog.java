@@ -134,15 +134,15 @@ public class HighScoresDialog extends DialogView {
     private void updateHighScore(HighScoreModel score) {
         switch(score.SETTING) {
         case BEGINNER:
-            _beginnerSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
+            _beginnerSecondsLabel.setText(score.SETTING.getTime() + " " + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _beginnerNameLabel.setText(score.SETTING.getName());
             break;
         case INTERMEDITE:
-            _intermediateSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
+            _intermediateSecondsLabel.setText(score.SETTING.getTime() + " " + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _intermediateNameLabel.setText(score.SETTING.getName());
             break;
         case EXPERT:
-            _expertSecondsLabel.setText(score.SETTING.getTime() + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
+            _expertSecondsLabel.setText(score.SETTING.getTime() + " " + Localization.instance().getLocalizedString(LocalizedStrings.Seconds));
             _expertNameLabel.setText(score.SETTING.getName());
             break;
         case CUSTOM:
