@@ -60,7 +60,7 @@ public final class ButtonStateEntity extends AbstractGameEntity {
      * @return TRUE if this entity is empty, FALSE otherwise
      */
     public boolean isEmpty() {
-        return _currentButtonState == BUTTON_STATE.BUTTON_BLANK || _currentButtonState == BUTTON_STATE.BUTTON_MARK;
+        return _currentButtonState == BUTTON_STATE.BUTTON_BLANK;
     }
     
     /**

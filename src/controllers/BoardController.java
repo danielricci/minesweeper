@@ -342,7 +342,7 @@ public class BoardController extends BaseController {
             // to be the first move.  The first move is always a valid move, so make sure that if there is a mine, that
             // it is placed at a different location
             if(_tileModels.keySet().stream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
-                if(tileModel.getButtonStateEntity().isEmpty()) {
+                if(tileModel.getButtonStateEntity().isMark() || tileModel.getButtonStateEntity().isEmpty()) {
                     // Set the timer of the game
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).startGameTimer();
                     
@@ -361,7 +361,7 @@ public class BoardController extends BaseController {
         
         // If the tile has a valid button state and it is empty (no flag, etc) then remove the button state
         // and update the tile with the surrounding neighbor tiles
-        if(tileModel.getButtonStateEntity().isEnabled() && tileModel.getButtonStateEntity().isEmpty()) {
+        if(tileModel.getButtonStateEntity().isEnabled() && (tileModel.getButtonStateEntity().isEmpty() || tileModel.getButtonStateEntity().isMark())) {
             
             if(performingMove) {
                 
@@ -490,7 +490,7 @@ public class BoardController extends BaseController {
         if(tileModel.getButtonStateEntity().isFlagged()) {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).decrementCounter();
         }
-        else {
+        else if(tileModel.getButtonStateEntity().isEmpty() || tileModel.getButtonStateEntity().isMark()) {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).incrementCounter();
         }
     }
