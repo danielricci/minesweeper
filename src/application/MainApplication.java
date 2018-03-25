@@ -25,6 +25,7 @@
 package application;
 
 import java.awt.EventQueue;
+import java.awt.Point;
 import java.io.File;
 import java.util.logging.Level;
 
@@ -194,7 +195,7 @@ public final class MainApplication extends AbstractApplication {
         }
         
         // Get the location that was last saved and position the window there
-        if(PreferencesManager.instance().isNew()) {
+        if(PreferencesManager.instance().getWindowPosition() == new Point(0, 0)) {
             setLocationRelativeTo(null);
         }
         else {
