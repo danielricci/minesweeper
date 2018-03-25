@@ -195,7 +195,8 @@ public final class MainApplication extends AbstractApplication {
         }
         
         // Get the location that was last saved and position the window there
-        if(PreferencesManager.instance().getWindowPosition() == new Point(0, 0)) {
+        Point location = PreferencesManager.instance().getWindowPosition(); 
+        if(location.x == 0 && location.y == 0){
             setLocationRelativeTo(null);
         }
         else {
