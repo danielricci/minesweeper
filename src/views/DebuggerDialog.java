@@ -36,6 +36,7 @@ import javax.swing.JPanel;
 import application.MainApplication;
 import controllers.BoardController;
 import controllers.DebuggerController;
+import core.PreferencesManager;
 import engine.communication.internal.signal.arguments.BooleanEventArgs;
 import engine.core.factories.AbstractFactory;
 import engine.core.factories.AbstractSignalFactory;
@@ -66,6 +67,11 @@ public class DebuggerDialog extends DialogView {
      * This button when clicked will clear the contents of the board
      */
     private final JButton _clearButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.Clear));
+    
+    /**
+     * This button when clicked will clear the preferences that have been saved within the application
+     */
+    private final JButton _clearPreferencesButton = new JButton(Localization.instance().getLocalizedString(LocalizedStrings.ClearPreferences));
 
     /**
      * Constructs a new instance of this class type
@@ -99,6 +105,7 @@ public class DebuggerDialog extends DialogView {
         JPanel actionPanel = new JPanel();
         actionPanel.setLayout(new BoxLayout(actionPanel, BoxLayout.X_AXIS));
         actionPanel.add(_clearButton);
+        actionPanel.add(_clearPreferencesButton);        
         actionPanel.setMaximumSize(actionPanel.getPreferredSize());
         add(actionPanel);
     }
@@ -112,14 +119,14 @@ public class DebuggerDialog extends DialogView {
         
         // Mouse listener for when the mines checkbox is clicked
         _minesCheckBox.addMouseListener(new MouseAdapter() {
-            @Override public void mouseReleased(MouseEvent e) {
+            @Override public void mouseReleased(MouseEvent event) {
                 debuggerController.setMinesEnabled(_minesCheckBox.isSelected());
             }
         });
         
         // Mouse listener for when the hide checkbox is selected
         _buttonsHideCheckBox.addMouseListener(new MouseAdapter() {
-            @Override public void mouseReleased(MouseEvent e) {
+            @Override public void mouseReleased(MouseEvent event) {
                 AbstractFactory.getFactory(ViewFactory.class).multicastSignalListeners(
                     TileView.class, new BooleanEventArgs(DebuggerDialog.this, TileView.EVENT_SHOW_TILE_BUTTONS, _buttonsHideCheckBox.isSelected())
                 );
@@ -130,6 +137,14 @@ public class DebuggerDialog extends DialogView {
         _clearButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent event) {
                 boardController.clearEntities();
+            }
+        });
+        
+        // Mouse listener for when the preferences button is clicked
+        _clearPreferencesButton.addMouseListener(new MouseAdapter() {
+            @Override public void mouseReleased(MouseEvent event) {
+                PreferencesManager.instance().reset();
+                System.exit(0);
             }
         });
     }

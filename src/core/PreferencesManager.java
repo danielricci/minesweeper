@@ -40,6 +40,11 @@ import engine.utils.logging.Tracelog;
 public class PreferencesManager {
 
     /**
+     * The preferences of this class
+     */
+    private Preferences preferences = Preferences.userNodeForPackage(this.getClass());
+    
+    /**
      * The x-axis position of the window
      */
     private int _posX;
@@ -119,7 +124,7 @@ public class PreferencesManager {
      * 
      * @param point The window position
      */
-    public void setWindowPositionX(Point point) {
+    public void setWindowPosition(Point point) {
         _posX = point.x;
         _posY = point.y;
     }
@@ -129,7 +134,7 @@ public class PreferencesManager {
      * 
      * @return The window position
      */
-    public Point getWindowPositionX() {
+    public Point getWindowPosition() {
         return new Point(_posX, _posY);
     }
     
@@ -283,7 +288,6 @@ public class PreferencesManager {
      * Loads all the preferences into the preferences manager
      */
     private void load() {
-        Preferences preferences = Preferences.userNodeForPackage(this.getClass());
         _posX = preferences.getInt("_posX", 0);
         _posY = preferences.getInt("_posY", 0);
         _difficulty = preferences.getInt("_difficulty", 0);
@@ -307,5 +311,18 @@ public class PreferencesManager {
             preferences.get("_expertSettingName", "Anonymous"),
             preferences.getInt("_expertSettingTime", 999)
         );
+    }
+    
+    /**
+     * @return TRUE if this preferences manager has saved any elements, FALSE otherwise
+     */
+    public boolean isNew() {
+        try {
+            return preferences.childrenNames().length > 0;
+        } catch (BackingStoreException exception) {
+            Tracelog.log(Level.SEVERE, true, exception);
+        }
+        
+        return true;
     }
 }

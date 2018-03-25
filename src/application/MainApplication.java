@@ -194,7 +194,13 @@ public final class MainApplication extends AbstractApplication {
         }
         
         // Get the location that was last saved and position the window there
-        setLocation(PreferencesManager.instance().getWindowPositionX());
+        if(PreferencesManager.instance().isNew()) {
+            setLocationRelativeTo(null);
+        }
+        else {
+            setLocation(PreferencesManager.instance().getWindowPosition());    
+        }
+        
         if(PreferencesManager.instance().getMarksEnabled()) {
             MenuBuilder.search(getJMenuBar(), MarksMenuItem.class).getComponent(JCheckBoxMenuItem.class).doClick();
         }
@@ -213,7 +219,7 @@ public final class MainApplication extends AbstractApplication {
         PreferencesManager.instance().setGameRows(BoardController.GAME_SETTINGS.ROWS);
         PreferencesManager.instance().setGameMines(BoardController.GAME_SETTINGS.MINES);
         PreferencesManager.instance().setGameDifficulty(BoardController.GAME_SETTINGS.IDENTIFIER);
-        PreferencesManager.instance().setWindowPositionX(getLocation());
+        PreferencesManager.instance().setWindowPosition(getLocation());
         PreferencesManager.instance().save();
         
         super.dispose();

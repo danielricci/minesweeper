@@ -36,6 +36,7 @@ public enum LocalizedStrings {
     BestTimes,
     Cancel,
     Clear,
+    ClearPreferences,
     CustomMode,
     Debug,
     DebugEmptyTiles,
