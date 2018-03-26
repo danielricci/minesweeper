@@ -24,6 +24,10 @@
 
 package views;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,6 +41,7 @@ import javax.swing.SpringLayout;
 import javax.swing.text.PlainDocument;
 
 import application.MainApplication;
+import controllers.BoardController;
 import core.GameSettings;
 import engine.core.mvc.view.DialogView;
 import engine.core.mvc.view.layout.SpringLayoutHelper;
@@ -65,17 +70,17 @@ public class CustomGameDialogView extends DialogView {
     /**
      * The height text field
      */
-    private JTextField _heightTextField = new JTextField(3);
+    private JTextField _heightTextField = new JTextField(4);
     
     /**
      * The width text field
      */
-    private JTextField _widthTextField = new JTextField(3);
+    private JTextField _widthTextField = new JTextField(4);
     
     /**
      * The mines text field
      */
-    private JTextField _minesTextField = new JTextField(3);
+    private JTextField _minesTextField = new JTextField(4);
     
     /**
      * Constructs a new instance of this class type
@@ -132,18 +137,21 @@ public class CustomGameDialogView extends DialogView {
         _heightTextField.setMaximumSize(_heightTextField.getPreferredSize());
         ((PlainDocument)_heightTextField.getDocument()).setDocumentFilter(new DocumentIntegerFilter());
         customPanel.add(_heightTextField);
+        _heightTextField.setText(BoardController.GAME_SETTINGS.ROWS + "");
         
         // WIDTH
         customPanel.add(new JLabel("Width:"));
         _widthTextField.setMaximumSize(_widthTextField.getPreferredSize());
         ((PlainDocument)_widthTextField.getDocument()).setDocumentFilter(new DocumentIntegerFilter());
         customPanel.add(_widthTextField);
+        _widthTextField.setText(BoardController.GAME_SETTINGS.COLUMNS + "");
         
         // MINES
         customPanel.add(new JLabel("Mines:"));
         _minesTextField.setMaximumSize(_minesTextField.getPreferredSize());
         ((PlainDocument)_minesTextField.getDocument()).setDocumentFilter(new DocumentIntegerFilter());
         customPanel.add(_minesTextField);
+        _minesTextField.setText(BoardController.GAME_SETTINGS.MINES + "");
         
         // OK
         actionPanel.add(_okayButton);
@@ -160,16 +168,48 @@ public class CustomGameDialogView extends DialogView {
     }
     
     @Override public void initializeComponentBindings() {
+        
+        _heightTextField.addFocusListener(new FocusAdapter() {
+            @Override public void focusGained(FocusEvent event) {
+                _heightTextField.selectAll();
+            }
+        });
+        _widthTextField.addFocusListener(new FocusAdapter() {
+            @Override public void focusGained(FocusEvent event) {
+                _widthTextField.selectAll();
+            }
+        });
+        _minesTextField.addFocusListener(new FocusAdapter() {
+            @Override public void focusGained(FocusEvent event) {
+                _minesTextField.selectAll();
+            }
+        });
         _okayButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
                 setDialogResult(JOptionPane.OK_OPTION);
                 setVisible(false);
             }
         });
+        _okayButton.addKeyListener(new KeyAdapter() {
+            @Override public void keyReleased(KeyEvent event) {
+                if (event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_ENTER) {
+                    setDialogResult(JOptionPane.OK_OPTION);
+                    setVisible(false);
+                }
+            }
+        });
         _cancelButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
                 setDialogResult(JOptionPane.CANCEL_OPTION);
                 setVisible(false);
+            }
+        });
+        _cancelButton.addKeyListener(new KeyAdapter() {
+            @Override public void keyReleased(KeyEvent event) {
+                if (event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_ENTER) {
+                    setDialogResult(JOptionPane.CANCEL_OPTION);
+                    setVisible(false);
+                }
             }
         });
     }
