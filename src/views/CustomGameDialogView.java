@@ -162,18 +162,8 @@ public class CustomGameDialogView extends DialogView {
     @Override public void initializeComponentBindings() {
         _okayButton.addMouseListener(new MouseAdapter() {
             @Override public void mouseReleased(MouseEvent mouseEvent) {
-                if(validateDialog()) {
-                    setDialogResult(JOptionPane.OK_OPTION);
-                    setVisible(false);
-                }
-                else {
-                    JOptionPane.showMessageDialog(
-                        CustomGameDialogView.this,
-                        Localization.instance().getLocalizedString(LocalizedStrings.InvalidConfiguration),
-                        Localization.instance().getLocalizedString(LocalizedStrings.Error),
-                        JOptionPane.ERROR_MESSAGE
-                    );
-                }
+                setDialogResult(JOptionPane.OK_OPTION);
+                setVisible(false);
             }
         });
         _cancelButton.addMouseListener(new MouseAdapter() {
@@ -191,17 +181,6 @@ public class CustomGameDialogView extends DialogView {
     }
 
     @Override protected boolean validateDialog() {
-        try {
-            int height = getRowsCount();
-            int width = getColumnsCount();
-            int mines = getMinesCount();
-            
-            return height < 99 && width < 99 && mines < width * height; 
-        }
-        catch (Exception exception){
-            // NOTE: This is not logged, the range of errors that the user can type in 
-            // are not worth checking
-            return false;
-        }
+        return true;
     }
 }

@@ -151,8 +151,32 @@ public enum GameSettings {
      */
     public static GameSettings getCustomGameSetting(int rows, int columns, int mines) {
         GameSettings settings = GameSettings.CUSTOM;
+        
+        // Range for rows
+        if(rows < GameSettings.BEGINNER.ROWS) {
+            rows = GameSettings.BEGINNER.ROWS;
+        }
+        else if(rows > 24) {
+            rows = 24;
+        }
         settings.ROWS = rows;
+        
+        // Range for columns
+        if(columns < GameSettings.BEGINNER.COLUMNS) {
+            columns = GameSettings.BEGINNER.COLUMNS;
+        }
+        else if(columns > 30) {
+            columns = 30;
+        }        
         settings.COLUMNS = columns;
+
+        // Range for mines
+        if(mines >= rows * columns) {
+            mines = Math.max(667,  (int)((0.80) * rows * columns));
+        }
+        else if(mines < GameSettings.BEGINNER.MINES) {
+            mines = GameSettings.BEGINNER.MINES;
+        }
         settings.MINES = mines;
         
         return settings;
