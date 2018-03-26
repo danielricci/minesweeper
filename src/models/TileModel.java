@@ -67,7 +67,6 @@ public class TileModel extends BaseModel {
      */
     public TileModel(ISignalListener... listeners) {
         super(listeners);
-        doneUpdating();
     }
         
     /**
@@ -113,5 +112,14 @@ public class TileModel extends BaseModel {
      */
     public boolean getIsHighlighted() {
         return _isHighlighted;
+    }
+
+    /**
+     * Resets this entity
+     */
+    public void reset() {
+        _buttonStateEntity.reset();
+        _tileStateEntity.reset();
+        doneUpdating();
     }
 }

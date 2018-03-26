@@ -65,11 +65,13 @@ public class BoardView extends PanelView {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
 
+        ViewFactory viewFactory = AbstractSignalFactory.getFactory(ViewFactory.class);
+        
         // Create the board based on the specified dimensions
         for(int row = 0, dimensionsX = BoardController.GAME_SETTINGS.getDimensions().height; row < dimensionsX; ++row) {
             for(int col =  0, dimensionsY = BoardController.GAME_SETTINGS.getDimensions().width; col < dimensionsY; ++col) {
                 // Create a tile and add it to our board
-                TileView view = AbstractSignalFactory.getFactory(ViewFactory.class).add(new TileView(), false);
+                TileView view = viewFactory.add(new TileView(), false);
                 view.setPreferredSize(new Dimension(16, 16));
 
                 gbc.gridx = col;
@@ -79,7 +81,7 @@ public class BoardView extends PanelView {
                 view.render();
             }
         }
-
+        
         // Link all the tile views together
         getViewProperties().getEntity(BoardController.class).generateLogicalTileLinks();
     }

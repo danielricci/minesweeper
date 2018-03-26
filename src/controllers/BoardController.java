@@ -76,9 +76,6 @@ public class BoardController extends BaseController {
         if(_tileModels.putIfAbsent(tileModel, null) != null) {
             Tracelog.log(Level.SEVERE, true, "Attempting to add a tile model to the tile models list when it has already been added");
         }
-        
-        // Set the counter of the bombs based on the currently set game settings
-        ControllerFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).setCounter(GAME_SETTINGS.MINES);
     }
 
     /**
@@ -86,6 +83,9 @@ public class BoardController extends BaseController {
      */
     public void generateLogicalTileLinks() {
 
+        // Set the counter of the bombs based on the currently set game settings
+        ControllerFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).setCounter(GAME_SETTINGS.MINES);
+        
         // Get the array representation of our tile models.
         // Note: This is done because it is easier to get a subset of an array
         //       and because the neighbor data structure tracks the insertion 
@@ -271,7 +271,7 @@ public class BoardController extends BaseController {
             tileModel = (TileModel) listener;
         }
         else {
-            tileModel = _tileModels.keySet().stream().filter(z -> z.isModelListening(listener)).findFirst().get();    
+            tileModel = _tileModels.keySet().parallelStream().filter(z -> z.isModelListening(listener)).findFirst().get();    
         }
         
         if(tileModel.getTileStateEntity().hasMine()) {
@@ -341,7 +341,7 @@ public class BoardController extends BaseController {
             // Check to see if there are any buttons that have already been revealed, if not then this is considered
             // to be the first move.  The first move is always a valid move, so make sure that if there is a mine, that
             // it is placed at a different location
-            if(_tileModels.keySet().stream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
+            if(_tileModels.keySet().parallelStream().filter(z -> !z.getButtonStateEntity().isEnabled()).count() == 0) {
                 if(tileModel.getButtonStateEntity().isMark() || tileModel.getButtonStateEntity().isEmpty()) {
                     // Set the timer of the game
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).startGameTimer();
@@ -352,7 +352,7 @@ public class BoardController extends BaseController {
                         setMine(tileModel);
                         
                         // Pick a new tile to have set as the mine
-                        TileModel newTile = _tileModels.keySet().stream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
+                        TileModel newTile = _tileModels.keySet().parallelStream().filter(z -> z != tileModel && z.getButtonStateEntity().isEnabled() && !z.getTileStateEntity().hasMine()).findFirst().get();
                         setMine(newTile);
                     }
                 }
@@ -397,7 +397,7 @@ public class BoardController extends BaseController {
                     tileModel.getTileStateEntity().setTileState(TILE_STATE.BOMB_CLICKED);
                     
                     // Get all the mines that are on the board and reveal them
-                    List<TileModel> tilesWithMine = _tileModels.keySet().stream().filter(z -> z.getTileStateEntity().hasMine() && !z.equals(tileModel)).collect(Collectors.toList());
+                    List<TileModel> tilesWithMine = _tileModels.keySet().parallelStream().filter(z -> z.getTileStateEntity().hasMine() && !z.equals(tileModel)).collect(Collectors.toList());
                     for(TileModel tileWithMine : tilesWithMine) {
                         
                         // If the tile is set as flagged then leave it as flagged. We do not reveal bombs that
@@ -411,7 +411,7 @@ public class BoardController extends BaseController {
                     }
                     
                     // Get all the tiles that have flags that do not have mines, they should be marked as 'misflagged'
-                    List<TileModel> misflaggedTiles = _tileModels.keySet().stream().filter(z -> !z.getTileStateEntity().hasMine() && z.getButtonStateEntity().isFlagged()).collect(Collectors.toList());
+                    List<TileModel> misflaggedTiles = _tileModels.keySet().parallelStream().filter(z -> !z.getTileStateEntity().hasMine() && z.getButtonStateEntity().isFlagged()).collect(Collectors.toList());
                     for(TileModel misFlaggedTile : misflaggedTiles) {
                         misFlaggedTile.getButtonStateEntity().setIsButtonEnabled(false);
                         misFlaggedTile.getTileStateEntity().setTileState(TILE_STATE.BOMB_MISFLAGGED);
@@ -422,10 +422,10 @@ public class BoardController extends BaseController {
                     gameStateController.setGameLost();
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
                 }
-                else if(_tileModels.keySet().stream().filter(z -> z.getButtonStateEntity().isEnabled()).count() == GAME_SETTINGS.MINES) {
+                else if(_tileModels.keySet().parallelStream().filter(z -> z.getButtonStateEntity().isEnabled()).count() == GAME_SETTINGS.MINES) {
                     AbstractFactory.getFactory(ControllerFactory.class).get(GameTimerController.class).stopGameTimer();
                     
-                    List<TileModel> mineTiles = _tileModels.keySet().stream().filter(z -> z.getTileStateEntity().hasMine()).collect(Collectors.toList());
+                    List<TileModel> mineTiles = _tileModels.keySet().parallelStream().filter(z -> z.getTileStateEntity().hasMine()).collect(Collectors.toList());
                     for(TileModel mineTile : mineTiles) {
                         mineTile.getButtonStateEntity().changeState(BUTTON_STATE.BUTTON_FLAG);
                         mineTile.doneUpdating();
@@ -523,7 +523,7 @@ public class BoardController extends BaseController {
         
         // Clear the entities currently on the board, but do not refresh the view, wait until
         // this operation is completed
-        _tileModels.keySet().stream().forEach(z -> z.setSuppressUpdates(true));
+        _tileModels.keySet().parallelStream().forEach(z -> z.setSuppressUpdates(true));
         clearEntities();
         
         // Get the current list of tiles and randomize them in a new list
@@ -536,7 +536,7 @@ public class BoardController extends BaseController {
         }
         
         // Re-apply the update functionality and perform the update
-        _tileModels.keySet().stream().forEach(z -> z.setSuppressUpdates(false));
+        _tileModels.keySet().parallelStream().forEach(z -> z.setSuppressUpdates(false));
         _tileModels.keySet().parallelStream().forEach(z -> z.doneUpdating());
     }
     
@@ -544,14 +544,6 @@ public class BoardController extends BaseController {
      * Clears all the tiles of their entities
      */
     public void clearEntities() {
-        
-        // Go through all the tile models and reset their data elements
-        for(TileModel model : _tileModels.keySet()) {
-            model.getTileStateEntity().reset();    
-            model.getButtonStateEntity().reset();
-        }
-        
-        // Update all of the tile models
-        _tileModels.keySet().parallelStream().forEach(z -> z.doneUpdating());
+        _tileModels.keySet().parallelStream().forEach(z -> z.reset());
     }
 }
