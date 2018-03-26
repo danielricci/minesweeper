@@ -51,7 +51,7 @@ public class BeginnerModeMenuItem extends AbstractMenuItem {
      * @param parent The parent associated to this menu item
      */
     public BeginnerModeMenuItem(JComponent parent) {
-        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.BeginnerMode), false), parent);
+        super(new JCheckBoxMenuItem(Localization.instance().getLocalizedString(LocalizedStrings.BeginnerMode), true), parent);
     }
 
     @Override protected String getGroupName() {
