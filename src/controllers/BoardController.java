@@ -490,7 +490,7 @@ public class BoardController extends BaseController {
         if(tileModel.getButtonStateEntity().isFlagged()) {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).decrementCounter();
         }
-        else if(tileModel.getButtonStateEntity().isEmpty() || tileModel.getButtonStateEntity().isMark()) {
+        else if(tileModel.getButtonStateEntity().isEmpty()) {
             AbstractFactory.getFactory(ControllerFactory.class).get(BombsCounterController.class).incrementCounter();
         }
     }
