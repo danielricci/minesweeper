@@ -1,4 +1,4 @@
 # Minesweeper
 
 ### Description
-Minesweeper is a single-player puzzle video game. The objective of the game is to clear a rectangular board containing hidden "mines" or bombs without detonating any of them, with help from clues about the number of neighboring mines in each field.
+This is a Windows 98 clone of the Minesweeper game written in Java using Swing and a custom game library that I wrote to help make Swing more tolerable.
