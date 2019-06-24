@@ -1,4 +1,4 @@
 # Minesweeper
 
 ### Description
-This is a Windows 98 clone of the Minesweeper game written in Java
+This is a clone of the classic Windows version of Minesweeper. 
