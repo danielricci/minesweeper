@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+    <data>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="status_running" layers="game_face" friendly="Running"&gt;
+    &lt;p1 y="0.0" x="0.0"/&gt;
+    &lt;p2 y="26.0" x="26.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="status_move" layers="game_face" friendly="Moving"&gt;
+    &lt;p1 y="0.0" x="26.0"/&gt;
+    &lt;p2 y="26.0" x="52.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="status_win" layers="game_face" friendly="Win"&gt;
+    &lt;p1 y="0.0" x="52.0"/&gt;
+    &lt;p2 y="26.0" x="78.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="status_lose" layers="game_face" friendly="Lose"&gt;
+    &lt;p1 y="0.0" x="78.0"/&gt;
+    &lt;p2 y="26.0" x="104.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="facewin" layers="" friendly=""&gt;
+    &lt;p1 y="26.0" x="0.0"/&gt;
+    &lt;p2 y="52.0" x="26.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="" layers="" friendly=""&gt;
+    &lt;p1 y="26.0" x="26.0"/&gt;
+    &lt;p2 y="52.0" x="52.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="" layers="" friendly=""&gt;
+    &lt;p1 y="26.0" x="52.0"/&gt;
+    &lt;p2 y="52.0" x="78.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="" layers="" friendly=""&gt;
+    &lt;p1 y="26.0" x="78.0"/&gt;
+    &lt;p2 y="52.0" x="104.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_clicked" layers="bomb_indicators" friendly="Bomb Clicked"&gt;
+    &lt;p1 y="0.0" x="104.0"/&gt;
+    &lt;p2 y="16.0" x="120.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_flagged" layers="bomb_indicators" friendly="Bomb Flagged"&gt;
+    &lt;p1 y="0.0" x="120.0"/&gt;
+    &lt;p2 y="16.0" x="136.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_misflagged" layers="bomb_indicators" friendly="Bomb Misflagged"&gt;
+    &lt;p1 y="0.0" x="136.0"/&gt;
+    &lt;p2 y="16.0" x="152.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_unsure" layers="bomb_indicators" friendly="Bomb Unsure"&gt;
+    &lt;p1 y="16.0" x="104.0"/&gt;
+    &lt;p2 y="32.0" x="120.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bound_found" layers="bomb_indicators" friendly="Bomb Found"&gt;
+    &lt;p1 y="16.0" x="120.0"/&gt;
+    &lt;p2 y="32.0" x="136.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="" layers="" friendly=""&gt;
+    &lt;p1 y="16.0" x="136.0"/&gt;
+    &lt;p2 y="32.0" x="152.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_1" layers="bomb_numerals" friendly="1"&gt;
+    &lt;p1 y="0.0" x="152.0"/&gt;
+    &lt;p2 y="16.0" x="168.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_2" layers="bomb_numerals" friendly="2"&gt;
+    &lt;p1 y="0.0" x="168.0"/&gt;
+    &lt;p2 y="16.0" x="184.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_3" layers="bomb_numerals" friendly="3"&gt;
+    &lt;p1 y="0.0" x="184.0"/&gt;
+    &lt;p2 y="16.0" x="200.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_4" layers="bomb_numerals" friendly="4"&gt;
+    &lt;p1 y="0.0" x="200.0"/&gt;
+    &lt;p2 y="16.0" x="216.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_5" layers="bomb_numerals" friendly="5"&gt;
+    &lt;p1 y="0.0" x="216.0"/&gt;
+    &lt;p2 y="16.0" x="232.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_6" layers="bomb_numerals" friendly="6"&gt;
+    &lt;p1 y="0.0" x="232.0"/&gt;
+    &lt;p2 y="16.0" x="248.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_7" layers="bomb_numerals" friendly="7"&gt;
+    &lt;p1 y="0.0" x="248.0"/&gt;
+    &lt;p2 y="16.0" x="264.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="bomb_8" layers="bomb_numerals" friendly="8"&gt;
+    &lt;p1 y="0.0" x="264.0"/&gt;
+    &lt;p2 y="16.0" x="280.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_empty" layers="timers" friendly="Empty Timer"&gt;
+    &lt;p1 y="0.0" x="280.0"/&gt;
+    &lt;p2 y="23.0" x="293.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_0" layers="timers" friendly="Timer 0"&gt;
+    &lt;p1 y="0.0" x="293.0"/&gt;
+    &lt;p2 y="23.0" x="306.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_1" layers="timers" friendly="Timer 1"&gt;
+    &lt;p1 y="0.0" x="306.0"/&gt;
+    &lt;p2 y="23.0" x="319.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_2" layers="timers" friendly="Timer 2"&gt;
+    &lt;p1 y="0.0" x="319.0"/&gt;
+    &lt;p2 y="23.0" x="332.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_3" layers="timers" friendly="Timer 3"&gt;
+    &lt;p1 y="0.0" x="332.0"/&gt;
+    &lt;p2 y="23.0" x="345.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_4" layers="timers" friendly="Timer 4"&gt;
+    &lt;p1 y="0.0" x="345.0"/&gt;
+    &lt;p2 y="23.0" x="358.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_5" layers="timers" friendly="Timer 5"&gt;
+    &lt;p1 y="0.0" x="358.0"/&gt;
+    &lt;p2 y="23.0" x="371.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_6" layers="timers" friendly="Timer 6"&gt;
+    &lt;p1 y="0.0" x="371.0"/&gt;
+    &lt;p2 y="23.0" x="384.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_7" layers="timers" friendly="Timer 7"&gt;
+    &lt;p1 y="0.0" x="384.0"/&gt;
+    &lt;p2 y="23.0" x="397.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_8" layers="timers" friendly="Timer 8"&gt;
+    &lt;p1 y="0.0" x="397.0"/&gt;
+    &lt;p2 y="23.0" x="410.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="timer_9" layers="timers" friendly="Timer 9"&gt;
+    &lt;p1 y="0.0" x="410.0"/&gt;
+    &lt;p2 y="23.0" x="423.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_empty" layers="flag_counters" friendly="Empty Flag"&gt;
+    &lt;p1 y="23.0" x="280.0"/&gt;
+    &lt;p2 y="46.0" x="293.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_0" layers="flag_counters" friendly="Flag 0"&gt;
+    &lt;p1 y="23.0" x="293.0"/&gt;
+    &lt;p2 y="46.0" x="306.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_1" layers="flag_counters" friendly="Flag 1"&gt;
+    &lt;p1 y="23.0" x="306.0"/&gt;
+    &lt;p2 y="46.0" x="319.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_2" layers="flag_counters" friendly="Flag 2"&gt;
+    &lt;p1 y="23.0" x="319.0"/&gt;
+    &lt;p2 y="46.0" x="332.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_3" layers="flag_counters" friendly="Flag 3"&gt;
+    &lt;p1 y="23.0" x="332.0"/&gt;
+    &lt;p2 y="46.0" x="345.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_4" layers="flag_counters" friendly="Flag 4"&gt;
+    &lt;p1 y="23.0" x="345.0"/&gt;
+    &lt;p2 y="46.0" x="358.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_5" layers="flag_counters" friendly="Flag 5"&gt;
+    &lt;p1 y="23.0" x="358.0"/&gt;
+    &lt;p2 y="46.0" x="371.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_6" layers="flag_counters" friendly="Flag 6"&gt;
+    &lt;p1 y="23.0" x="371.0"/&gt;
+    &lt;p2 y="46.0" x="384.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_7" layers="flag_counters" friendly="Flag 7"&gt;
+    &lt;p1 y="23.0" x="384.0"/&gt;
+    &lt;p2 y="46.0" x="397.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_8" layers="flag_counters" friendly="Flag 8"&gt;
+    &lt;p1 y="23.0" x="397.0"/&gt;
+    &lt;p2 y="46.0" x="410.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+        <entry>
+            <key>generated.TileMapData</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;root name="flag_9" layers="flag_counters" friendly="Flag 9"&gt;
+    &lt;p1 y="23.0" x="410.0"/&gt;
+    &lt;p2 y="46.0" x="423.0"/&gt;
+&lt;/root&gt;
+</value>
+        </entry>
+    </data>
+</root>
+

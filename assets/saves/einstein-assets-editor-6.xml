@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+    <data>
+        <entry>
+            <key>models.TileMapModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;tilemap name="faces" rows="2" columns="4" width="26" height="26" UUID="dc89dce8-69ff-42f3-8ca1-cf8e9bf4f0ff"&gt;
+    &lt;coordinate y="452.0" x="751.0"/&gt;
+    &lt;tile width="26" height="26" name="status_running" fname="Running" image="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAkklEQVR42u3W0QrAIAgF0PvffVvf5vAhiKWbmcoeFlyIBTuslYXWGmWn907gTmZjhI1UaCALxAORmafvmxCAJaHQeCnRmidwC9IACXRDVkTDTNAuImEuSPpP2jMzJH2NFZoxF+SZvh96hbUF4V51O8jRPpJq3fE+KqsMpbWutHqXnkehJ+x9IDoY967sux0qEM4FuqeEeyNrJ/sAAAAASUVORK5CYII=" UUID="b3d2f564-18c7-4fae-a789-1a73c4e341b8"&gt;
+        &lt;layer&gt;49370e39-acd7-42ac-a70d-61df924cd159&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="26" height="26" name="status_move" fname="Moving" image="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAApUlEQVR42tXWAQqAMAgAQJ/u0/azhYQgTocOJxVI0cLDrG2AiPN2jDEm0MXNgxAyrkKMLBANVIZ8fd+EAGCJUoiTzrnGDkxBHmCBx1AU8bAQJBHENwmdZWLrvsTSkGy+1R/9bBjSCTMVSSwNZeNfkNevUoh7wsl0b9KQh1lf3e5fOoYiFaWhXVVej45mhta5rnX2bl2PSldYPVAdwPuu23s76EAoHkt/f+ZwzpA7AAAAAElFTkSuQmCC" UUID="bcc0ec4a-b7b9-4fc9-b9f2-562a36902390"&gt;
+        &lt;layer&gt;49370e39-acd7-42ac-a70d-61df924cd159&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="26" height="26" name="status_win" fname="Win" image="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAnUlEQVR42s3WYQrAIAgGUO/t2Tqbwx9ClLkslQYfjIJehFiAiJSd1hoB/2R+jLCRCgkyQTwRmf743oQAYEooJIsSzbFAF7QCNPAY2kVW2BbkRTTMDWlFMOYI+kOs8R7bhlaLWmNuqN8hIqglLmM8r5W76+huCuIdSMOszhBW3n8VeAWVdYbSXlfavUvvo9AbdpyIDsi7K/ttBxUI5wNw81CdDzPSpQAAAABJRU5ErkJggg==" UUID="524e43c9-b397-4faa-8520-e1ad4fc7ce13"&gt;
+        &lt;layer&gt;49370e39-acd7-42ac-a70d-61df924cd159&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="26" height="26" name="status_lose" fname="Lose" image="iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAkklEQVR42u3W0QrAIAgF0PvffVvf5vBBkMotm8oeNrgQBjsjloXWGmWn907gQebDCBupkCATxBOR0cv3TQjAlFBIXko05w50QRawAo+hXcTCtiCNyHiEV3WNuaEVYtVd0M6XP9WPIG9+yNycOq+gsr/O2kd3S3UMlXWG0l5X2r1Lz6PQE3aciA7k3pV9t0MFwrkAPFaAf3G0qmsAAAAASUVORK5CYII=" UUID="56551e50-bce1-478f-aaee-12c228b99e55"&gt;
+        &lt;layer&gt;49370e39-acd7-42ac-a70d-61df924cd159&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="26" height="26" name="" fname="" UUID="8a246697-bed3-4933-9ab3-a3f5eea0ecfb"/&gt;
+    &lt;tile width="26" height="26" name="" fname="" UUID="d7051699-d64f-4718-a6f8-c982426bcdf0"/&gt;
+    &lt;tile width="26" height="26" name="" fname="" UUID="94b70bc5-be1f-4cbd-acb0-87b71243f84c"/&gt;
+    &lt;tile width="26" height="26" name="" fname="" UUID="d51f976c-53e5-4ac4-93f1-9d071f86f003"/&gt;
+&lt;/tilemap&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileMapModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;tilemap name="indicators" rows="2" columns="3" width="16" height="16" UUID="0e1b7b23-4cb2-4dd3-9a44-1687c150f31b"&gt;
+    &lt;coordinate y="243.0" x="502.0"/&gt;
+    &lt;tile width="16" height="16" name="bomb_clicked" fname="Bomb Clicked" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASUlEQVR42mOorq7+TwlmABH/GRjIxgQNYKC7AQxINDrGZiBWFzDgwUS5AKwQCggZQj0DGMjAeF1AbDhQ3wCqxALF6WBgkzKpGACocccjU0iyhwAAAABJRU5ErkJggg==" UUID="8a33867f-956c-44ba-bbbc-8a868415a6e6"&gt;
+        &lt;layer&gt;2f558ffa-bade-43f7-b13e-c1b9efd2d5c8&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_flagged" fname="Bomb Flagged" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAn0lEQVR42mP4TwHYu3fvfwZyNR88ePB/fX09woBjx46RhFtaWv5XV1cjDAA5Bx1/UlMDY2xyIM04DXhrZATG/xkYwJgkA17a28M1kmXA9cJCygwA4TupqWBMtgEw/CAi4n8HJQaAEwq5BtTV1YExyAAQTbQB3d3dYAzSiIxh4gQNQNeIjgkaICkpiRdjNeD379//d+7cSRJGMQDZRFIxAJ1E+H8vX7RXAAAAAElFTkSuQmCC" UUID="806dbbb7-e1b9-4dbb-918c-2b75f89b9e75"&gt;
+        &lt;layer&gt;2f558ffa-bade-43f7-b13e-c1b9efd2d5c8&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_misflagged" fname="Bomb Misflagged" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAa0lEQVR42rWSAQrAIAwD8+++rW9zOhhobGtRJ0QR45liISLlRGiTqm5rCQCQA1Tnqwyg9w4JhoO6sqyHphI+gwWwUk6A3tgGX0YGwBc4lQmIInslhQkiwD8lrH7C7ZOr32gaaO820pVW3tED2NZzr5KBG4cAAAAASUVORK5CYII=" UUID="c4a064aa-27fa-4f44-a81c-39be4e1b6a5a"&gt;
+        &lt;layer&gt;2f558ffa-bade-43f7-b13e-c1b9efd2d5c8&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_unsure" fname="Bomb Unsure" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASklEQVR42mP4TwHYu3fvfwZKNFdXVyMMAAmQgkGa8RrAwMCAgkkyAF0TNkNoawAu75BlAFlhQEgz/QygKB0MMS8gC5CKGSjRDMIAVW0BBmi9rj4AAAAASUVORK5CYII=" UUID="102fd2e9-b2ca-492c-9c48-673b9ca7a391"&gt;
+        &lt;layer&gt;2f558ffa-bade-43f7-b13e-c1b9efd2d5c8&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bound_found" fname="Bomb Found" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAT0lEQVR42mOorq7+TwlmABF79+4lGxM0gIGBgc4GwDSAaHSMzUCsLsCmGdkQgi4AYRggZAj1DMDnbHzewekCYsOB+gZQJRYoTgcDm5RJxQBZhHayINJsLAAAAABJRU5ErkJggg==" UUID="ee08d3de-3223-421e-bbf2-33870d02f7ab"&gt;
+        &lt;layer&gt;2f558ffa-bade-43f7-b13e-c1b9efd2d5c8&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="9512820b-1480-4190-9822-ee232d2ac31c"/&gt;
+&lt;/tilemap&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileMapModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;tilemap name="tile_numerals" rows="1" columns="8" width="16" height="16" UUID="62139d58-a013-440c-b3aa-ff6b39d7f6ff"&gt;
+    &lt;coordinate y="240.0" x="744.0"/&gt;
+    &lt;tile width="16" height="16" name="bomb_1" fname="1" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPklEQVR42mOorq7+TwlmABF79+4lG9PeAAaG/2BMlgEwzWQZgKyZZAPQNQ+MF4a4AdgCEZdBtDFgcOUFQhgAC6DtZVKY/q8AAAAASUVORK5CYII=" UUID="1c5fbf97-2484-4f93-8c94-a4f91ee5bb39"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_2" fname="2" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASUlEQVR42mOorq7+TwlmABF79+4lG1PfAIZqBrwYrwGENGMzBKcBmDYRYQB+v5JpAElhQCgwyY4FoqORFI20j0ayDBgceYFUDACPda1pBSPn1AAAAABJRU5ErkJggg==" UUID="76a0566c-5d69-45e3-861e-03b15e6b12d9"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_3" fname="3" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAO0lEQVR42mOorq7+TwlmABF79+4lG1PXgP8MDAQxxQagG0K0F+hvAFlhQFUDBiYMKI5GihPSwOcFcjAA6OrSlZFoaNAAAAAASUVORK5CYII=" UUID="128ed2ac-a9ee-4255-b4db-3426062f2a6d"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_4" fname="4" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAO0lEQVR42mOorq7+TwlmABF79+4lG9PGAAaGajjGxqetAdgU088AZIX4MO0MwBlVpMbCMDSA/nmBFAwA+WS9BfJODzgAAAAASUVORK5CYII=" UUID="b2a8a1b2-a72a-42fd-882c-806f42a2c73c"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_5" fname="5" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAANklEQVR42mOorq7+TwlmABF79+4lG1PXgGoGBqIwfQyg2As0CwPaBiI+TB8D6JIOaJuUB8QAALS+pL3JdczjAAAAAElFTkSuQmCC" UUID="8999fda2-113b-4280-bc09-20658d37f932"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_6" fname="6" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAQUlEQVR42mOorq7+TwlmABF79+4lG1PfAAaIs3BivAYQ0kySAWR5gaoG0CwMGDADnTgv0N8AsrxAcUIaHHmBVAwAQCbD3bGYbfMAAAAASUVORK5CYII=" UUID="9f913290-e980-44cc-8ffa-10f8ff1ff00e"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_7" fname="7" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAOUlEQVR42mOorq7+TwlmABF79+4lG1PXAAYGBqIw7QzA69QBNQCXZvoYgE8z7Q0gpJn2BtA/L5CDAXSJvLHg6HllAAAAAElFTkSuQmCC" UUID="f402344d-fab6-48c9-827a-ca11310beef2"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="bomb_8" fname="8" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAO0lEQVR42mOorq7+TwlmABF79+4lG1PfAEJOxmsAsf4mygB0m+hjAMVhQNVAHJgwoDgaqRKIA58XSMUA8FvjXVzOZlEAAAAASUVORK5CYII=" UUID="6c238bc2-6cf2-4cfe-b07e-aa62cf221262"&gt;
+        &lt;layer&gt;39cdd0f4-4029-43d9-b46c-36477bf509de&lt;/layer&gt;
+    &lt;/tile&gt;
+&lt;/tilemap&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileMapModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;tilemap name="timer_numerals" rows="2" columns="11" width="13" height="23" UUID="b968af24-60bd-4777-b2d4-84789aed8ea2"&gt;
+    &lt;coordinate y="456.0" x="455.0"/&gt;
+    &lt;tile width="13" height="23" name="timer_empty" fname="Empty Timer" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAS0lEQVR42mNgYGD4TwZG4jQ04KdRNCEL4tOAYDP8J6gR0za8zsBlCAN+DSPSpv//cWOsNuHTgKyRcptG44laNpGUn0jOuSSXESRiANIhmbdh1DdpAAAAAElFTkSuQmCC" UUID="b2128687-9bbc-4766-a2e6-3edfcf3645bf"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_0" fname="Timer 0" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAUUlEQVR42mNgYGD4TwaGMv7/J4xRNMEECGlAaGTAlMClAasmVCf8x+r0EaEJX4Ri1QSTbGjATmPEEyENyBops4lsP42mCEryE8k5l6wygkQMAB2ILvgBsTqnAAAAAElFTkSuQmCC" UUID="dc290a76-6aee-4eb3-8e50-e9a1f968c639"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_1" fname="Timer 1" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAR0lEQVR42mNgYGD4TwZG4jQ04KdRNCEL4tPw/z+aTfg0wjSgaMLtDFQNeG0iStMQtwlv6JEcTwOTIkjy02iKoCQ/0T5FkIgBtEOxkZ1Gt/gAAAAASUVORK5CYII=" UUID="0ec32493-5494-4fee-ad0f-f31f9cbb5b20"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_2" fname="Timer 2" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAYElEQVR42tWTOw4AIAhDe3RujotG+dXg5tBoMPWBIADog+ZG9S5jErkb17khMeMZD6S1esUUwQ2l6XMSfb12n9oT4RtYGXYJyG6KsjWjSiEaUhKj/Upi/ykltfv0NBFNDVCqFx5ZHBy3AAAAAElFTkSuQmCC" UUID="0123b31c-886f-416a-b709-09fe701ed9fa"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_3" fname="Timer 3" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAASUlEQVR42mNgYGD4TwaGMv7/J4xRNDU0ENYIk0exCZ9GZHEMm2A0OsZ0IgN+DTg1DXGb8IYeyfFE/xRBsp9GUwQl+Yn2KYJEDABl7hceft0/OQAAAABJRU5ErkJggg==" UUID="fb48d276-738f-415b-b745-eecf59ac4586"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_4" fname="Timer 4" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAYElEQVR42t2UwRIAEAhE+3R/novDsrXhxmHHRE+omJn5hcBoTY8T5F6Ds98wFMg+MIEgitc/h1RCQ2jdcRXlqQL4JJDE40hcX8Wd8sIUr1dFCqHHIm31kwLSzr36Iw7VAeiY8zmfQB3jAAAAAElFTkSuQmCC" UUID="755de118-011c-41cd-957c-b0b1ef0584c2"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_5" fname="Timer 5" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAXUlEQVR42tWSQQoAIAgEfXo/t0si1qasNw8LEYwjqoiINnIeqnUCZB8VsNYFZWAELii24DEAmn7QZFO2UGii99S6CKtQAQ7Cnt9EG5wOBigThAaZsnFDE70n+iLIbFCqFx7n+W7QAAAAAElFTkSuQmCC" UUID="bb3ad09c-0a94-435f-9cbd-099c8a3f1504"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_6" fname="Timer 6" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAWElEQVR42mNgYGD4TwaGMv7/J4xRNMEECGloaEDThE8jqgY0TahOQGCYBqw24dI0lG3CF6FYbSI5nmiaIhAaifQTqhoiQg9TfphrwpefsGoiOZ7IShEkYgBu2zT0C4IZNQAAAABJRU5ErkJggg==" UUID="fa90a917-25dc-4e0e-b213-462353f0f4b1"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_7" fname="Timer 7" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAUUlEQVR42mNgYGD4TwaGMv7/J4xRNDU0ENYIk0exCZ9GZHEMm2A0OsZ0IgN+DTg1DXGb8IYeNluR5TBswqcB0xWU2ES2n0ZTBIFgH+AUQSIGAFUd0md2jyCQAAAAAElFTkSuQmCC" UUID="6a64dfa1-541c-437e-9c34-ea86ec9599e6"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_8" fname="Timer 8" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAARUlEQVR42mNgYGD4TwaGMv7/J4xRNMEECGlAaGTAlMClAasmVCf8x+r0EaEJX4Ri1URyPA1MiiDJT6MpgpL8RJ8UQSIGAGr+Usp2ji9gAAAAAElFTkSuQmCC" UUID="2f0ec242-b2bc-4f69-b7c3-354692013ec1"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="timer_9" fname="Timer 9" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAWElEQVR42uWTwQoAIAhD9+n+uV2SkGamt+gwkOQxawYA2tAsVHM5yA4yYIHYGxFAIT+C0tG/gE6BUqicU2sjRJpOBl7fyYAIpK+XOVHoIafr/9TOqbwRRQ1MzTT0RGkViAAAAABJRU5ErkJggg==" UUID="0b96fa1e-6658-4bf7-853e-3f6d7771f1a5"&gt;
+        &lt;layer&gt;6f3287d0-d7ce-4bbf-97cb-7607be250c5a&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_empty" fname="Empty Flag" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAASElEQVR42mNgYGD4TwZGcKoJ0CiaqonQiMbGLYlDA6pN1Tj8UE2MTfg0jgib/uPBWG36TwSmjk2j8UQtm0jKTyTnXJLLCFIxAO0rYITcR7oGAAAAAElFTkSuQmCC" UUID="43a6a8dc-4aa5-47b4-a79f-40a7cda78a27"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_0" fname="Flag 0" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAT0lEQVR42mNgYGD4TwaGMP4TgVE0/SdCIwOqRkwJXBqwavqPww//R5omfBGKVRNMshoHjRFPhDRUY0tGZNlEtp9GUwQl+YnknEtWGUEqBgCfOaw1/D0TFAAAAABJRU5ErkJggg==" UUID="2f26c3bf-1e79-40fd-bdd3-01437f02a844"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_1" fname="Flag 1" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAASUlEQVR42mNgYGD4TwZGcKoJ0CiaqonQCML/0W3CpxGm4T82m6px+OE/Nk34NODUNMRtwht6JMfTwKQIkvw0miIoyU+0TxGkYgAPeGy3U1240gAAAABJRU5ErkJggg==" UUID="b3b367f6-6d22-4d35-b237-e10c4debc561"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_2" fname="Flag 2" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAWklEQVR42t2SMQ7AIAwD/W8/3h0YKii4SZhgsJTldEpiAFAhbVAgHcQAiB5sgwPxtb0AFztoBjlgCR1ustdL/yndCAVNHCH97MSZyYF0Jl1oQuzcG38qNSKbB3/NoALNu9QgAAAAAElFTkSuQmCC" UUID="e7711c16-f44a-47e5-9dd7-b43cc2566e71"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_3" fname="Flag 3" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAASUlEQVR42mNgYGD4TwaGMP4TgVE0VROhkQFVI4SBTyMDpm0IDdU4/PAfmyZ8GnBqGuI24Q09kuOJ/imCZD+NpghK8hPtUwSpGACCn6ACoxe3NgAAAABJRU5ErkJggg==" UUID="f11b7a37-f02d-4396-bbc5-2cdcde3c8ccf"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_4" fname="Flag 4" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAW0lEQVR42uWUOw4AIAhDuXcPXwcHIkF+ow6NwfBsUFBEhANpgGQ9IBZAk7eDCHRydIOXGvgbFD2oC9kT6TjQdgQLOjoCUyd0a0ICureXOfEBp9I8YTK5oz+iqwUjhY35eHHgggAAAABJRU5ErkJggg==" UUID="f68b3e21-cf8d-42e6-8a5e-42b793b4e732"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_5" fname="Flag 5" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAWklEQVR42tWSSQrAMAwD9W89fkrpKab1EnrJQWAIw6DYksRGnoFGFogGeL87QhkYgBXio4MzE0n5U02amsZ72roIN01Ek4tORMgFyBtUmTjclH03v+xpfBHTXH/NoALFMh2nAAAAAElFTkSuQmCC" UUID="fc42d03b-e764-43f6-9af8-1d9820192923"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_6" fname="Flag 6" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAUklEQVR42uWSwQoAIAhD9999/IvolJBm0SE6DAR5jDkliQ31gQUNEAtg2xcLeaABRohJhuI54YR/1UlZp3RPVz+CbCZmEAHwDaTg3Bz3tPURWVX6Rq8pbI7sgQAAAABJRU5ErkJggg==" UUID="19da8c29-92dc-451e-acba-1543379cb01d"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_7" fname="Flag 7" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAU0lEQVR42mNgYGD4TwaGMP4TgVE0VROhkQFVI4SBTyMDpm0IDdU4/PAfmyZ8GnBqGuI24Q09bLZWo2lEsQmfhmpsyYhsm8j202iKIBDsA5wiSMUAOd99T+GP8TIAAAAASUVORK5CYII=" UUID="9ef27fa4-f964-4307-925a-48d993f258fe"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_8" fname="Flag 8" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAQklEQVR42mNgYGD4TwaGMP4TgVE0/SdCIwOqRkwJXBqwavqPww//R5omfBGKVRPJ8TQwKYIkP42mCEryE31SBKkYANgvvlDAiYGMAAAAAElFTkSuQmCC" UUID="c74bbdb2-ff24-4141-984b-5d51678ca224"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="13" height="23" name="flag_9" fname="Flag 9" image="iVBORw0KGgoAAAANSUhEUgAAAA0AAAAXCAYAAADQpsWBAAAAUUlEQVR42mNgYGD4TwaGMP4TgVE0/SdCIwOqRkwJXBqwavqPww//R5omfBGKVRPJ8URWiqgm16ZqUv1UTUAj1tAjZNP/IW4T0fmpmm4pglQMAF22ryk/sMoKAAAAAElFTkSuQmCC" UUID="f63cb9d1-b730-48e2-b3f0-ff468fce925e"&gt;
+        &lt;layer&gt;017dc1b1-f51b-4749-b776-d63cbe621656&lt;/layer&gt;
+    &lt;/tile&gt;
+&lt;/tilemap&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileMapModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;tilemap name="tilemap_tiles" rows="2" columns="3" width="16" height="16" UUID="d7770035-a35b-479f-9df0-af72b527b855"&gt;
+    &lt;coordinate y="99.0" x="632.0"/&gt;
+    &lt;tile width="16" height="16" name="tiles_empty" fname="Tile Empty" image="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVR42mP4TwHYu3fvfwZKNFdXVyMMAAmQgkGaRw0YNWC4GYAsQCpmoEQzCAMA2lU2Likx4OkAAAAASUVORK5CYII=" UUID="a5356a52-580e-481c-874d-0b14cc45c1aa"&gt;
+        &lt;layer&gt;c4af7a3d-1445-4b60-b03c-bfd669dba165&lt;/layer&gt;
+    &lt;/tile&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="fcb2de56-0baf-488e-b0e7-f436d667f467"/&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="33f457c4-47ee-4849-815c-82878f93b31b"/&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="5f8821fb-ff78-4a04-9110-2b55851ee1dd"/&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="8ecea253-7d48-43d7-94c0-2b97d1f33959"/&gt;
+    &lt;tile width="16" height="16" name="" fname="" UUID="e9bf1dea-46ea-44ec-9ec6-0c9d5b972f90"/&gt;
+&lt;/tilemap&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="bomb_numerals" UUID="39cdd0f4-4029-43d9-b46c-36477bf509de"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="bomb_indicators" UUID="2f558ffa-bade-43f7-b13e-c1b9efd2d5c8"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="flag_counters" UUID="017dc1b1-f51b-4749-b776-d63cbe621656"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="timers" UUID="6f3287d0-d7ce-4bbf-97cb-7607be250c5a"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="game_face" UUID="49370e39-acd7-42ac-a70d-61df924cd159"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.TileLayerModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;layer name="tiles" UUID="c4af7a3d-1445-4b60-b03c-bfd669dba165"/&gt;
+</value>
+        </entry>
+        <entry>
+            <key>models.ProjectModel</key>
+            <value>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;project name="Minesweeper" UUID="4a2c1af0-d1b2-49a3-8250-db0ff35913ba"/&gt;
+</value>
+        </entry>
+    </data>
+</root>
+
